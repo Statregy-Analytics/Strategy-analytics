@@ -14,6 +14,13 @@ const inputStyle = {
   "lazy-rules": true,
   "no-error-icon": true
 }
+const inputWhite = {
+  color: "#000",
+  "item-aligned": true,
+  "stack-label": true,
+  dark: false,
+  outlined: true,
+}
 const inputStandardStyle = {
   "letter-spacing": "1.3rem !important",
   "margin-inline": " 0.5rem 0.1rem !important",
@@ -30,5 +37,6 @@ const inputBankStyle = {
 export {
   inputStyle,
   inputStandardStyle,
-  inputBankStyle
+  inputBankStyle,
+  inputWhite
 }
