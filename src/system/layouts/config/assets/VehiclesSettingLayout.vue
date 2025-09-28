@@ -29,19 +29,40 @@
         </q-btn>
       </div>
     </div>
-    <q-btn flat no-caps padding="12px">
+    <q-btn
+      flat
+      no-caps
+      padding="12px"
+      @click.prevent="addVehicles = true"
+      v-if="!addVehicles"
+    >
       <IconPlus width="16" height="16" class="q-mr-sm" />
       Adiconar
     </q-btn>
+    <vehicles-add-layout v-else>
+      <div class="col">
+        <p class="text-weight-bolder">Adiconar Veículo</p>
+      </div>
+      <div class="col-auto">
+        <btn-inline
+          @closed="addVehicles = false"
+          @salve="addVehicles = false"
+          textClosed="Descartar"
+        />
+      </div>
+    </vehicles-add-layout>
   </div>
 </template>
 
 <script setup>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import PointCenter from "src/system/components/PointCenter.vue";
+import VehiclesAddLayout from "src/system/layouts/config/Forms/VehiclesAddLayout.vue";
+import BtnInline from "src/system/components/form/BtnInline.vue";
 defineComponent({
   name: "VehiclesSettingLayout",
 });
+const addVehicles = ref(false);
 const vehiclesList = [
   {
     estimated: "HYUNDAI HB20 COMFORT PLUS 1.6",

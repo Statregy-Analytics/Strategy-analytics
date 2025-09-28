@@ -32,7 +32,14 @@ const state = () => {
     cash: {
       ammount: "",
       account: ""
-    }
+    },
+    vehicles: {
+      paid_off: false
+    },
+    investmentsAdd: {
+      term: false
+    },
+    consortium: {}
   };
 };
 

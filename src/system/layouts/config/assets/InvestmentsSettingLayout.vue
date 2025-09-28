@@ -29,19 +29,40 @@
         </q-btn>
       </div>
     </div>
-    <q-btn flat no-caps padding="12px">
+    <q-btn
+      flat
+      no-caps
+      padding="12px"
+      @click.prevent="addInvestment = true"
+      v-if="!addInvestment"
+    >
       <IconPlus width="16" height="16" class="q-mr-sm" />
       Adiconar
     </q-btn>
+    <investiment-add-layout v-else>
+      <div class="col">
+        <p class="text-weight-bolder">Adicionar Investimento</p>
+      </div>
+      <div class="col-auto">
+        <btn-inline
+          @closed="addInvestment = false"
+          @save="addInvestment = false"
+          textClosed="Descartar"
+        />
+      </div>
+    </investiment-add-layout>
   </div>
 </template>
 
 <script setup>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import PointCenter from "src/system/components/PointCenter.vue";
+import InvestimentAddLayout from "src/system/layouts/config/Forms/InvestimentAddLayout.vue";
+import BtnInline from "src/system/components/form/BtnInline.vue";
 defineComponent({
   name: "investmentsSettingLayout",
 });
+const addInvestment = ref(false);
 const investmentsList = [
   {
     estimated: "Valor Investido: R$ 100.000,00",
