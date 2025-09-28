@@ -57,7 +57,7 @@ defineComponent({
   name: "ProfilePage",
 });
 
-const tab = ref("patrimonio");
+const tab = ref("personal");
 
 const options = [
   {
