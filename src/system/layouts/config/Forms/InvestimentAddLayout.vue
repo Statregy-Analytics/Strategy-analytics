@@ -29,13 +29,13 @@
     <div class="col-12"></div>
     <div class="col-auto">
       <q-toggle
-        v-model="investmentsAdd.term"
+        v-model="investmentsAdd.paid_off"
         label="Tem Prazo Pré Determinado?"
       />
     </div>
     <label-form className="col-12 col-sm-3" textLabel="Prazo do Investimento">
       <q-input
-        v-model="investmentsAdd.term_value"
+        v-model="investmentsAdd.paid_off_restante"
         class="q-mb-md"
         outlined
         dense

@@ -39,7 +39,10 @@ const state = () => {
     investmentsAdd: {
       term: false
     },
-    consortium: {}
+    consortium: {},
+    imovel: {
+      paid_off: false
+    }
   };
 };
 

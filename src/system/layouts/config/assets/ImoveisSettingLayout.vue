@@ -31,20 +31,41 @@
         </q-btn>
       </div>
     </div>
-    <q-btn flat no-caps padding="12px">
+    <q-btn
+      flat
+      no-caps
+      padding="12px"
+      @click.prevent="addImoveis = true"
+      v-if="!addImoveis"
+    >
       <IconPlus width="16" height="16" class="q-mr-sm" />
       Adiconar
     </q-btn>
+    <imoveis-add-layout v-else>
+      <div class="col">
+        <p class="text-weight-bolder">Adicionar Imóvel</p>
+      </div>
+      <div class="col-auto">
+        <btn-inline
+          @closed="addImoveis = false"
+          @salve="addImoveis = false"
+          textClosed="Descartar"
+        />
+      </div>
+    </imoveis-add-layout>
   </div>
 </template>
 
 <script setup>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import PointCenter from "src/system/components/PointCenter.vue";
+import ImoveisAddLayout from "src/system/layouts/config/Forms/ImoveisAddLayout.vue";
+import BtnInline from "src/system/components/form/BtnInline.vue";
 
 defineComponent({
   name: "ImoveisSettingLayout",
 });
+const addImoveis = ref(false);
 const imoveisList = [
   {
     estimated: "50.000,00",
