@@ -22,6 +22,7 @@
         :subtitle="item.subtitle"
         :banks="item.banks"
         :image="item.image"
+        :link="item.link"
         class="col-12"
       />
     </q-card>
@@ -35,7 +36,12 @@
       >
         <q-card-section class="col-12 self-center text-center text-h6">
           <!-- <q-icon :name="`img:${item}`" class="bank-img" /> -->
-          <img src="/img/level-block.png" alt="bloqueio" class="block-icon" />
+          <img
+            src="/img/level-block.png"
+            alt="bloqueio"
+            class="block-icon"
+            @click.prevent="dialog = false"
+          />
           <!-- <q-icon name="img:/img/level-block.png" class="block-icon" /> -->
         </q-card-section>
 
@@ -86,7 +92,7 @@ const list = [
       "Crédito com juros menores usando um patrimônio seu como segurança",
     banks: ["Banco A", "Banco B", "Banco C"],
     image: "/img/colateral.png",
-    link: "",
+    link: "loan/securedLoan",
     banks: [
       "/icons/banks/c6.png",
       "/icons/banks/inter.png",

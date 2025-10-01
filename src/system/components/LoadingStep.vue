@@ -1,7 +1,7 @@
 <template>
   <div class="loading-step">
-    <div class="row q-gutter-xs q-mb-sm">
-      <div v-for="(item, index) in stepTotal" :key="index" class="col">
+    <div class="row q-mb-sm q-gutter-sm justify-between">
+      <div v-for="(item, index) in stepTotal" :key="index" class="col-auto">
         <q-linear-progress
           rounded
           size="8px"
@@ -10,8 +10,8 @@
         />
       </div>
     </div>
-    <span class="text-weigth-bolder">Passo {{ stepNumber }}</span>
-    <span class="text-grey">/ {{ stepTotal }}</span>
+    <span class="text-inter-20-500">Passo {{ stepNumber }}</span>
+    <span class="text-inter-20-500 text-grey">/ {{ stepTotal }}</span>
   </div>
 </template>
 
@@ -32,6 +32,6 @@ defineProps({
 
 <style scoped>
 .q-linear-progress {
-  width: 4rem !important;
+  width: 7rem !important;
 }
 </style>

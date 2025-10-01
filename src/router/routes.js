@@ -157,10 +157,39 @@ const routes = [
         name: "Alavancagem",
         component: () => import("../system/pages/LeveragePage.vue"),
       },
+      // {
+      //   path: "loan",
+      //   name: "Empréstimos",
+      //   component: () => import("../system/pages/LoanPage.vue"),
+      // },
       {
         path: "loan",
-        name: "Empréstimos",
-        component: () => import("../system/pages/LoanPage.vue"),
+        props: true,
+        children: [
+          {
+            path: "",
+            name: "Empréstimos",
+            component: () => import("../system/pages/loan/LoanPage.vue")
+          },
+          {
+            path: "securedLoan",
+            name: "Empréstimo com Garantia",
+            component: () => import("../system/pages/loan/SecuredLoanPage.vue")
+
+          },
+          {
+            path: "consortiumLoan",
+            name: "Consórcio",
+            component: () => import("../system/pages/loan/ConsortiumLoanPage.vue")
+
+          },
+          {
+            path: "collateralLoan",
+            name: "Emprestimo Colateral",
+            component: () => import("../system/pages/loan/CollateraLoanPage.vue")
+
+          }
+        ]
       },
       {
         path: "config",

@@ -34,7 +34,17 @@ const inputBankStyle = {
   "lazy-rules": true,
   "no-error-icon": true
 }
+const inputStandout = {
+  bgColor: "white",
+  lazyRules: true,
+  dense: true,
+  dark: false,
+  standout: true,
+  popupContentStyle: "color:black"
+
+}
 export {
+  inputStandout,
   inputStyle,
   inputStandardStyle,
   inputBankStyle,

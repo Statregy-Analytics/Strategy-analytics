@@ -8,7 +8,14 @@
         <div class="col-auto">
           <span class="text-weight-bold"> {{ title }} </span><br />
           <span class="text-grey">{{ subtitle }}</span> <br />
-          <q-btn color="primary" class="q-mt-md" flat padding="0" no-caps>
+          <q-btn
+            color="primary"
+            class="q-mt-md"
+            flat
+            padding="0"
+            no-caps
+            :to="link"
+          >
             Quero conhecer
             <IconArrowRight width="16" height="16" class="q-mx-sm" />
           </q-btn>
