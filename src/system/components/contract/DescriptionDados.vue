@@ -30,12 +30,6 @@ defineProps({
 </script>
 
 <style scoped>
-.divisor {
-  width: 6px;
-  height: 6px;
-  background: #989898;
-  opacity: 1;
-}
 .block-amount {
   display: flex;
   align-items: center;

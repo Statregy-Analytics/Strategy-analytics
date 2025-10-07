@@ -14,6 +14,20 @@
           proposta especial para você.
         </p>
       </card-title-image>
+      <div class="row col-12" v-if="step_automobile == 'document'">
+        <notification-badge
+          title="Fique tranquilo(a), mesmo que você saia da página os arquivos ficarão registrado aqui."
+          text="Retorne quanto tive os documentos para continuar o processo."
+          icon-color="text-primary"
+          text-color="text-white"
+        />
+        <q-btn no-caps class="q-mt-md" color="white">
+          <span class="text-primary">
+            Solicitar Ajudar para um Acessor
+            <IconMessages width="24" height="24" class="q-ml-sm" />
+          </span>
+        </q-btn>
+      </div>
     </div>
     <div class="col-auto">
       <div class="q-mx-md">
@@ -68,6 +82,8 @@ import ReasonsLoanLayout from "src/system/layouts/loans/steps/ReasonsLoanLayout.
 import InfoBasicLoanLayout from "./steps/InfoBasicLoanLayout.vue";
 import InfoBasicAutoLoanLayout from "./steps/auto/InfoBasicAutoLoanLayout.vue";
 import InfoAutoLoanLayout from "./steps/auto/InfoAutoLoanLayout.vue";
+import DocUploadLoanLayout from "./steps/DocUploadLoanLayout.vue";
+import NotificationBadge from "src/system/components/badge/NotificationBadge.vue";
 defineComponent({
   name: "SecuredAutoLayout",
 });
@@ -79,6 +95,7 @@ const componentsMaps = {
   InfoBasicLoanLayout,
   InfoBasicAutoLoanLayout,
   InfoAutoLoanLayout,
+  DocUploadLoanLayout,
 };
 const nextStep = (next) => {
   storeLoan.setStepAutoMobile(next);

@@ -173,8 +173,24 @@ const routes = [
           },
           {
             path: "securedLoan",
-            name: "Empréstimo com Garantia",
-            component: () => import("../system/pages/loan/SecuredLoanPage.vue")
+            props: true,
+            children: [
+              {
+                path: "",
+                name: "Empréstimo com Garantia",
+                component: () => import("../system/pages/loan/SecuredLoanPage.vue")
+              },
+              {
+                path: "simulation",
+                name: "Simulação de Crédito pré-aprovado",
+                component: () => import("../system/pages/loan/SimulationLoanPage.vue")
+              },
+              {
+                path: "offers_final",
+                name: "Orfetas Finais",
+                component: () => import("../system/pages/loan/OffersFinalLoanPage.vue")
+              }
+            ]
 
           },
           {
@@ -188,7 +204,8 @@ const routes = [
             name: "Emprestimo Colateral",
             component: () => import("../system/pages/loan/CollateraLoanPage.vue")
 
-          }
+          },
+
         ]
       },
       {

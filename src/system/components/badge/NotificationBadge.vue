@@ -1,9 +1,9 @@
 <template>
   <div class="notification-badge row items-center">
-    <div class="icon col-auto self-center">
+    <div class="icon col-auto self-center" :class="iconColor">
       <component :is="icon" width="24" height="24" />
     </div>
-    <div class="content col self-center">
+    <div class="content col self-center" :class="textColor">
       <p>{{ title }}</p>
       <p>{{ text }}</p>
     </div>
@@ -20,6 +20,8 @@ defineProps({
   icon: { type: String, default: "IconStar" },
   title: { type: String },
   text: { type: String },
+  textColor: { type: String, default: "text-grey" },
+  iconColor: { type: String },
 });
 </script>
 
@@ -43,5 +45,4 @@ defineProps({
   .content
     margin-top: 10px
     line-height:10%
-    color: grey
 </style>

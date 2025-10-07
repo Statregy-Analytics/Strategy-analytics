@@ -73,7 +73,10 @@
     </label-form>
     <div class="row col-12 justify-end">
       <div class="col-auto">
-        <slot name="progress"></slot>
+        <q-btn color="primary" no-caps :to="{ path: 'securedLoan/simulation' }">
+          Prosseguir
+          <IconArrowRight width="24" height="24" class="q-ml-sm" />
+        </q-btn>
       </div>
     </div>
   </div>

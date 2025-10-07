@@ -53,9 +53,4 @@ defineComponent({
 });
 </script>
 
-<style scoped lang="sass">
-.icon-section
-  border-radius: 4px
-  padding: 4px
-  background: linear-gradient(202.99deg, rgba(0, 0, 0, 0.24) 0.52%, rgba(0, 0, 0, 0.08) 51.12%, rgba(0, 0, 0, 0.04) 99.48%)
-</style>
+<style scoped lang="sass"></style>

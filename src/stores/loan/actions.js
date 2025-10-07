@@ -14,6 +14,12 @@ const actions = {
   },
   setModelCar(payload) {
     this.loan.model_car = payload
+  },
+  setInstallments(payload) {
+    this.loan.installments = payload
+  },
+  setLoanOfferSelect(payload) {
+    this.loan.offer_select = payload
   }
 
 };

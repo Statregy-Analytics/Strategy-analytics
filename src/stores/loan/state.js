@@ -8,14 +8,17 @@ const state = () => {
       { header: "Informações iniciais", step: "info_inicial", component: "InfoBasicLoanLayout", next: "info_complementa" },
       { header: "Informações iniciais", step: "info_complementa", component: "InfoBasicAutoLoanLayout", next: "info_auto" },
       { header: "Informações do Veículo", step: "info_auto", component: "InfoAutoLoanLayout" },
-      { header: "", step: "document", component: "" }
+      { header: "Documentações importantes", step: "document", component: "DocUploadLoanLayout" },
     ],
     property: {
       step: 1
     },
     loan: {
       type: "",
-      value_loan: 50000
+      value_loan: 50000,
+      installments: 0,
+      offer_select: "",
+      offer_final: false
     }
   };
 };

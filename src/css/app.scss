@@ -227,6 +227,29 @@ body {
   padding: 16px;
   @extend .styleTool;
 }
+.tool-off {
+  background: linear-gradient(
+    202.99deg,
+    rgba(255, 255, 255, 0.06) 0.52%,
+    rgba(255, 255, 255, 0.01) 79.69%
+  ) !important;
+}
+.tool-status-offers {
+  gap: 12px;
+  border-width: 1px;
+  border-radius: 8px;
+  padding: 12px;
+  background: linear-gradient(
+    202.99deg,
+    rgba(255, 255, 255, 0.16) 0.52%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.01) 99.48%
+  );
+  border: 1px solid #efefef14;
+  backdrop-filter: blur(40px);
+
+  box-shadow: 4px 4px 12px 0px #0000003d;
+}
 .card-deposit,
 .card-transfer,
 .step-finnaly-cash,
@@ -256,6 +279,41 @@ body {
     rgba(255, 255, 255, 0.06) 0.52%,
     rgba(255, 255, 255, 0.01) 79.69%
   );
+}
+.icon-section {
+  border-radius: 4px;
+  padding: 4px;
+  background: linear-gradient(
+    202.99deg,
+    rgba(0, 0, 0, 0.24) 0.52%,
+    rgba(0, 0, 0, 0.08) 51.12%,
+    rgba(0, 0, 0, 0.04) 99.48%
+  );
+}
+.divisor {
+  width: 6px;
+  height: 6px;
+  background: #989898;
+  opacity: 1;
+}
+.border-select {
+  border: 2px solid var(--Brand-Blue-400, #2cb7ff);
+  border-width: 2px;
+  border-radius: 8px;
+}
+.modal-contract {
+  border-width: 2px;
+  border-radius: 8px;
+  background: linear-gradient(
+    202.99deg,
+    rgba(0, 0, 0, 0.24) 0.52%,
+    rgba(0, 0, 0, 0.08) 51.12%,
+    rgba(0, 0, 0, 0.04) 99.48%
+  );
+  border: 2px solid var(--Brand-Blue-400, #2cb7ff);
+  backdrop-filter: blur(32px);
+
+  box-shadow: 0px 0px 48px 12px #00a3ff3d;
 }
 .badge-publicity {
   background: linear-gradient(
@@ -449,4 +507,16 @@ body {
 }
 .a-center {
   align-items: center;
+}
+
+.badge-status {
+  border-width: 1px;
+  padding: 2px 10px;
+  border-radius: 4px;
+  background: linear-gradient(
+    202.99deg,
+    rgba(255, 255, 255, 0.16) 0.52%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.01) 99.48%
+  );
 }
