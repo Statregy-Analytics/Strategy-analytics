@@ -20,7 +20,10 @@ const actions = {
   },
   setLoanOfferSelect(payload) {
     this.loan.offer_select = payload
-  }
+  },
+  setStepImovel(payload) {
+    this.step_imovel = payload
+  },
 
 };
 

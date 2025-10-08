@@ -76,10 +76,10 @@ const formattedLoanValue = computed(() => {
 const markerLabels = computed(() => {
   const min = 50000;
   const max = 3000000;
-  const mid = (min + max) / 2;
+  // const mid = (min + max) / 2;
   return [
     { value: min, label: "R$ 50mil" }, // Rótulo vazio para o marcador, pois o texto será abaixo
-    { value: mid, label: "-" },
+    // { value: mid, label: "-" },
     { value: max, label: "R$ 3 Milhões" },
   ];
 });

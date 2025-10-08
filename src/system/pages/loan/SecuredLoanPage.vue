@@ -7,7 +7,6 @@
     </div>
     <q-tab-panels v-model="securedLoan" animated class="bg-transparent">
       <q-tab-panel name="home"> <secured-home-layout /> </q-tab-panel>
-
       <q-tab-panel name="automovel">
         <div class="row q-px-lg">
           <div class="col-auto">
@@ -22,7 +21,7 @@
             <IconArrowLeft @click.prevent="backStep('home')" />
           </div>
         </div>
-        Imovel
+        <secured-imovel-layout />
       </q-tab-panel>
     </q-tab-panels>
   </q-page>
@@ -35,6 +34,7 @@ import { storeToRefs } from "pinia";
 import RouteBack from "src/system/components/btn/RouterBack.vue";
 import SecuredHomeLayout from "src/system/layouts/loans/SecuredHomeLayout.vue";
 import SecuredAutoLayout from "src/system/layouts/loans/SecuredAutoLayout.vue";
+import SecuredImovelLayout from "src/system/layouts/loans/SecuredImovelLayout.vue";
 defineComponent({
   name: "SecuredLoanPage",
 });

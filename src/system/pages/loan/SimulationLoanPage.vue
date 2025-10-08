@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import RouteBack from "src/system/components/btn/RouterBack.vue";
 import SliderLoanValues from "src/system/components/loan/SliderLoanValues.vue";
 import LoadingStep from "src/system/components/LoadingStep.vue";
@@ -46,12 +46,18 @@ import SelectInstallments from "src/system/components/loan/SelectInstallments.vu
 import CreditOffersLoanLayout from "src/system/layouts/loans/CreditOffersLoanLayout.vue";
 import { useLoanStore } from "src/stores/loan";
 import { storeToRefs } from "pinia";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 const storeLoan = useLoanStore();
 const { loan } = storeToRefs(storeLoan);
 const router = useRouter();
+const route = useRoute();
 const nextStep = () => {
   console.log("aqui");
+  if (route.query.secured) {
+    storeLoan.setStepImovel("document");
+    router.push({ name: "Empréstimo com Garantia" });
+    return;
+  }
   storeLoan.setStepAutoMobile("document");
   router.push({ name: "Empréstimo com Garantia" });
   // router.replace({ path: "/loan/securedLoan" });
@@ -62,6 +68,9 @@ defineComponent({
 const handleUpdateValue = (value) => {
   storeLoan.setInstallments(value);
 };
+onMounted(() => {
+  console.log(route.query.secured);
+});
 // Seu código aqui
 </script>
 
