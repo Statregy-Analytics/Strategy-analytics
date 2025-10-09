@@ -121,7 +121,7 @@ const list = [
     subtitle: "Transforme seus ativos financeiros em crédito rápido e seguro!",
     banks: ["Banco D", "Banco E"],
     image: "/img/garantia.png",
-    link: "",
+    link: "loan/collateralLoan",
     banks: [
       "/icons/coins/real.png",
       "/icons/coins/dollar.png",

@@ -37,12 +37,23 @@ const state = () => {
       type: "",
       value_loan: 50000,
       value_loan_installments: 680,
-      installments: 0,
+      installments: 60,
       offer_select: "",
       offer_final: false,
-      imovel_name: []
+      imovel_name: [],
+      accept: false
     },
-    offers_layout: "text-imagem"
+    offers_layout: "text-imagem",
+    step_collateral: 1,
+    loan_callateral: [
+      { header: "De quanto você Precisa?", step: "home", component: "SelectValueCollateralLayout", next: "reason" },
+      { header: "Motivo do Empréstimo", step: "reason", component: "ReasonCollateralLayout", next: "installments" },
+      { header: "Parcelamento", step: "installments", component: "InstallmentCollateralLayout", next: "resume" },
+      { header: "Resumo", step: "resume", component: "ResumeCollateralLayout", next: "" },
+      { header: "Final", step: "final", component: "finalCollateralLayout", next: "" },
+
+
+    ]
   };
 };
 
