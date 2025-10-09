@@ -6,26 +6,26 @@
     <div class="col-12 text-grey text-h6 text-center">
       {{ textHeader }}
     </div>
-    <div class="text-h4 q-mb-sm col inline items-center">
+    <div class="text-h4 q-mb-sm col inline items-center q-mb-lg">
       <span>{{ formattedLoanValue }}</span>
       <q-btn flat round icon="edit" size="sm" class="q-ml-sm" color="primary" />
     </div>
     <div class="col-12">
       <q-slider
         v-model="loan.value_loan"
-        :min="50000"
-        :max="3000000"
+        :min="minValue"
+        :max="maxValue"
         :step="1000"
         dark
+        dense
         style="white-space: nowrap"
         color="primary"
         :label-value="formattedLoanValue"
         :markers="true"
         :marker-labels="markerLabels"
       >
-        <template #top>teste</template>
       </q-slider>
-      <span style="display: ruby-text">
+      <span style="display: ruby-text" v-if="infoMax">
         <IconInfoCircle />
         <q-tooltip
           anchor="center right"
@@ -62,6 +62,11 @@ const arrayMarkerLabel = [
 ];
 const props = defineProps({
   textHeader: { type: String },
+  maxValue: { type: Number, default: 3000000 },
+  minValue: { type: Number, default: 50000 },
+  textMaxValue: { type: String, default: "R$ 3 Milhões" },
+  textMinValue: { type: String, default: "R$ 50 mil" },
+  infoMax: { type: Boolean, default: true },
 });
 
 const formattedLoanValue = computed(() => {
@@ -73,13 +78,13 @@ const formattedLoanValue = computed(() => {
 });
 
 const markerLabels = computed(() => {
-  const min = 50000;
-  const max = 3000000;
+  const min = props.minValue;
+  const max = props.maxValue;
   const mid = (min + max) / 2;
   return [
-    { value: min, label: "R$ 50mil" }, // Rótulo vazio para o marcador, pois o texto será abaixo
+    { value: min, label: props.textMinValue }, // Rótulo vazio para o marcador, pois o texto será abaixo
     // { value: mid, label: "" },
-    { value: max, label: "R$ 3 Milhões" },
+    { value: max, label: props.textMaxValue },
   ];
 });
 </script>
