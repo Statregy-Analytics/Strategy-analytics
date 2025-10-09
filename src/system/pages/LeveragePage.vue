@@ -112,7 +112,7 @@ const list = [
       "Participe de um grupo e consulte seu patrimônio no momento certo",
     banks: ["Banco F", "Banco G"],
     image: "/img/consorcio.png",
-    link: "",
+    link: "loan/consortiumLoan",
     banks: ["/icons/banks/porto.png", "/icons/banks/bradesco.png"],
   },
   {

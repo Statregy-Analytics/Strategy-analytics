@@ -1,0 +1,38 @@
+[
+  {
+    "valor": "R$ 420.000,00",
+    "descricao": "Parcelas reduzidas 50% até ser contemplado!",
+    "parcela": "R$ 10.133,33",
+    "prazo": "178 meses",
+    "image": "/icons/banks/strategy.png",
+    "taxa_administracao": "0,0787% ao mês",
+    "lance_embutido": "15% do Crédito"
+  },
+  {
+    "valor": "R$ 420.000,00",
+    "descricao": "Parcelas por 50% até ser contemplado!",
+    "parcela": "R$ 10.833,33",
+    "prazo": "178 meses",
+    "image": "/icons/banks/strategy.png",
+    "taxa_administracao": "0,0787% ao mês",
+    "lance_embutido": "15% do Crédito"
+  },
+  {
+    "valor": "R$ 400.000,00",
+    "descricao": "Parcelas por 50% até ser contemplado!",
+    "parcela": "R$ 10.833,33",
+    "prazo": "180 meses",
+    "image": "/icons/banks/strategy.png",
+    "taxa_administracao": "0,0787% ao mês",
+    "lance_embutido": "15% do Crédito"
+  },
+  {
+    "valor": "R$ 400.000,00",
+    "descricao": "Parcelas por 50% até ser contemplado!",
+    "parcela": "R$ 10.833,33",
+    "prazo": "180 meses",
+    "image": "/icons/banks/strategy.png",
+    "taxa_administracao": "0,0787% ao mês",
+    "lance_embutido": "15% do Crédito"
+  }
+]

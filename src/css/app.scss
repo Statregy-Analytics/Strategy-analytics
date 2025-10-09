@@ -419,11 +419,19 @@ body {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
 }
 .q-btn-group > .q-btn-item:not(:first-child) {
+  border-top-right-radius: 8px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 8px;
+}
+.btn-personal {
+  gap: 8px;
+  padding-right: 8px;
+  padding-left: 8px;
+  border-radius: 8px;
 }
 .text-align {
   line-height: 14px;
@@ -519,4 +527,20 @@ body {
     rgba(255, 255, 255, 0.04) 50%,
     rgba(255, 255, 255, 0.01) 99.48%
   );
+}
+.sb-text {
+  font-family: Inter;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 24px;
+  line-height: 135%;
+  letter-spacing: 0%;
+}
+.title {
+  font-family: Inter;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 41px;
+  line-height: 150%;
+  letter-spacing: 0%;
 }

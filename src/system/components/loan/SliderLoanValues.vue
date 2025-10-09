@@ -1,6 +1,6 @@
 <template>
   <div
-    class="q-pa-xl row text-center tool tool-off q-mt-lg col-12"
+    class="q-pa-xl row text-center tool tool-off q-mt-lg col-12 slider-loan-values"
     style="padding-inline: 5rem"
   >
     <div class="col-12 text-grey text-h6 text-center">

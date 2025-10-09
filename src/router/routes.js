@@ -195,8 +195,19 @@ const routes = [
           },
           {
             path: "consortiumLoan",
-            name: "Consórcio",
-            component: () => import("../system/pages/loan/ConsortiumLoanPage.vue")
+            props: true,
+            children: [
+              {
+                path: "",
+                name: "Consórcio",
+                component: () => import("../system/pages/loan/ConsortiumLoanPage.vue")
+              },
+              {
+                path: "offers",
+                name: "Orfetas Finais Consórcio",
+                component: () => import("../system/pages/loan/ConsortiumOffersLoanPage.vue")
+              }
+            ]
 
           },
           {
