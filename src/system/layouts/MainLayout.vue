@@ -1,5 +1,10 @@
 <template>
-  <q-layout view="hhr lpR fFf" class="text-white" :class="system.theme">
+  <q-layout
+    view="hhr lpR fFf"
+    class="text-white"
+    :class="['themed-background', system.theme]"
+  >
+    <div class="theme-3-layer"></div>
     <navbar-layout :key="route.name" v-if="!loading" />
     <q-page-container style="min-height: 95vh">
       <!-- @click.prevent="drawerThemeAction(false)" -->

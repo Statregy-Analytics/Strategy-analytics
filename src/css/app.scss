@@ -59,6 +59,11 @@ body {
     sans-serif;
   // letter-spacing: 1px;
 }
+body,
+#q-app,
+.q-layout {
+  transition: background 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
 *::-webkit-scrollbar {
   width: 12px; /* largura da barra de rolagem inteira */
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="change-photo tool">
     <p class="text-weight-bolder">Perfil Resumo</p>
-    <q-card class="change-photo-card" flat>
+    <q-card class="change-photo-card" :class="`${themeSystem}-photo-card`" flat>
       <q-card-section horizontal>
         <avatar-new class="q-my-md" />
         <q-card-section class="q-pa-lg">
@@ -48,6 +48,7 @@ export default defineComponent({
     mail: { type: String },
     address: { type: String },
     typeInvest: { type: String, default: "Investidor Obsidian" },
+    themeSystem: { type: String },
   },
   methods: {
     abbreviateName(fullName) {
@@ -64,10 +65,4 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="sass">
-.change-photo-card
-  background: linear-gradient(224.8deg, rgba(121, 24, 35, 0.4) 0.17%, rgba(51, 10, 15, 0.4) 9.09%, rgba(9, 12, 21, 0.4) 39.13%, rgba(9, 41, 62, 0.4) 73.45%, rgba(17, 77, 118, 0.4) 99.83%)
-  border: 1px solid #EFEFEF29
-  backdrop-filter: blur(40px)
-  box-shadow: 4px 4px 12px 0px #0000003D;
-</style>
+<style lang="sass"></style>

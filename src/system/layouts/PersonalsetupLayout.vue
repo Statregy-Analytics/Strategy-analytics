@@ -12,6 +12,7 @@
       :phone="data.account.phone"
       :mail="data.email"
       :address="`${data.account.address_state} - ${data.account.address_district}`"
+      :themeSystem="system.theme"
     />
     <div class="tool q-mt-md">
       <q-tabs
@@ -55,6 +56,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { useUserStore } from "src/stores/user";
+import { useStoreLayout } from "src/stores/layoutStore";
 import { storeToRefs } from "pinia";
 
 import useCase from "src/composables/system/useCase";
@@ -77,7 +79,10 @@ export default defineComponent({
     const cardStatus = ref(false);
     const edit = ref();
     const store = useUserStore();
+    const storeLayout = useStoreLayout();
     const { data, isDirty, isDirtyData } = storeToRefs(store);
+    const { system } = storeToRefs(storeLayout);
+
     const { same } = useCase();
     const { infoNotify } = useNotify();
     const { updateData, loading } = useAccount();
@@ -109,6 +114,7 @@ export default defineComponent({
       tab,
       cardStatus,
       edit,
+      system,
       editBank,
       onSubmitData,
       sameInput,
