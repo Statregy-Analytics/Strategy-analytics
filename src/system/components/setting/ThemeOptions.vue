@@ -7,7 +7,7 @@
     @click.prevent="setSystemTheme"
     :class="{ 'border-active': system.theme == 'bg-simulator' }"
     dense
-    class="col-auto"
+    class="col"
   >
     <IconCheck
       class="absolute-center"
@@ -20,7 +20,7 @@
         src="/system/background/patterns.png"
         srcset="/system/background/patterns.png"
         :ratio="4 / 3"
-        width="226.67px"
+        width="216.67px"
         height="100px"
       />
     </template>
@@ -33,7 +33,7 @@
     @click.prevent="setSystemTheme"
     :class="{ 'border-active': system.theme == 'bg-theme-2' }"
     dense
-    class="col-auto"
+    class="col"
   >
     <IconCheck
       class="absolute-center"
@@ -46,7 +46,7 @@
         src="/system/background/2.jpg"
         srcset="/system/background/2.jpg"
         :ratio="4 / 3"
-        width="226.67px"
+        width="216.67px"
         height="100px"
       />
       <!-- </q-avatar> -->
@@ -61,7 +61,7 @@
     @click.prevent="setSystemTheme"
     :class="{ 'border-active': system.theme == 'bg-theme-4' }"
     dense
-    class="col-auto"
+    class="col"
   >
     <IconCheck
       class="absolute-center"
@@ -74,7 +74,7 @@
         src="/system/background/4.jpg"
         srcset="/system/background/4.jpg"
         :ratio="4 / 3"
-        width="226.67px"
+        width="216.67px"
         height="100px"
       />
     </template>

@@ -19,6 +19,7 @@
         :btnBgColor="item.btnBgColor"
         :bgBadgeBank="item.bgBadgeBank"
         :loading="item.loading"
+        :plusValue="item.plusValue"
       />
     </card-overview-layout>
   </div>
@@ -56,8 +57,9 @@ const contracts = [
     icon: "IconCalendarDollar",
     cipher: "R$",
     balance: "35.000,00",
+    plusValue: "+2,1%",
     cipher: true,
-    description: "Fim: 02/06/28",
+    description: "(USD 85,196.39)",
   },
 ];
 

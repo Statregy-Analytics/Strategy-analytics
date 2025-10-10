@@ -623,13 +623,13 @@ export default function useCharts() {
       stackType: '100%',
       background: "transparent",
       toolbar: {
-        show: false
+        show: true
       },
     },
     plotOptions: {
       bar: {
         horizontal: true,
-        columnWidth: '2%',
+        barHeight: '40%',
       },
     },
     stroke: {
@@ -637,45 +637,76 @@ export default function useCharts() {
     },
     xaxis: {
       categories: ["Renda Fixa", "Renda Variável", "Poupança", "Aposentadoria"],
-      // categories: [2008, 2009, 2010, 2011],
+      labels: {
+        formatter: (val) => `${val}%`,
+        style: {
+          colors: "#a59b9bff"
+        }
+      },
+      axisBorder: {
+        show: false
+      },
+      axisTicks: {
+        show: false,
+      },
+      min: 0,
+      max: 100,
+      tickAmount: 5,
+      crosshairs: {
+        show: false
+      }
+    },
+    dataLabels: {
+      enabled: false,
     },
     tooltip: {
-      show: false,
-      y: {
-        formatter: function (val) {
-          return val + "%"
-        }
-      }
+      enabled: false,
     },
     fill: {
       opacity: 1
-
     },
     grid: {
-      borderColor: "transparent",
+      borderColor: "#fff",
       strokeDashArray: 0.1,
+      xaxis: {
+        lines: {
+          show: true
+        }
+      },
+      yaxis: {
+        lines: {
+          show: true
+        }
+      },
     },
     legend: {
+      show: false,
       position: 'top',
       horizontalAlign: 'right',
       offsetX: 80,
       labels: {
         colors: ["#a59b9bff", "#a59b9bff", "#a59b9bff"],
         useSeriesColors: false,
+      },
+      markers: {
+        width: 10,
+        height: 10,
+        radius: 2
       }
     },
     yaxis: {
-      tooltip: {
-        enabled: false,
-      },
       labels: {
+        align: 'left',
         style: {
-          align: "left",
           colors: ["#a59b9bff", "#a59b9bff", "#a59b9bff"],
         },
       },
+      offsetX: 100,
+      offsetY: 100,
+      rotate: 10,
     },
-  })
+  });
+
   const barColumnComparative = ref({
     theme: themeOptions,
     colors: ["#00A3FF", "#00F5D9", "#7438FF"],
@@ -701,6 +732,12 @@ export default function useCharts() {
       categories: ["JAN. 25", "FEB. 25", "MAR. 25", "APR. 25", "MAY. 25", "JUN. 25", "JUL. 25", "AUG. 25", "SEP. 25", "OCT. 25", "NOV. 25", "DEC. 25",
         "JAN. 26", "FEB. 26", "MAR. 26"],
       // categories: [2008, 2009, 2010, 2011],
+      axisBorder: {
+        show: false
+      },
+      axisTicks: {
+        show: false,
+      },
     },
     goals: {
       me: 'Expected',
@@ -725,6 +762,7 @@ export default function useCharts() {
 
     },
     legend: {
+      show: false,
       position: 'top',
       horizontalAlign: 'right',
       offsetX: 80,
@@ -744,6 +782,9 @@ export default function useCharts() {
           colors: ["#a59b9bff", "#a59b9bff", "#a59b9bff"],
         },
       },
+    },
+    dataLabels: {
+      enabled: false,
     },
     annotations: {
       yaxis: [

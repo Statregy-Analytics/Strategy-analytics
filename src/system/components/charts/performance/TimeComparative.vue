@@ -1,5 +1,15 @@
 <template>
   <div class="time-comparative row">
+    <div class="col-12 row justify-end q-gutter-sm">
+      <legend-chart
+        v-for="(item, index) in chartData"
+        :key="index"
+        :name="item.name"
+        :color="item.color"
+        :now="item.now"
+        :year="item.year"
+      />
+    </div>
     <apexchart
       class="col-12"
       type="bar"
@@ -19,7 +29,7 @@
 <script setup>
 import { defineComponent, ref } from "vue";
 import useCharts from "src/composables/useCharts";
-
+import LegendChart from "../LegendChart.vue";
 defineComponent({
   name: "TimeComparative",
 });
@@ -42,6 +52,20 @@ const series = [
     data: [12, 17, 11, 9],
   },
 ];
+const chartData = ref([
+  {
+    color: "#00A3FF",
+    name: "Curto Prazo",
+  },
+  {
+    color: "#00F5D9",
+    name: "Médio Prazo",
+  },
+  {
+    color: "#7438FF",
+    name: "Longo Prazo",
+  },
+]);
 </script>
 
 <style scoped>

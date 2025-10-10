@@ -6,7 +6,7 @@
           <q-avatar size="32px" flat>
             <component :is="icon" color="#00a3ff" />
           </q-avatar>
-          <span class="text-h6 q-ml-xs" style="vertical-align: middle">
+          <span class="text-h6 q-ml-xs q-mr-md" style="vertical-align: middle">
             {{ title }}
           </span>
 
@@ -19,7 +19,7 @@
             class="q-badge-control"
           />
         </div>
-        <div class="col-auto q-pa-md row q-gutter-md">
+        <div class="col-auto q-pa-md row q-gutter-xl">
           <description-dados
             :amount="amountContract"
             title="Valor de Contrato inicial"

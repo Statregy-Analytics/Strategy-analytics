@@ -49,6 +49,7 @@
       <template v-slot:body-cell-status="props">
         <q-td :props="props">
           <q-badge
+            style="border-color: #317912"
             :color="props.row.statusColor"
             class="q-pa-sm"
             :class="{ 'text-dark': props.row.statusColor == 'white' }"

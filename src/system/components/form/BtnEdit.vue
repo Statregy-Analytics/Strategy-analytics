@@ -1,5 +1,11 @@
 <template>
-  <q-btn no-caps flat @click.prevent="$emit('clickBtn')" class="btn-edit">
+  <q-btn
+    no-caps
+    flat
+    @click.prevent="$emit('clickBtn')"
+    class="btn-edit"
+    padding="0"
+  >
     <IconEdit width="16" height="16" class="q-mx-sm" />
     {{ textBtn }}
   </q-btn>

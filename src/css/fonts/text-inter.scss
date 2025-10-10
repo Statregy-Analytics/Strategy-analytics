@@ -6,6 +6,10 @@ $fontStyle: normal;
   font-size: $size + rem;
   font-weight: $weight;
 }
+.text-inter-12-400 {
+  @include inter-medium(calc(12 / 16), 400);
+  $lineHeight: calc(135 / 16) + rem;
+}
 .text-inter-15-400 {
   @include inter-medium(calc(39.844 / 16), 400);
   $lineHeight: calc(44 / 16) + rem;

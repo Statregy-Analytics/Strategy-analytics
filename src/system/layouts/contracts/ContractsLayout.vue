@@ -17,8 +17,10 @@
             </div>
             <div class="col-6">
               <q-btn no-caps outline size="sm" color="primary">
-                <span class="text-white"> Oportunidade de investimento</span>
-                <IconPlus width="14" height="14" class="q-ml-sm text-white" />
+                <IconPlus width="14" height="14" class="text-white" />
+                <span class="text-white q-ml-sm">
+                  Oportunidade de investimento</span
+                >
               </q-btn>
               <div class="line-height-1 q-mt-xs">
                 <p class="text-16 text-weight-bolder">

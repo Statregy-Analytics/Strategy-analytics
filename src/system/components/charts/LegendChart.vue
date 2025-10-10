@@ -1,14 +1,23 @@
 <template>
-  <div class="row q-pa-sm" style="gap: 2px">
-    <div class="col-12">
+  <div
+    class="row"
+    :class="{
+      'q-pa-sm': padding,
+      'q-py-sm': paddingBlock,
+    }"
+    style="gap: 2px"
+  >
+    <div class="col-12 text-grey">
       <span
         class="legend-color legend-item"
         :style="{ backgroundColor: color }"
-      ></span
-      >{{ name }}
+      ></span>
+      <span v-if="name">
+        {{ name }}
+      </span>
     </div>
-    <div class="col-auto text-h7">+ {{ now }}%</div>
-    <div flat class="col-auto badge-item">+ {{ year }}%</div>
+    <div class="col-auto text-h7" v-if="now">+ {{ now }}%</div>
+    <div flat class="col-auto badge-item" v-if="year">+ {{ year }}%</div>
   </div>
 </template>
 
@@ -19,6 +28,8 @@ defineComponent({
   name: "LegendChart",
 });
 defineProps({
+  paddingBlock: { type: Boolean, default: false },
+  padding: { type: Boolean, default: true },
   name: { type: String },
   color: { type: String },
   now: { type: String },

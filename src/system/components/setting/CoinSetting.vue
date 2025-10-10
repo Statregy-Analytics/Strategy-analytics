@@ -14,6 +14,8 @@
             dark
             placeholder="Selecione um tipo"
             dropdown-icon="keyboard_arrow_down"
+            transition-show="flip-up"
+            transition-hide="flip-down"
           />
         </label-form>
       </div>
@@ -29,6 +31,8 @@
             dark
             placeholder="Selecione um tipo"
             dropdown-icon="keyboard_arrow_down"
+            transition-show="flip-up"
+            transition-hide="flip-down"
           />
         </label-form>
       </div>
@@ -47,21 +51,26 @@
             dark
             placeholder="Selecione um tipo"
             dropdown-icon="keyboard_arrow_down"
+            transition-show="flip-up"
+            transition-hide="flip-down"
           />
         </label-form>
       </div>
       <div class="col">
-        <label-form textLabel="Moeda Secundária">
+        <label-form textLabel="Fuso Horário do Sistema">
           <q-select
             style="min-width: 17rem !important"
             v-model="system.time_zone"
-            :options="optionsTimeZone"
+            :options="['Brasilia, D.F (GMT-3)', 'Nova Iorque, EUA']"
             class="q-mb-md"
             outlined
             dense
             dark
             placeholder="Selecione um tipo"
             dropdown-icon="keyboard_arrow_down"
+            transition-show="flip-up"
+            transition-hide="flip-down"
+            map-options
           />
         </label-form>
       </div>

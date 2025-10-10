@@ -23,6 +23,7 @@
           <div style="line-height: 1rem" v-if="cipher">
             <p class="text-roboto-32-700">
               {{ $filters.currentValue(balance, brCoin) }}
+              <span class="text-green" v-if="plusValue">({{ plusValue }})</span>
             </p>
           </div>
           <div style="line-height: 1rem" v-else>
@@ -57,6 +58,7 @@ export default defineComponent({
     btnBgColor: { type: String, default: "btn-bank" },
     bgBadgeBank: { type: String, default: "badge-bank" },
     loading: { type: Boolean },
+    plusValue: { type: String },
     // iconTheme: { type: String, default: "white" },
   },
   setup() {

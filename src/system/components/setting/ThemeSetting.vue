@@ -1,5 +1,5 @@
 <template>
-  <div class="ThemeSetting">
+  <div class="theme-setting">
     <div class="row">
       <div class="col-12 q-mb-md">
         <textarea-title text="Tema" />
