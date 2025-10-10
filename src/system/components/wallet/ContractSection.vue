@@ -42,7 +42,7 @@
           style="height: 140px; width: 100%"
         />
       </div>
-      <div class="col-auto items-end" v-show="!isActive">
+      <div class="col-auto" style="align-self: flex-end" v-show="!isActive">
         <q-btn
           @click="emit('select')"
           class="border-primary border-radius-pattern"

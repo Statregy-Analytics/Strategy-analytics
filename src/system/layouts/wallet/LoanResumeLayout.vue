@@ -6,7 +6,7 @@
       <div class="col-12">
         <h2 class="text-h7">
           Empréstimos
-          <q-btn color="primary" flat no-caps>
+          <q-btn color="primary" flat no-caps :to="{ name: 'Alavancagem' }">
             Ver mais
             <IconArrowRight class="q-ml-xs" />
           </q-btn>

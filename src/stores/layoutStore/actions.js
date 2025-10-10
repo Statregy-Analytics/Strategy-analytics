@@ -16,6 +16,9 @@ const actions = {
   },
   setMenuAdm(payload) {
     this.menuAdm = payload
+  },
+  setViewWalletValue(payload) {
+    this.view_wallet_value = payload
   }
 };
 

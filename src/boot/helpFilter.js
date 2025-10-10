@@ -19,6 +19,15 @@ const filters = {
     }
     return `$ ${value}`;
   },
+  currentValueBR(value) {
+
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+      minimumFractionDigits: 2,
+    }).format(value);
+
+  },
   dateFormatBr(value) {
     let dateCurrent = new Date(value + " 00:00:00")
     return date.formatDate(dateCurrent, "DD/MM/YYYY")

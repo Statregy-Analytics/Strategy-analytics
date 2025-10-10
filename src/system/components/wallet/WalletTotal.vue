@@ -1,11 +1,31 @@
 <template>
-  <div class="wallet-total col-md-6 col-xs-12">
+  <div class="wallet-total col-md-auto col-xs-12">
     <p class="text-h6 text-weight-light">Carteira Total</p>
     <div
       class="text-h3 text-weight-bolder"
-      style="line-height: 2rem; margin-top: 1.5rem"
+      style="line-height: 2rem; margin-top: 1.5rem; transition: all 2s"
+      :class="{ 'text-none': dashboard.view_wallet_value }"
     >
-      R$ {{ currentWallet }} <br />
+      R$ {{ currentWallet }}
+      <q-btn
+        flat
+        @click.prevent="
+          dashboard.view_wallet_value = !dashboard.view_wallet_value
+        "
+        v-if="!dashboard.view_wallet_value"
+      >
+        <IconEyeOff />
+      </q-btn>
+      <q-btn
+        flat
+        v-else
+        @click.prevent="
+          dashboard.view_wallet_value = !dashboard.view_wallet_value
+        "
+      >
+        <IconEye />
+      </q-btn>
+      <br />
       <b class="text-h6 text-weight-light">
         USD {{ $filters.convertCoin(currentWallet) }}
       </b>
@@ -77,7 +97,10 @@ import { IconArrowDown, IconArrowUp, IconTransfer } from "@tabler/icons-vue";
 import { defineComponent, ref } from "vue";
 import CardDeposit from "src/system/layouts/deposit/CardDeposit.vue";
 import CardTransfer from "src/system/layouts/deposit/CardTransfer.vue";
-
+import { useLayoutStore } from "src/stores/layout";
+import { storeToRefs } from "pinia";
+const useLayout = useLayoutStore();
+const { dashboard } = storeToRefs(useLayout);
 defineComponent({
   name: "WalletTotal",
 });

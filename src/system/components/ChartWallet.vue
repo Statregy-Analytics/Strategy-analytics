@@ -1,5 +1,5 @@
 <template>
-  <div class="ChartWallet col-md-6 col-xs-12" id="chart">
+  <div class="ChartWallet col-md-7 col-xs-12" id="chart">
     <apexchart
       :key="timeSelect"
       type="area"

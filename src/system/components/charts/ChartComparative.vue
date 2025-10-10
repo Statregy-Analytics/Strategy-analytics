@@ -58,19 +58,19 @@ export default defineComponent({
     const timeSelect = ref("2025");
     const chartData = ref([
       {
-        color: "#2E93fA",
+        color: "#00A3FF",
         name: "Contrato",
         now: "27,8",
         year: "147,84",
       },
       {
-        color: "#66DA26",
+        color: "#F08484",
         name: "S&P 500",
         now: "27,8",
         year: "147,84",
       },
       {
-        color: "#E91E63",
+        color: "#E3F271",
         name: "Ibovespa",
         now: "27,8",
         year: "147,84",

@@ -22,12 +22,12 @@
         <div class="col-lg-auto col-12" style="display: flex; align-items: end">
           <div style="line-height: 1rem" v-if="cipher">
             <p class="text-roboto-32-700">
-              {{ $filters.currentValue(balance, brCoin) }}
+              {{ $filters.currentValueBR(balance) }}
             </p>
           </div>
           <div style="line-height: 1rem" v-else>
             <p class="text-roboto-32-700">
-              {{ $filters.currentValue(balance, brCoin) }}
+              {{ balance }}
             </p>
           </div>
         </div>

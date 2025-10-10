@@ -1,6 +1,6 @@
 <template>
   <q-card class="BalancecurrentLayout bg-transparent row q-mt-sm card-wallet">
-    <q-card-section class="col-12 row q-mb-sm">
+    <q-card-section class="col-12 row q-mb-sm justify-between">
       <wallet-total :currentWallet="setCurrentWallet" />
       <chart-wallet />
     </q-card-section>

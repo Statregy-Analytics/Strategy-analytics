@@ -28,7 +28,7 @@ defineComponent({
 const timeSelect = ref("last_30_days");
 const chart = ref(null);
 const chartOptions = ref({
-  colors: ["#9875FF", "#06C9BF", "#FFC775", "#EE77A2", "#D582E3", "#F6FE7D"],
+  colors: ["#9875FF", "#00A3FF", "#FFC775", "#EE77A2", "#D582E3", "#E3F271"],
   chart: {
     type: "donut",
     height: 250,

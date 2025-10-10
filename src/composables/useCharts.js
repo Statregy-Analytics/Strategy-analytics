@@ -96,6 +96,7 @@ export default function useCharts() {
   const colorArray = computed(() => (Dark.isActive ? arrayDark : arrayWhite));
   const optionsComparative = ref({
     theme: themeOptions,
+    colors: ["#00A3FF", "#E3F271", "#F08484"],
     legend: {
       show: false,
     },
@@ -203,7 +204,7 @@ export default function useCharts() {
     legend: {
       show: false,
     },
-    colors: ["#2E93fA", "#66DA26", "#E91E63"],
+    colors: ["#00A3FF", "#66DA26", "#F08484"],
     chart: {
       width: "100%",
       height: 100,
@@ -436,6 +437,22 @@ export default function useCharts() {
       toolbar: {
         show: false
       },
+      // Configurações de animação adicionadas
+      animations: {
+        enabled: true,
+        easing: 'easein', // ou 'linear', 'easeout', 'easein'
+        speed: 2800, // velocidade da animação em ms (quanto maior, mais lento)
+        animateGradually: {
+          enabled: true,
+          delay: 3050 // delay entre cada ponto/série
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 15350
+        }
+      },
+      foreColor: 'transparent'
+
     },
     dataLabels: {
       enabled: false,
@@ -447,13 +464,14 @@ export default function useCharts() {
     fill: {
       type: "gradient",
       gradient: {
-        shadeIntensity: 1,
-        opacityFrom: 0,
+        shadeIntensity: 0,
+        opacityFrom: 0.5,
         opacityTo: 0,
       }
     },
-    colors: ["#008FFB"],
+    colors: ["#00A3FF"],
     legend: {
+      fontSize: '56px',
       labels: {
         colors: ["#eee"],
         useSeriesColors: false,
@@ -462,7 +480,7 @@ export default function useCharts() {
     grid: {
       borderColor: '#3D3D3D',
       row: {
-        colors: ["transparent"], // takes an array which will be repeated on columns
+        colors: ["transparent"],
         opacity: 0.4,
       },
       yaxis: {
@@ -485,35 +503,32 @@ export default function useCharts() {
       labels: {
         style: {
           colors: "#989898",
-          fontSize: "8px",
+          fontSize: "12px",
           fontFamily: "Inter",
           fontWeight: 600,
         },
       },
-      tickPlacement: "center",
-      labels: {
-        style: {
-          colors: "#eee",
-          fontSize: "8px",
-          fontWeight: 600,
-        },
-      },
       categories: ["JAN", "FEV", "MAR", "ABRIL", "MAI", "JUN", "JUL", "AGO"],
+      animations: {
+        enabled: true,
+        speed: 1800,
+        animateGradually: {
+          enabled: true,
+          delay: 1350
+        }
+      }
     },
     yaxis: {
       opposite: true,
-      min: 40000, // Um pouco abaixo do valor inicial para melhor visualização
-      max: 80000, // Um pouco acima do valor final
+      min: 40000,
+      max: 80000,
       labels: {
         align: "left",
         formatter: (value) => {
           return ` ${convertNumber(value)}`;
-          // return new Intl.NumberFormat('pt-BR', {
-          //   style: 'currency',
-          //   currency: 'BRL'
-          // }).format(value);
         },
         style: {
+          fontSize: "12px",
           colors: "#eee",
         },
       },
