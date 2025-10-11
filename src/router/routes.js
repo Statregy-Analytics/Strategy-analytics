@@ -154,8 +154,19 @@ const routes = [
       },
       {
         path: "leverage",
-        name: "Alavancagem",
-        component: () => import("../system/pages/LeveragePage.vue"),
+        props: true,
+        children: [
+          {
+            path: "",
+            name: "Alavancagem",
+            component: () => import("../system/pages/Leverage/LeveragePage.vue"),
+          },
+          {
+            path: "MyLeverages",
+            name: "Minhas Alavacagens",
+            component: () => import('../system/pages/Leverage/MyLeveragesPage.vue')
+          }
+        ]
       },
       // {
       //   path: "loan",
