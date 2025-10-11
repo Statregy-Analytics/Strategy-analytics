@@ -86,69 +86,6 @@ const datasCharts = [
     datasSeries: [1472.4, 242.6, 285],
     componentChart: "DistributionChart",
   },
-  {
-    name: "Mercados",
-    title: "Redes",
-    titles: { bolsas: "Redes" },
-    labelsArray: [
-      "Bitcoin Network",
-      "Ethereum",
-      "BNB Smart Chain",
-      "Solana Mainnet",
-      "Cardano Mainnet",
-      "Bolsas",
-    ],
-    colorsArray: [
-      "#06C9BF",
-      "#9875FF",
-      "#CFFF4C",
-      "#D582E3",
-      "#EE77A2",
-      "#FFC775",
-    ],
-    datasSeries: [219.2, 289, 78.2, 229.6, 1076.4, 716],
-    labels: {
-      bolsas: ["EUA (US)", "Europa (EU)", "Suíça (CH)", "Redes"],
-      redes: [
-        "Bitcoin Network",
-        "Ethereum",
-        "BNB Smart Chain",
-        "Solana Mainnet",
-        "Cardano Mainnet",
-        "Bolsas",
-      ],
-    },
-
-    componentChart: "CoinDistributionChart",
-
-    titles: { bolsas: "Bolsas", redes: "Redes" },
-
-    datas: {
-      bolsas: [398, 160, 158, 1280],
-      redes: [219.2, 289, 78.2, 229.6, 1076.4, 716],
-    },
-  },
-  {
-    name: "Moedas",
-    title: "Criptoativos",
-    labelsArray: [
-      "Bitcoin (BTC)",
-      "Cardano (ADA)",
-      "Solana (SOL)",
-      "Fiduciárias",
-    ],
-    colorsArray: ["#06C9BF", "#9875FF", "#EE77A2", "#FFC775"],
-    datasSeries: [750, 319.4, 398.2, 489],
-    componentChart: "CryptoDistributionChart",
-  },
-  {
-    name: "Alocação",
-    title: "Alocação",
-    labelsArray: ["Intradiário", "Núcleo", "Tática"],
-    colorsArray: ["#9875FF", "#06C9BF", "#FFC775"],
-    datasSeries: [1472.4, 242.6, 285, 489],
-    componentChart: "DistributionChart",
-  },
 ];
 
 // Seu código aqui
