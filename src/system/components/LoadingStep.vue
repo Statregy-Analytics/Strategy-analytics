@@ -32,7 +32,7 @@ defineProps({
 
 <style scoped>
 .loading-step {
-  min-width: 680px;
+  /* min-width: 680px; */
   gap: 12px;
 }
 .q-linear-progress {

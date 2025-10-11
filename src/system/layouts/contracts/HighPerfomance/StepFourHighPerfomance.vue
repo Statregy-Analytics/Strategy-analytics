@@ -16,7 +16,6 @@
           />
         </div>
       </div>
-      <div>Model: {{ highPerfomance.types }}</div>
     </q-card-section>
   </q-card>
 </template>
