@@ -63,19 +63,19 @@ export default defineComponent({
     const timeSelect = ref("2025");
     const chartData = ref([
       {
-        color: "#2E93fA",
+        color: "#00A3FF",
         name: "Contrato",
         now: "27,8",
         year: "147,84",
       },
       {
-        color: "#66DA26",
+        color: "#00F5D9",
         name: "S&P 500",
         now: "27,8",
         year: "147,84",
       },
       {
-        color: "#E91E63",
+        color: "#7438FF",
         name: "Ibovespa",
         now: "27,8",
         year: "147,84",
@@ -83,16 +83,25 @@ export default defineComponent({
     ]);
     const series = [
       {
-        name: "Carteira",
-        data: [100000, 200000, 300000, 400000, 430000, 450000, 1000000],
+        name: "Contrato 1",
+        data: [
+          20000, 50000, 30000, 80000, 60000, 120000, 100000, 40000, 150000,
+          120000, 180000, 200000,
+        ],
       },
       {
-        name: "Ibovespa",
-        data: [0, 100000, 100000, 200000, 25000, 100000, 300000],
+        name: "Contrato 2",
+        data: [
+          10000, 30000, 40000, 25000, 50000, 80000, 60000, 50000, 70000, 85000,
+          75000, 100000,
+        ],
       },
       {
-        name: "S&P",
-        data: [100000, 200000, 50000, 50000, 90000, 20000, 50000],
+        name: "Contrato 3",
+        data: [
+          5000, 10000, 15000, 20000, 18000, 30000, 25000, 35000, 40000, 38000,
+          50000, 60000,
+        ],
       },
     ];
     return {

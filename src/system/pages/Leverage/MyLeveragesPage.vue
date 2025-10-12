@@ -16,6 +16,11 @@
           <over-view-leverage-layout />
         </div>
       </div>
+      <div class="col-12 q-mx-sm row">
+        <div class="col-12 col-10 q-pa-lg">
+          <resume-my-leverage-layout />
+        </div>
+      </div>
     </div>
   </q-page>
 </template>
@@ -24,7 +29,7 @@
 import { defineComponent } from "vue";
 import TitlePage from "src/system/components/TitlePage.vue";
 import OverViewLeverageLayout from "src/system/layouts/Leverage/OverViewLeverageLayout.vue";
-
+import ResumeMyLeverageLayout from "src/system/layouts/Leverage/ResumeMyLeverageLayout.vue";
 defineComponent({
   name: "MyLeveragesPage",
 });

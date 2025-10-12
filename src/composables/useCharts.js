@@ -201,10 +201,11 @@ export default function useCharts() {
     },
   });
   const optionsContractComparative = ref({
+    theme: themeOptions,
     legend: {
       show: false,
     },
-    colors: ["#00A3FF", "#66DA26", "#F08484"],
+    colors: ["#00A3FF", "#00F5D9", "#7438FF"],
     chart: {
       width: "100%",
       height: 100,
@@ -268,12 +269,18 @@ export default function useCharts() {
         "out.",
         "nov.",
         "dez.",
+        "2025",
+        "fev.",
+        "mar.",
+        "abr.",
+        "mai.",
+        "jun."
       ],
     },
     yaxis: {
       opposite: true,
       min: 0,
-      max: 1100000,
+      max: 210000,
       labels: {
         align: "left",
         formatter: (value) => {
