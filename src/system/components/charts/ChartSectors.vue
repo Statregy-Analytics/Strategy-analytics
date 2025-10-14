@@ -108,7 +108,7 @@ const series = [22.19, 15.97, 15.38, 12.5, 20.83, 11.01];
 .apexcharts-legend,
 .apexcharts-align-center,
 .apx-legend-position-right {
-  top: 54px !important;
+  top: 3.1rem !important;
 }
 /* Seus estilos aqui */
 </style>
