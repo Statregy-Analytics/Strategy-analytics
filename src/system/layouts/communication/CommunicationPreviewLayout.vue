@@ -1,6 +1,6 @@
 <template>
   <div class="communication-preview-layout">
-    <q-card class="bg-transparent q-pa-md" :class="col - 12">
+    <q-card class="bg-transparent q-pa-md">
       <div class="col-12">
         <h2 class="text-h7">
           Comunicação

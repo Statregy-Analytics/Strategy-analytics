@@ -3,16 +3,25 @@
     <div class="bg-transparent q-pa-md">
       <div class="row q-col-gutter-md q-mt-sm">
         <div class="col-auto">
-          <q-btn-toggle
-            v-model="chartType"
-            toggle-color="primary"
-            :options="[
-              { label: 'Percentual', value: 'percentage' },
-              { label: 'Absoluto', value: 'absolute' },
-            ]"
-            dense
+          <q-btn
+            style="border-radius: 4px"
             no-caps
-          />
+            padding="4px 12px 4px 12px"
+            label="Percentual"
+            :color="chartType === 'percentage' ? 'grey-9' : 'transparent'"
+            @click.prevent="chartType = 'percentage'"
+          >
+          </q-btn>
+
+          <q-btn
+            style="border-radius: 4px"
+            no-caps
+            padding="4px 12px 4px 12px"
+            label="Absoluto"
+            :color="chartType === 'absolute' ? 'grey-9' : 'transparent'"
+            @click.prevent="chartType = 'absolute'"
+          >
+          </q-btn>
         </div>
         <q-space />
         <div class="col-auto flex items-center">
@@ -41,7 +50,6 @@ import financialData from "src/composables/system/fake/fincancial_fake_data.json
 const chartType = ref("percentage");
 
 const dividendYieldData = ref([]);
-
 onMounted(() => {
   dividendYieldData.value = financialData.dividend_yield;
 });
@@ -62,6 +70,9 @@ const chartOptions = computed(() => {
       type: "bar",
       toolbar: { show: false },
       background: "trasparent",
+      columnWidth: "50%",
+      endingShape: "flat",
+      distributed: true,
     },
     plotOptions: {
       bar: {

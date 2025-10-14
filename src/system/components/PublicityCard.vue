@@ -1,10 +1,10 @@
 <template>
   <div class="publicity-card col-2-2 propaganda-tool column">
     <div
-      class="text-muted col-1 cursor-pointer"
+      class="text-muted col-1 cursor-pointer text-roboto-20-500"
       @click.prevent="emit('closed')"
     >
-      ocultar
+      Ocultar
     </div>
     <!-- <q-img :src="image" :ratio="4 / 3" fit="none" /> -->
     <q-img

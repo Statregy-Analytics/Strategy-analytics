@@ -9,20 +9,12 @@
       R$ {{ currentWallet }}
       <q-btn
         flat
-        @click.prevent="
-          dashboard.view_wallet_value = !dashboard.view_wallet_value
-        "
+        @click.prevent="viewValues"
         v-if="!dashboard.view_wallet_value"
       >
         <IconEyeOff />
       </q-btn>
-      <q-btn
-        flat
-        v-else
-        @click.prevent="
-          dashboard.view_wallet_value = !dashboard.view_wallet_value
-        "
-      >
+      <q-btn flat v-else @click.prevent="viewValues">
         <IconEye />
       </q-btn>
       <br />
@@ -31,7 +23,7 @@
       </b>
     </div>
     <div
-      style="width: 21%; height: 0.4rem; display: flex; border-radius: 8px"
+      style="width: 84%; height: 0.4rem; display: flex; border-radius: 8px"
       class="q-my-sm"
     >
       <div
@@ -97,13 +89,21 @@ import { IconArrowDown, IconArrowUp, IconTransfer } from "@tabler/icons-vue";
 import { defineComponent, ref } from "vue";
 import CardDeposit from "src/system/layouts/deposit/CardDeposit.vue";
 import CardTransfer from "src/system/layouts/deposit/CardTransfer.vue";
-import { useLayoutStore } from "src/stores/layout";
+// import { useLayoutStore } from "src/stores/layout";
+import useStorage from "src/composables/system/useStorage";
+import { useStoreLayout } from "src/stores/layoutStore";
 import { storeToRefs } from "pinia";
-const useLayout = useLayoutStore();
-const { dashboard } = storeToRefs(useLayout);
+const storeLayout = useStoreLayout();
+const { dashboard } = storeToRefs(storeLayout);
+const { setSystemViewValues } = useStorage();
 defineComponent({
   name: "WalletTotal",
 });
+const viewValues = async () => {
+  storeLayout.setToggleViewWalletValues();
+  console.log("easss->", dashboard.value.view_wallet_value);
+  await setSystemViewValues();
+};
 
 const props = defineProps({
   currentWallet: {

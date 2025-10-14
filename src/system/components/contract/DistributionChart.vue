@@ -8,8 +8,8 @@
     <!-- <div class="" v-for="(item, index) in props.datasSeries" :key="index">
       {{ $filters.percenteCalc(item, 2000) }} %
     </div> -->
-    <div class="row justify-between">
-      <div class="col-10">
+    <div class="row justify-between q-mt-lg">
+      <div class="col">
         <apexchart
           :key="timeSelect"
           ref="chart"
@@ -87,9 +87,7 @@ const chartOptions = ref({
         size: "80%",
         labels: {
           show: true,
-          name: {
-            show: true, // Esconde o nome para evitar sobreposição
-          },
+          name: { show: true, offsetY: 0 },
           value: {
             show: false,
           },

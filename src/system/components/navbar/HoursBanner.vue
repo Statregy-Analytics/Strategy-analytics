@@ -1,6 +1,6 @@
 <template>
   <q-banner
-    class="text-white q-py-md-md styleTool"
+    class="hours-banner text-white q-py-md-md"
     dense
     style="text-wrap-mode: nowrap"
   >
@@ -37,6 +37,13 @@ export default defineComponent({
     //   return days[time.value.getDay()];
     // });
     const getNewTime = computed(() => {
+      if (!timezone.value) return "--:--";
+      return time.value.toLocaleTimeString(timezone.value.sigla, {
+        timeZone: timezone.value.value,
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      });
       const nyTime = new Date(
         time.value.toLocaleString(timezone.value.sigla, {
           timeZone: timezone.value.value,
@@ -57,3 +64,19 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+.hours-banner {
+  width: 122;
+  height: 43;
+  gap: 4px;
+  border-radius: 4px;
+  padding: 8px;
+
+  background: linear-gradient(
+    202.99deg,
+    rgba(255, 255, 255, 0.16) 0.52%,
+    rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.01) 99.48%
+  );
+}
+</style>

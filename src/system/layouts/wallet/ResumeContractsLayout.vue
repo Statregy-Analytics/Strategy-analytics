@@ -34,7 +34,7 @@
                 ref="contractSection{{ contract.id }}"
               />
             </div>
-            <div class="col styleTool q-pa-md flex flex-center">
+            <div class="col styleTool row justify-center items-center">
               <chart-sectors ref="contractSection{{ contract.id }}" />
             </div>
           </div>

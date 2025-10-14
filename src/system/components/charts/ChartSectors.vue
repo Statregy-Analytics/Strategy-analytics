@@ -1,20 +1,23 @@
 <template>
-  <apexchart
-    class="chart-sectors"
-    :key="timeSelect"
-    ref="chart"
-    width="100%"
-    :options="chartOptions"
-    :series="series"
-  ></apexchart>
-  <div class="chart-sectors-legend">
-    <legend-label
-      v-for="(label, index) in chartOptions.labels"
-      :key="index"
-      :color="chartOptions.colors[index]"
-      :label="label"
-      :percente="series[index]"
-    />
+  <div class="row justify-between col-9 items-center chart-sectors">
+    <div class="col">
+      <apexchart
+        :key="timeSelect"
+        ref="chart"
+        :options="chartOptions"
+        :series="series"
+      ></apexchart>
+    </div>
+    <div class="col-1 control-legend-label">
+      <p v-for="(item, index) in series" :key="index">
+        {{
+          $filters.percenteCalc(
+            item,
+            series.reduce((a, v) => a + v, 0),
+          )
+        }}%
+      </p>
+    </div>
   </div>
 </template>
 
@@ -31,13 +34,27 @@ const chartOptions = ref({
   colors: ["#9875FF", "#00A3FF", "#FFC775", "#EE77A2", "#D582E3", "#E3F271"],
   chart: {
     type: "donut",
-    height: 250,
+    height: "auto",
     dropShadow: {
       enabled: false,
     },
   },
   legend: {
-    show: false,
+    show: true,
+    labels: {
+      colors: "#989898",
+      useSeriesColors: false,
+    },
+    markers: {
+      shape: "square",
+      strokeWidth: 0,
+      size: 5,
+      offsetX: -4,
+      offsetY: 0,
+      // customHTML: function () {
+      //   return '<span class="custom-marker"><i class="fas fa-chart-pie"></i></span>';
+      // },
+    },
   },
   stroke: {
     width: 0,
@@ -48,9 +65,7 @@ const chartOptions = ref({
         size: "80%",
         labels: {
           show: true,
-          name: {
-            show: true, // Esconde o nome para evitar sobreposição
-          },
+          name: { show: true, offsetY: 0 },
           value: {
             show: false,
           },
@@ -60,8 +75,8 @@ const chartOptions = ref({
             label: "6 setores", // Não mostra label padrão
             fontSize: "20px",
             fontFamily: "Inter, sans-serif",
-            fontWeight: 600,
-            offsetY: -10,
+            fontWeight: 400,
+            offsetY: 10,
             color: "#eeeeee",
           },
         },
@@ -80,16 +95,20 @@ const chartOptions = ref({
     "Blockchain (DLT)",
   ],
   dataLabels: {
-    show: false,
+    enabled: false,
   },
   theme: {
     palette: "palette2",
   },
 });
 const series = [22.19, 15.97, 15.38, 12.5, 20.83, 11.01];
-// Seu código aqui
 </script>
 
-<style scoped>
+<style>
+.apexcharts-legend,
+.apexcharts-align-center,
+.apx-legend-position-right {
+  top: 54px !important;
+}
 /* Seus estilos aqui */
 </style>

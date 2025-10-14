@@ -32,8 +32,8 @@ const state = () => {
       { label: "Espanhol (es-ES)", value: "es" }
     ],
     optionsTimeZone: [
-      { label: "Brasilia, D.F (GMT-3)", value: "America/Sao_Paulo", sigla: 'pt-BR', fuso: '(CMT-3)' },
-      { label: "Nova Iorque, EUA", value: "America/New_York", sigla: 'en-US', fuso: '(CMT-5)' }
+      { label: "Brasilia, D.F (GMT-3)", value: "America/Sao_Paulo", sigla: 'pt-BR', fuso: '(GMT-3)' },
+      { label: "Nova Iorque, EUA", value: "America/New_York", sigla: 'en-US', fuso: '(GMT-5)' }
     ]
   };
 };

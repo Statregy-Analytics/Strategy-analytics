@@ -9,22 +9,24 @@
       :series="series"
     ></apexchart>
     <div class="row text-end align-center self-center justify-end">
-      <div class="col-9 col-md-8 col-xs-12 row items-center">
-        <div class="col-2 text-muted">Periodo:</div>
-        <q-btn-group
-          class="row q-gutter-sm"
-          style="box-shadow: none !important"
-        >
-          <q-btn
-            v-for="(item, index) in optionsTime"
-            :key="index"
-            :color="timeSelect == item.value ? 'primary' : ''"
-            :label="item.label"
-            :value="item.value"
-            @click="timeSelect = item.value"
-            style="border-radius: 8px"
-          />
-        </q-btn-group>
+      <div class="col-9 col-md-8 col-xs-12 row items-center justify-end">
+        <div class="col-1 text-muted">Periodo:</div>
+        <div class="col-auto">
+          <q-btn-group
+            class="row q-gutter-sm"
+            style="box-shadow: none !important"
+          >
+            <q-btn
+              v-for="(item, index) in optionsTime"
+              :key="index"
+              :color="timeSelect == item.value ? 'primary' : ''"
+              :label="item.label"
+              :value="item.value"
+              @click="timeSelect = item.value"
+              style="border-radius: 8px"
+            />
+          </q-btn-group>
+        </div>
       </div>
     </div>
   </div>

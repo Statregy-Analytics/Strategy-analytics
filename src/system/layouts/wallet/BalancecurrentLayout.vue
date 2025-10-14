@@ -23,6 +23,7 @@
         :btnBgColor="item.btnBgColor"
         :bgBadgeBank="item.bgBadgeBank"
         :tooltip="item.tooltip"
+        :viewValues="dashboard.view_wallet_value"
       />
     </div>
   </div>
@@ -58,7 +59,7 @@ export default defineComponent({
       storeToRefs(userStore);
     const { getWallet, loading } = useDataUser();
     const storeLayout = useStoreLayout();
-    const { system, getColorTheme } = storeToRefs(storeLayout);
+    const { system, getColorTheme, dashboard } = storeToRefs(storeLayout);
     const classBadge = computed(() => {
       return `${system.value.theme}-invest`;
     });
@@ -137,6 +138,7 @@ export default defineComponent({
       setCurrentWallet,
       getAvailableToInvest,
       getCurrentInvest,
+      dashboard,
     };
   },
   // Outras configurações do componente aqui

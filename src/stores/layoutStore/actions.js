@@ -18,7 +18,10 @@ const actions = {
     this.menuAdm = payload
   },
   setViewWalletValue(payload) {
-    this.view_wallet_value = payload
+    this.dashboard.view_wallet_value = payload
+  },
+  setToggleViewWalletValues() {
+    this.dashboard.view_wallet_value = (this.dashboard.view_wallet_value = !this.dashboard.view_wallet_value)
   }
 };
 

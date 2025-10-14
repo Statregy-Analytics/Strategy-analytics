@@ -38,7 +38,10 @@
           </q-btn>
         </div>
       </div>
-      <div class="row justify-between items-center q-mt-lg">
+      <div
+        class="row justify-between items-center q-mt-lg"
+        :class="{ 'text-none': viewValues }"
+      >
         <div class="col-lg-auto col-12" style="display: flex; align-items: end">
           <div style="line-height: 1rem">
             <p class="text-roboto-32-700">
@@ -87,6 +90,7 @@ export default defineComponent({
       type: String,
       default: "bottom end",
     },
+    viewValues: { type: Boolean },
     // iconTheme: { type: String, default: "white" },
   },
   setup() {

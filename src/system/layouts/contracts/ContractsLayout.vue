@@ -16,12 +16,18 @@
               ></q-icon>
             </div>
             <div class="col-6">
-              <q-btn no-caps outline size="sm" color="primary">
+              <div class="btn-personalite">
                 <IconPlus width="14" height="14" class="text-white" />
                 <span class="text-white q-ml-sm">
                   Oportunidade de investimento</span
                 >
-              </q-btn>
+              </div>
+              <!-- <q-btn no-caps outline size="sm" color="primary" :ripple="false">
+                <IconPlus width="14" height="14" class="text-white" />
+                <span class="text-white q-ml-sm">
+                  Oportunidade de investimento</span
+                >
+              </q-btn> -->
               <div class="line-height-1 q-mt-xs">
                 <p class="text-16 text-weight-bolder">
                   Contrato em Alta com Rendimentos de até 16% ao ano!

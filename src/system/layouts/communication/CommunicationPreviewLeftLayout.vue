@@ -1,6 +1,9 @@
 <template>
-  <div class="communication-preview-layout">
-    <q-card class="bg-transparent q-pa-md">
+  <div class="communication-preview-left-layout">
+    <q-card
+      class="bg-transparent q-pa-md"
+      style="max-height: 103rem; overflow: auto"
+    >
       <div class="col-12 row justify-between">
         <h2 class="text-h7">Comunicação</h2>
         <div class="col-1 self-center">

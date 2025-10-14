@@ -731,6 +731,29 @@ export default function useCharts() {
         horizontal: false,
         columnWidth: '25%',
       },
+      colors: {
+        ranges: [{
+          from: 0,
+          to: 0,
+          color: undefined
+        }],
+        backgroundBarColors: ['transparent', 'transparent', 'transparent'],
+        backgroundBarOpacity: 1,
+        backgroundBarRadius: 0,
+      },
+    },
+    states: {
+      hover: {
+        filter: {
+          type: 'none',
+        }
+      },
+      active: {
+        allowMultipleDataPointsSelection: true,
+        filter: {
+          type: 'none',
+        }
+      },
     },
     stroke: {
       width: 0,

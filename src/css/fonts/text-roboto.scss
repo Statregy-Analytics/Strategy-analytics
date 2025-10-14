@@ -14,6 +14,10 @@ $fontStyle: normal;
   font-size: $size + rem;
   font-weight: $weight;
 }
+.text-roboto-20-500 {
+  @include roboto-regular(calc(20 / 16), 500);
+  $lineHeight: calc(22.4 / 16) + rem;
+}
 .text-roboto-15-500 {
   @include roboto-regular(calc(15.625 / 16), 500);
   $lineHeight: calc(22.4 / 16) + rem;

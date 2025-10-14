@@ -145,138 +145,6 @@ const optionsTime = [
 ];
 const chartOne = ref(null);
 const chartTwo = ref(null);
-// const chartOptionsBolsas = computed(() => ({
-//   colors: props.colors?.bolsas ?? [],
-//   chart: {
-//     type: "donut",
-//     height: "auto",
-//     dropShadow: {
-//       enabled: false,
-//     },
-//   },
-//   legend: {
-//     show: true,
-//     labels: {
-//       colors: "#989898",
-//       useSeriesColors: false,
-//     },
-//     markers: {
-//       shape: "square",
-//       strokeWidth: 0,
-//       size: 5,
-//       offsetX: -4,
-//       offsetY: 0,
-//       // customHTML: function () {
-//       //   return '<span class="custom-marker"><i class="fas fa-chart-pie"></i></span>';
-//       // },
-//     },
-//   },
-//   stroke: {
-//     width: 0,
-//   },
-//   plotOptions: {
-//     pie: {
-//       donut: {
-//         size: "80%",
-//         labels: {
-//           show: true,
-//           name: {
-//             show: true, // Esconde o nome para evitar sobreposição
-//           },
-//           value: {
-//             show: false,
-//           },
-//           total: {
-//             showAlways: true,
-//             show: true,
-//             label: props.titles?.bolsas ?? "", // Não mostra label padrão
-//             fontSize: "20px",
-//             fontFamily: "Inter, sans-serif",
-//             fontWeight: 200,
-//             offsetY: -10,
-//             color: "#eeeeee",
-//           },
-//         },
-//       },
-//     },
-//   },
-//   tooltip: {
-//     enabled: false,
-//   },
-//   labels: props.labels?.bolsas ?? [],
-//   dataLabels: {
-//     enabled: false,
-//   },
-//   theme: {
-//     palette: "palette2",
-//   },
-// }));
-// const chartOptionsRedes = computed(() => ({
-//   colors: props.colors?.redes ?? [],
-//   chart: {
-//     type: "donut",
-//     height: "auto",
-//     dropShadow: {
-//       enabled: false,
-//     },
-//   },
-//   legend: {
-//     show: true,
-//     labels: {
-//       colors: "#989898",
-//       useSeriesColors: false,
-//     },
-//     markers: {
-//       shape: "square",
-//       strokeWidth: 0,
-//       size: 5,
-//       offsetX: -4,
-//       offsetY: 0,
-//       // customHTML: function () {
-//       //   return '<span class="custom-marker"><i class="fas fa-chart-pie"></i></span>';
-//       // },
-//     },
-//   },
-//   stroke: {
-//     width: 0,
-//   },
-//   plotOptions: {
-//     pie: {
-//       donut: {
-//         size: "80%",
-//         labels: {
-//           show: true,
-//           name: {
-//             show: true, // Esconde o nome para evitar sobreposição
-//           },
-//           value: {
-//             show: false,
-//           },
-//           total: {
-//             showAlways: true,
-//             show: true,
-//             label: props.titles?.redes ?? "", // Não mostra label padrão
-//             fontSize: "20px",
-//             fontFamily: "Inter, sans-serif",
-//             fontWeight: 200,
-//             offsetY: -10,
-//             color: "#eeeeee",
-//           },
-//         },
-//       },
-//     },
-//   },
-//   tooltip: {
-//     enabled: false,
-//   },
-//   labels: props.labels?.redes ?? [],
-//   dataLabels: {
-//     enabled: false,
-//   },
-//   theme: {
-//     palette: "palette2",
-//   },
-// }));
 const chartOptionsBolsas = computed(() => {
   if (!props.datas?.bolsas || !props.labels?.bolsas) return { chart: {} };
   return {
@@ -300,7 +168,7 @@ const chartOptionsBolsas = computed(() => {
           size: "80%",
           labels: {
             show: true,
-            name: { show: true },
+            name: { show: true, offsetY: 0 },
             value: { show: false },
             total: {
               showAlways: true,
@@ -309,7 +177,7 @@ const chartOptionsBolsas = computed(() => {
               fontSize: "20px",
               fontFamily: "Inter, sans-serif",
               fontWeight: 200,
-              offsetY: -10,
+              offsetY: -5,
               color: "#eeeeee",
             },
           },
@@ -345,7 +213,7 @@ const chartOptionsRedes = computed(() => {
           size: "80%",
           labels: {
             show: true,
-            name: { show: true },
+            name: { show: true, offsetY: 0 },
             value: { show: false },
             total: {
               showAlways: true,

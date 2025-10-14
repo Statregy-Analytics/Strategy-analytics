@@ -73,9 +73,22 @@ const datasCharts = [
   {
     name: "Moedas",
     title: "Fiduciárias",
+    titles: { bolsas: "Fiduciárias", redes: "Criptoativos" },
     labelsArray: ["Real (BRL)", "Dálar (USD)", "Criptoativos"],
     colorsArray: ["#EE77A2", "#D582E3", "#9875FF"],
     datasSeries: [167, 322.00000000000006, 1467.6],
+    labels: {
+      fiduciaria: ["Real (BRL)", "Dólar (USD)", "Criptoativos"],
+      crypto: ["BitCoin (BTC)", "Cardano (ADA)", "Solana (SOL)", "Fiduciárias"],
+    },
+    colors: {
+      fiduciaria: ["#EE77A2", "#D582E3", "#9875FF"],
+      crypto: ["#9875FF", "#06C9BF", "#FFC755", "#EE77A2"],
+    },
+    datas: {
+      fiduciaria: [398, 160, 158],
+      crypto: [219.2, 289, 78.2, 229.6],
+    },
     componentChart: "CryptoDistributionChart",
   },
   {

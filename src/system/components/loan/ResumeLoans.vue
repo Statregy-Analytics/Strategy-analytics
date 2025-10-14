@@ -18,7 +18,10 @@
           <span class="text-roboto-20-400 text-weight-bolder">{{ title }}</span>
         </div>
       </div>
-      <div class="row justify-between items-center q-mt-lg">
+      <div
+        class="row justify-between items-center q-mt-lg"
+        :class="{ 'text-none': viewValues }"
+      >
         <div class="col-lg-auto col-12" style="display: flex; align-items: end">
           <div style="line-height: 1rem" v-if="cipher">
             <p class="text-roboto-32-700">
@@ -57,6 +60,7 @@ export default defineComponent({
     btnBgColor: { type: String, default: "btn-bank" },
     bgBadgeBank: { type: String, default: "badge-bank" },
     loading: { type: Boolean },
+    viewValues: { type: Boolean },
     // iconTheme: { type: String, default: "white" },
   },
   setup() {

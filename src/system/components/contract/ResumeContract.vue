@@ -48,7 +48,7 @@
           </div>
         </div>
       </div>
-      <div class="col-auto">
+      <div class="col q-mr-md">
         <img
           src="/img/chart-axis.png"
           srcset="/img/chart-axis.png"
@@ -58,7 +58,6 @@
       <div class="col-auto">
         <q-btn
           :to="link"
-          size="sm"
           outline
           no-caps
           style="border-color: red !important"

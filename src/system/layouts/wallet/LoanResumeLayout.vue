@@ -21,6 +21,7 @@
         :cipher="item.cipher"
         :br-coin="item.brCoin"
         :description="item.description"
+        :viewValues="dashboard.view_wallet_value"
       />
     </q-card>
   </div>
@@ -29,11 +30,13 @@
 <script setup>
 import { defineComponent } from "vue";
 import ResumeLoans from "src/system/components/loan/ResumeLoans.vue";
-// import BalanceItems from "src/system/components/wallet/BalanceItems.vue";
+import { storeToRefs } from "pinia";
+import { useStoreLayout } from "src/stores/layoutStore";
 defineComponent({
   name: "LoanResumeLayout",
 });
-
+const storeLayout = useStoreLayout();
+const { dashboard } = storeToRefs(storeLayout);
 const loans = [
   {
     title: "Empréstimos Vigentes",
