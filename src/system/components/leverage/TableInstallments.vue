@@ -110,7 +110,9 @@
 
 <script setup>
 import { ref, computed } from "vue";
-
+import { useLoanStore } from "src/stores/loan";
+import useNotify from "src/composables/useNotify";
+import { storeToRefs } from "pinia";
 const props = defineProps({
   parcelas: {
     type: Array,
@@ -119,13 +121,16 @@ const props = defineProps({
   },
 });
 
+const storeLoan = useLoanStore();
+const { selectedPay } = storeToRefs(storeLoan);
 const selected = ref([]);
 const pending = ref(false);
-
+const emit = defineEmits(["sendPayment"]);
 const pagination = ref({
   rowsPerPage: 10,
   sortBy: "numero",
 });
+const { errorNotify } = useNotify();
 
 const columns = ref([
   {
@@ -204,8 +209,15 @@ const pagarParcela = (parcela) => {
 };
 
 const pagarParcelasSelecionadas = () => {
+  if (selected.value.length <= 0) {
+    errorNotify("Selecione pelo menos uma parcela", null, "bottom");
+    return;
+  }
   console.log("Pagar parcelas selecionadas:", selected.value);
   // Implementar lógica para múltiplos pagamentos
+
+  selectedPay.value = selected.value;
+  emit("sendPayment");
 };
 
 const baixarExtrato = () => {

@@ -24,6 +24,9 @@ const actions = {
   setStepImovel(payload) {
     this.step_imovel = payload
   },
+  setSelectedPay(payload) {
+    this.selectedPay = payload
+  }
 
 };
 

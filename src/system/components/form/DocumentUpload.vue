@@ -1,5 +1,8 @@
 <template>
-  <q-card class="document-upload-card bg-transparent">
+  <q-card
+    class="document-upload-card bg-transparent"
+    :class="{ 'document-border-bottom': separator }"
+  >
     <q-card-section class="q-pa-lg">
       <!-- Document Title -->
       <!-- <div class="document-title q-mb-lg">
@@ -177,6 +180,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  separator: { type: Boolean, default: false },
 });
 const hasError = computed(() => {
   return (
@@ -370,8 +374,10 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-.document-upload-card {
+.document-border-bottom {
   border-bottom: 1px solid grey;
+}
+.document-upload-card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 

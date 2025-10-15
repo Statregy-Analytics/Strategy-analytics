@@ -1,5 +1,6 @@
 const state = () => {
   return {
+    selectedPay: [],
     securedLoan: "home",
     step_automobile: "valores",
     step_imovel: "valores",

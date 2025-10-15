@@ -54,41 +54,51 @@
       },
       "parcelas": [
         {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
           "numero": "01/200",
+          "slug": "#01",
           "vencimento": "09/06/2025",
-          "valor": 10833.0,
+          "valor": 10833.4,
           "status": "Pago: 08/06/2025",
           "comprovante": "comp1415815.pdf",
           "pagar_agora": false
         },
         {
+          "hash": "2d3d70f8e381aca0e1ce59f25f72b78b8d3267db888130829007d6f9eccc9f3e",
           "numero": "02/200",
+          "slug": "#02",
           "vencimento": "09/06/2025",
-          "valor": 10833.0,
+          "valor": 10833.2,
           "status": "Atrasado: 2 dias",
           "comprovante": null,
           "pagar_agora": true
         },
         {
+          "hash": "9e489e45617535d576001548fab2cb6a8d9387c291b7e10083f07d1b51a54ff6",
           "numero": "03/200",
+          "slug": "#03",
           "vencimento": "09/07/2025",
-          "valor": 10833.0,
+          "valor": 10833.13,
           "status": "Em aberto",
           "comprovante": null,
           "pagar_agora": false
         },
         {
+          "hash": "2f422a7b2f34759ecf6c0acb2c3874c7901671fb96a4b75b8efcb25a59994f56",
           "numero": "04/200",
+          "slug": "#04",
           "vencimento": "09/08/2025",
-          "valor": 10833.0,
+          "valor": 10833.21,
           "status": "Em aberto",
           "comprovante": null,
           "pagar_agora": false
         },
         {
+          "hash": "df9e17ae08301573221fc79e56bac1b2100c481392858f4345784645d95ee440",
           "numero": "05/200",
+          "slug": "#05",
           "vencimento": "09/09/2025",
-          "valor": 10833.0,
+          "valor": 10833.32,
           "status": "Em aberto",
           "comprovante": null,
           "pagar_agora": false

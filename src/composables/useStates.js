@@ -212,7 +212,21 @@ export default function useStates() {
   const hideLoading = () => {
     $q.loading.hide()
   }
+  const typeLoanIcon = {
+    "secured_automovel": "IconCar",
+    "secured_imovel": "IconHome2",
+    "consorcio": "IconPigMoney",
+    "colateral": "IconCoins"
+  }
+  const administrationImage = {
+    "Sicredi": "/icons/banks/sicredi.png",
+    "Porto": "/icons/banks/porto.png",
+    "Itau": "/icons/banks/itau.png",
+    "Inter": "/icons/banks/inter.png",
+  }
   return {
+    typeLoanIcon,
+    administrationImage,
     redirectRouteForUser,
     get,
     dimension,

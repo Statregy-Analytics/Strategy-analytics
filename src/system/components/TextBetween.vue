@@ -14,7 +14,7 @@ defineComponent({
 
 defineProps({
   title: { type: String },
-  description: { type: String },
+  description: { type: [String, Number] },
   colorTextDescription: { type: String, default: "text-white" },
 });
 // Seu código aqui
