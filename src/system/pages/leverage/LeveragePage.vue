@@ -72,7 +72,7 @@
 <script setup>
 import { computed, defineComponent, onMounted, ref } from "vue";
 import TitlePage from "src/system/components/TitlePage.vue";
-import LeverageResumeLayout from "src/system/layouts/Leverage/LeverageResumeLayout.vue";
+import LeverageResumeLayout from "src/system/layouts/leverage/LeverageResumeLayout.vue";
 import { useUserStore } from "src/stores/user";
 import { storeToRefs } from "pinia";
 import { IconArrowLeft } from "@tabler/icons-vue";

@@ -28,6 +28,26 @@
 .teste {
   color: #9875ff;
 }
+.text-neutral {
+  color: $neutral;
+}
+.text-error {
+  color: $error;
+}
+.bg-btn-neutral {
+  color: #000;
+  background: $neutral;
+  border: 1px solid var(--Neutral-600, #656565);
+}
+
+.bg-btn-success {
+  background: $positive;
+  border: 1px solid #317912;
+}
+.bg-btn-error {
+  background: $negative;
+  border: 1px solid #a50f11;
+}
 .text-h8 {
   color: #fff;
   text-align: center;
@@ -580,4 +600,7 @@ body,
   );
   border: 1px solid var(--active, #00a3ff);
   cursor: pointer;
+}
+.max-height-28em {
+  max-height: 28rem;
 }

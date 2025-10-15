@@ -1,0 +1,163 @@
+{
+  "simulation": [
+    {
+      "title": "Empréstimo de R$ 500.000,00",
+      "descricao": "Com Garantia de Automóvel",
+      "status": "Informações Inicias (Etapa 3)"
+    },
+    {
+      "title": "Empréstimo de R$ 500.000,00",
+      "descricao": "Com Garantia de Automóvel",
+      "status": "Informações Inicias (Etapa 3)"
+    },
+    {
+      "title": "Empréstimo de R$ 500.000,00",
+      "descricao": "Com Garantia de Automóvel",
+      "status": "Informações Inicias (Etapa 3)"
+    },
+    {
+      "title": "Empréstimo de R$ 500.000,00",
+      "descricao": "Com Garantia de Automóvel",
+      "status": "Informações Inicias (Etapa 3)"
+    },
+    {
+      "title": "Empréstimo de R$ 500.000,00",
+      "descricao": "Com Garantia de Automóvel",
+      "status": "Informações Inicias (Etapa 3)"
+    },
+    {
+      "title": "Empréstimo de R$ 500.000,00",
+      "descricao": "Com Garantia de Automóvel",
+      "status": "Informações Inicias (Etapa 3)"
+    }
+  ],
+  "loans": [
+    {
+      "id": 1,
+      "title": "Empréstimo de R$ 500.000,00",
+      "tipo": "Com Garantia de Imóvel",
+      "administradora": "Sicredi",
+      "detalhes": {
+        "proxima_parcela": {
+          "valor": 10833.0,
+          "vencimento": "02/06/25"
+        },
+        "status_parcelas": "12 pagas",
+        "parcelas_quitadas": 12,
+        "total_parcelas": 40,
+        "juros": "1,08% ao mês",
+        "outro": "39%"
+      },
+      "type": {
+        "description": "Com Garantia de Automóvel",
+        "value": "secured_imovel"
+      },
+      "parcelas": [
+        {
+          "numero": "01/200",
+          "vencimento": "09/06/2025",
+          "valor": 10833.0,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "numero": "02/200",
+          "vencimento": "09/06/2025",
+          "valor": 10833.0,
+          "status": "Atrasado: 2 dias",
+          "comprovante": null,
+          "pagar_agora": true
+        },
+        {
+          "numero": "03/200",
+          "vencimento": "09/07/2025",
+          "valor": 10833.0,
+          "status": "Em aberto",
+          "comprovante": null,
+          "pagar_agora": false
+        },
+        {
+          "numero": "04/200",
+          "vencimento": "09/08/2025",
+          "valor": 10833.0,
+          "status": "Em aberto",
+          "comprovante": null,
+          "pagar_agora": false
+        },
+        {
+          "numero": "05/200",
+          "vencimento": "09/09/2025",
+          "valor": 10833.0,
+          "status": "Em aberto",
+          "comprovante": null,
+          "pagar_agora": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Empréstimo de R$ 500.000,00",
+      "tipo": "Contábil",
+      "administradora": "Porto",
+      "detalhes": {
+        "proxima_parcela": {
+          "valor": 12833.33,
+          "vencimento": "02/06/25"
+        },
+        "status_parcelas": "04 meses ",
+        "parcelas_quitadas": 4,
+        "total_parcelas": 180,
+        "taxa_administracao": "0,0787% ao mês",
+        "lance_embutido": "15% do Crédito",
+        "outro": "39%"
+      },
+      "type": {
+        "description": "Com Garantia de imóvel",
+        "value": "secured_imovel"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Empréstimo de R$ 500.000,00",
+      "tipo": "Contábil",
+      "detalhes": {
+        "proxima_parcela": {
+          "valor": 2102.27,
+          "vencimento": "02/06/25"
+        },
+        "status_parcelas": "12 pagas",
+        "parcelas_quitadas": 12,
+        "total_parcelas": 40,
+        "juros": "3,75% ao mês",
+        "distribuicao_lucros": "R$ 1000,00 - (20%)",
+        "outro": "39%"
+      },
+      "type": {
+        "description": "Consórcio",
+        "value": "consorcio"
+      }
+    },
+    {
+      "id": 4,
+      "title": "Empréstimo de R$ 500.000,00",
+      "tipo": "Contábil",
+      "detalhes": {
+        "proxima_parcela": {
+          "valor": 2102.27,
+          "vencimento": "02/06/25"
+        },
+        "status_parcelas": "12 pagas",
+        "parcelas_quitadas": 12,
+        "total_parcelas": 40,
+        "juros": "3,75% ao mês",
+        "distribuicao_lucros": "R$ 1000,00 - (20%)",
+        "outro": "39%"
+      },
+      "type": {
+        "description": "Colateral",
+        "value": "colateral"
+      }
+    }
+  ]
+}

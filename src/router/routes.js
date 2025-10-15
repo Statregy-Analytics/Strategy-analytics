@@ -159,12 +159,12 @@ const routes = [
           {
             path: "",
             name: "Alavancagem",
-            component: () => import("../system/pages/Leverage/LeveragePage.vue"),
+            component: () => import("../system/pages/leverage/LeveragePage.vue"),
           },
           {
             path: "MyLeverages",
             name: "Minhas Alavacagens",
-            component: () => import('../system/pages/Leverage/MyLeveragesPage.vue')
+            component: () => import("../system/pages/leverage/MyLeveragesPage.vue")
           }
         ]
       },
