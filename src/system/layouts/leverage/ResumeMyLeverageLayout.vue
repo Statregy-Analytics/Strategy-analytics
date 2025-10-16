@@ -40,12 +40,14 @@ import { defineComponent, ref } from "vue";
 import CardOverviewLayout from "../CardOverviewLayout.vue";
 import SimulationYourLeverages from "src/system/layouts/leverage/yourLeverages/SimulationYourLeverages.vue";
 import ActiveYourLeverages from "src/system/layouts/leverage/yourLeverages/ActiveYourLeverages.vue";
+import PaidOffYourLeverages from "src/system/layouts/leverage/yourLeverages/PaidOffYourLeverages.vue";
 defineComponent({
   name: "ResumeMyLeverageLayout",
 });
 const componentsMaps = {
   SimulationYourLeverages,
   ActiveYourLeverages,
+  PaidOffYourLeverages,
 };
 
 const leverage = ref("simulation");
@@ -56,7 +58,7 @@ const alavaragensTypes = [
     component: "SimulationYourLeverages",
   },
   { title: "Ativas", value: "actives", component: "ActiveYourLeverages" },
-  { title: "Quitados", value: "quitada", component: "SimulationYourLeverages" },
+  { title: "Quitados", value: "quitada", component: "PaidOffYourLeverages" },
 ];
 </script>
 

@@ -169,5 +169,306 @@
         "value": "colateral"
       }
     }
+  ],
+  "paid_off": [
+    {
+      "id": 1,
+      "title": "Empréstimo de R$ 500.000,00",
+      "tipo": "Com Garantia de Imóvel",
+      "administradora": "Sicredi",
+      "paid_off_date": "15/08/2025",
+      "detalhes": {
+        "proxima_parcela": {
+          "valor": 10833.0,
+          "vencimento": "02/06/25"
+        },
+        "status_parcelas": "40 pagas",
+        "parcelas_quitadas": 40,
+        "total_parcelas": 40,
+        "juros": "1,08% ao mês",
+        "outro": "39%"
+      },
+      "type": {
+        "description": "Com Garantia de Automóvel",
+        "value": "secured_imovel"
+      },
+      "parcelas": [
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "01/200",
+          "slug": "#01",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "02/200",
+          "slug": "#03",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "03/200",
+          "slug": "#03",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "04/200",
+          "slug": "#04",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "05/200",
+          "slug": "#05",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Empréstimo de R$ 500.000,00",
+      "tipo": "Contábil",
+      "administradora": "Porto",
+      "paid_off_date": "15/08/2025",
+      "detalhes": {
+        "proxima_parcela": {
+          "valor": 12833.33,
+          "vencimento": "02/06/25"
+        },
+        "status_parcelas": "180 meses ",
+        "parcelas_quitadas": 180,
+        "total_parcelas": 180,
+        "taxa_administracao": "0,0787% ao mês",
+        "lance_embutido": "15% do Crédito",
+        "outro": "39%"
+      },
+      "type": {
+        "description": "Com Garantia de imóvel",
+        "value": "secured_imovel"
+      },
+      "parcelas": [
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "01/200",
+          "slug": "#01",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "02/200",
+          "slug": "#03",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "03/200",
+          "slug": "#03",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "04/200",
+          "slug": "#04",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "05/200",
+          "slug": "#05",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Empréstimo de R$ 500.000,00",
+      "tipo": "Contábil",
+      "administradora": "Sicredi",
+      "detalhes": {
+        "proxima_parcela": {
+          "valor": 2102.27,
+          "vencimento": "02/06/25"
+        },
+        "status_parcelas": "40 pagas",
+        "parcelas_quitadas": 40,
+        "total_parcelas": 40,
+        "juros": "3,75% ao mês",
+        "distribuicao_lucros": "R$ 1000,00 - (20%)",
+        "outro": "39%"
+      },
+      "type": {
+        "description": "Consórcio",
+        "value": "consorcio"
+      },
+      "paid_off_date": "15/08/2025",
+      "parcelas": [
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "01/200",
+          "slug": "#01",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "02/200",
+          "slug": "#03",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "03/200",
+          "slug": "#03",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "04/200",
+          "slug": "#04",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "05/200",
+          "slug": "#05",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Empréstimo de R$ 500.000,00",
+      "tipo": "Contábil",
+      "administradora": "Sicredi",
+      "detalhes": {
+        "proxima_parcela": {
+          "valor": 2102.27,
+          "vencimento": "02/06/25"
+        },
+        "status_parcelas": "40 pagas",
+        "parcelas_quitadas": 40,
+        "total_parcelas": 40,
+        "juros": "3,75% ao mês",
+        "distribuicao_lucros": "R$ 1000,00 - (20%)",
+        "outro": "39%"
+      },
+      "type": {
+        "description": "Colateral",
+        "value": "colateral"
+      },
+      "paid_off_date": "15/08/2025",
+      "parcelas": [
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "01/200",
+          "slug": "#01",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "02/200",
+          "slug": "#03",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "03/200",
+          "slug": "#03",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "04/200",
+          "slug": "#04",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        },
+        {
+          "hash": "f2e5c8e421617337030d1feeb8eae1a921d54a77423559281a9304334d6efa16",
+          "numero": "05/200",
+          "slug": "#05",
+          "vencimento": "09/06/2025",
+          "valor": 10833.4,
+          "status": "Pago: 08/06/2025",
+          "comprovante": "comp1415815.pdf",
+          "pagar_agora": false
+        }
+      ]
+    }
   ]
 }

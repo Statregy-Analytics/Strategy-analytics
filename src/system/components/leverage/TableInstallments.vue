@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <!-- Botões de ação abaixo da tabela -->
-    <div class="row justify-between">
+    <div class="row justify-between" v-if="!paidOff">
       <div class="col-auto">
         <q-toggle v-model="pending" label="Exibir somente parcelas pendentes" />
       </div>
@@ -13,6 +13,18 @@
           @click="pagarParcelasSelecionadas"
           flat
         />
+        <q-btn
+          outline
+          color="grey-7"
+          no-caps
+          flat
+          label="Baixar Extrato de Parcelas"
+          @click="baixarExtrato"
+        />
+      </div>
+    </div>
+    <div class="row justify-end" v-else>
+      <div class="col-auto">
         <q-btn
           outline
           color="grey-7"
@@ -118,6 +130,9 @@ const props = defineProps({
     type: Array,
     required: true,
     default: () => [],
+  },
+  paidOff: {
+    type: [String, Boolean],
   },
 });
 
