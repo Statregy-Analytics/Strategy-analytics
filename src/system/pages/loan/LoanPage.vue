@@ -1,45 +1,41 @@
 <template>
   <div class="LoanPage">
-    <div class="row text-center justify-center q-pt-lg">
-      <div class="col-12">
-        <titleinter-medium text="Emprestimo" />
-      </div>
-    </div>
-    <q-tab-panels v-model="loanSteps" animated class="bg-transparent">
-      <q-tab-panel name="home"> <loanmain-layout /> </q-tab-panel>
-
-      <q-tab-panel name="details"> <loandetails-layout /> </q-tab-panel>
-      <q-tab-panel name="finally"> <request-analysis /></q-tab-panel>
-    </q-tab-panels>
+    <secured-imovel-loan-layout v-if="loan.type == 'secured_imovel'" />
+    <secured-auto-loan-layout v-if="loan.type == 'secured_automovel'" />
+    <secured-consortium-loan-layout
+      v-if="loan.type == 'consortium_automovel'"
+    />
+    <collateral-loan-layout v-if="loan.type == 'collateral'" />
   </div>
 </template>
 
-<script>
-import { defineComponent } from "vue";
-import LoanmainLayout from "src/system/layouts/loans/LoanmainLayout.vue";
-
-// import TextareaTitle from "src/system/components/TextareaTitle.vue";
-import TitleinterMedium from "src/system/components/TitleinterMedium.vue";
-
-import { useLayoutStore } from "src/stores/layout";
+<script setup>
+import { defineComponent, onMounted } from "vue";
+import { useLoanStore } from "src/stores/loan";
 import { storeToRefs } from "pinia";
-import LoandetailsLayout from "src/system/layouts/loans/LoandetailsLayout.vue";
-import RequestAnalysis from "src/system/layouts/RequestAnalysis.vue";
-
-export default defineComponent({
+import { useRoute } from "vue-router";
+import fakeLoanData from "src/composables/system/fake/loans_fake_data.json";
+import SecuredImovelLoanLayout from "src/system/layouts/loans/SecuredImovelLoanLayout.vue";
+import SecuredAutoLoanLayout from "src/system/layouts/loans/SecuredAutoLoanLayout.vue";
+import SecuredConsortiumLoanLayout from "src/system/layouts/loans/SecuredConsortiumLoanLayout.vue";
+import CollateralLoanLayout from "src/system/layouts/loans/CollateralLoanLayout.vue";
+defineComponent({
   name: "LoanPage",
-  components: {
-    LoanmainLayout,
-    LoandetailsLayout,
-    TitleinterMedium,
-    RequestAnalysis,
-  },
-  setup() {
-    const layout = useLayoutStore();
-    const { loanSteps } = storeToRefs(layout);
-    return { loanSteps };
-  },
-  // Outras configurações do componente aqui
+});
+const route = useRoute();
+const storeLoan = useLoanStore();
+const { loan } = storeToRefs(storeLoan);
+onMounted(() => {
+  /// AQUI EM VEZ DE FAZER ISSO IRÁ PEGAR VIA HASH OU ID O EMPRESTIMO E DEU TIPO
+  // procura por id/hash primeiro, senão pelo tipo (query.q)
+  const hash =
+    route.query.hash || (route.hash ? route.hash.replace("#", "") : null);
+  const found = hash
+    ? fakeLoanData.find((e) => e.hash == hash || e.hash == hash)
+    : fakeLoanData.find((e) => e.type == route.query.q);
+
+  loan.value = found ?? {};
+  console.log("route", route.query.hash, "loan", loan.value);
 });
 </script>
 

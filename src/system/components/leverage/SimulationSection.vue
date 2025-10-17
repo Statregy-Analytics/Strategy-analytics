@@ -81,16 +81,4 @@ const emit = defineEmits(["select"]);
   background: linear-gradient(202.99deg, rgba(0, 0, 0, 0.24) 0.52%, rgba(0, 0, 0, 0.08) 51.12%, rgba(0, 0, 0, 0.04) 99.48%)
   backdrop-filter: blur(40px)
   box-shadow: 4px 4px 12px 0px #0000003D
-.simulation-status
-  width: 222px
-  height: 24px
-  gap: 4px
-  padding-top: 1px
-  padding-right: 8px
-  padding-bottom: 1px
-  padding-left: 8px
-  border-radius: 4px
-  background: linear-gradient(202.99deg, rgba(255, 255, 255, 0.16) 0.52%, rgba(255, 255, 255, 0.04) 50%, rgba(255, 255, 255, 0.01) 99.48%)
-  border: 1px solid #656565
-  cursor: pointer
 </style>

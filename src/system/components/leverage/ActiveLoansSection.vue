@@ -147,6 +147,7 @@
               flat
               no-caps
               color="primary"
+              :to="{ name:'Empréstimos', query:{hash:hash}}"
             >
             <span>Ver Empréstimo</span>
             <IconArrowRight class="q-ml-md" width="24"
@@ -195,6 +196,7 @@ const props = defineProps({
   type:{type:String},
   typeDescription:{type:String},
   isActive: { type: Boolean, default: true },
+  hash:{type:String}
 });
 const emit = defineEmits(["select", "edit", "closed"]);
 const discharge = computed(() => {const total = Number(props.totalInstallments) || 0;

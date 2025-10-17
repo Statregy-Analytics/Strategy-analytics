@@ -6,7 +6,7 @@
       </div>
     </div>
     <label-form className="col-12" textLabel="Data Nascimento">
-      <p class="text-muted q-my-md">{{ data.account.birthday }}</p>
+      <p class="text-muted q-my-md">{{ data.account.birthday ?? "" }}</p>
     </label-form>
     <label-form className="col-12" textLabel="CEP">
       <p class="text-muted q-my-md">{{ data.account.address_zip_code }}</p>

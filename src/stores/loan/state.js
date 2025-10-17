@@ -25,11 +25,7 @@ const state = () => {
     },
     consortium_automobile: [
       { header: "Simular por", step: "valores", component: "SelectValuesConsortiumLayout", next: "motivo" },
-      { header: "Motivo do Empréstimo", step: "motivo", component: "ReasonsLoanLayout", next: "info_inicial" },
-      { header: "Informações iniciais", step: "info_inicial", component: "InfoBasicLoanLayout", next: "info_complementa" },
-      { header: "Informações iniciais", step: "info_complementa", component: "InfoBasicAutoLoanLayout", next: "info_auto" },
-      { header: "Informações do Veículo", step: "info_auto", component: "InfoAutoLoanLayout" },
-      { header: "Documentações importantes", step: "document", component: "DocUploadLoanLayout" },
+      { header: "Motivo do Empréstimo", step: "motivo", component: "OffersConsortiumLayout", next: "info_inicial" },
     ],
     consortium_imovel: [
       { header: "Simular por", step: "valores", component: "SelectValuesConsortiumLayout", next: "motivo" },

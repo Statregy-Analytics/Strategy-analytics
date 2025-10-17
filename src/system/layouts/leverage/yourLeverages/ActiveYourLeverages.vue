@@ -17,6 +17,7 @@
       :type="loan.type.value"
       :typeDescription="loan.type.description"
       :adminstration="loan.administradora"
+      :hash="loan.hash"
       @select="loanSelect(loan.id)"
       @closed="loanSelection = null"
     >

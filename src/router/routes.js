@@ -180,7 +180,8 @@ const routes = [
           {
             path: "",
             name: "Empréstimos",
-            component: () => import("../system/pages/loan/LoanPage.vue")
+            component: () => import("../system/pages/loan/LoanPage.vue"),
+            props: true,
           },
           {
             path: "securedLoan",

@@ -34,8 +34,9 @@
   "loans": [
     {
       "id": 1,
+      "hash": "ad4426105517955791559a8f2a0217d8e5d727fe16409c8ffe80be0d35c142c5",
       "title": "Empréstimo de R$ 500.000,00",
-      "tipo": "Com Garantia de Imóvel",
+      "tipo": "Com Garantia de Automóvel",
       "administradora": "Sicredi",
       "detalhes": {
         "proxima_parcela": {
@@ -107,6 +108,7 @@
     },
     {
       "id": 2,
+      "hash": "5b1ac5931a53ac671493688d0cbf52e41b0f79c95a4df5509a058d75a0a328a2",
       "title": "Empréstimo de R$ 500.000,00",
       "tipo": "Contábil",
       "administradora": "Porto",
@@ -129,8 +131,9 @@
     },
     {
       "id": 3,
+      "hash": "d577727c4a07eb5dbf691d1b0c08a6f692155592a6a14b11215b82f6aba70a05",
       "title": "Empréstimo de R$ 500.000,00",
-      "tipo": "Contábil",
+      "tipo": "consortium_automovel",
       "detalhes": {
         "proxima_parcela": {
           "valor": 2102.27,
@@ -150,8 +153,9 @@
     },
     {
       "id": 4,
+      "hash": "966977b134ca9f04d11c10784cac6acfa69f5e84b449e3546e706258957368b6",
       "title": "Empréstimo de R$ 500.000,00",
-      "tipo": "Contábil",
+      "tipo": "collateral",
       "detalhes": {
         "proxima_parcela": {
           "valor": 2102.27,
@@ -166,7 +170,7 @@
       },
       "type": {
         "description": "Colateral",
-        "value": "colateral"
+        "value": "collateral"
       }
     }
   ],

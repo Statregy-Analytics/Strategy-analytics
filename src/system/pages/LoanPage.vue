@@ -1,5 +1,8 @@
 <template>
   <div class="LoanPage">
+    teste
+    <!-- 
+    old page
     <div class="row text-center justify-center q-pt-lg">
       <div class="col-12">
         <titleinter-medium text="Emprestimo" />
@@ -10,7 +13,8 @@
 
       <q-tab-panel name="details"> <loandetails-layout /> </q-tab-panel>
       <q-tab-panel name="finally"> <request-analysis /></q-tab-panel>
-    </q-tab-panels>
+    </q-tab-panels> 
+    -->
   </div>
 </template>
 

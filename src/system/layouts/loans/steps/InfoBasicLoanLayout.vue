@@ -18,13 +18,13 @@
       />
     </label-form>
     <label-form className="col-12" textLabel="Nome Completo">
-      <p class="text-muted q-my-md">{{ data.name }}</p>
+      <p class="text-muted q-my-md">{{ data?.name ?? "" }}</p>
     </label-form>
     <label-form className="col-12" textLabel="Telefone Celular">
-      <p class="text-muted q-my-md">{{ data.account.phone }}</p>
+      <p class="text-muted q-my-md">{{ data?.account.phone ?? "" }}</p>
     </label-form>
     <label-form className="col-12" textLabel="CPF">
-      <p class="text-muted q-my-md">{{ data.account.person }}</p>
+      <p class="text-muted q-my-md">{{ data?.account.person ?? "" }}</p>
     </label-form>
     <div class="row col-12 justify-end">
       <div class="col-auto">
