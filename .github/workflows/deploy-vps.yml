@@ -6,42 +6,49 @@ on:
       - v2
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "22"
 
-      - name: Install dependencies
+      - name: Install dependencies and build
         run: |
           npm install
           npm install -g @quasar/cli
+          quasar build -m spa
 
-      - name: Build Quasar project
-        run: quasar build -m spa
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VPS_SSH_KEY }}" > ~/.ssh/vps_key
+          chmod 600 ~/.ssh/vps_key
+          ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: Install Docker Compose on VPS
+        run: |
+          ssh -i ~/.ssh/vps_key ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} "
+            apt update && apt install -y docker-compose-plugin
+            docker compose version
+          "
 
       - name: Deploy to VPS
-        uses: appleboy/scp-action@v0.1.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          source: "dist/spa/*,Dockerfile,docker-compose.yml,nginx.conf"
-          target: "/home/v1"
+        run: |
+          # Copiar arquivos
+          scp -i ~/.ssh/vps_key -r dist/spa/* ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:/home/v1/
+          scp -i ~/.ssh/vps_key Dockerfile docker-compose.yml nginx.conf ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }}:/home/v1/
 
-      - name: Restart containers on VPS
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          script: |
+          # Executar deploy
+          ssh -i ~/.ssh/vps_key ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_HOST }} "
             cd /home/v1
-            docker-compose down
-            docker-compose up --build -d
+            docker compose down 2>/dev/null || true
+            docker compose up --build -d
+            echo '🚀 Deployment completed!'
+            docker ps
+          "
