@@ -43,5 +43,5 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             cd /home/v1
-            docker-compose down
-            docker-compose up --build -d
+            docker compose down
+            docker compose up --build -d
