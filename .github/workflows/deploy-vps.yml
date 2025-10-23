@@ -32,5 +32,5 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
-          source: "dist/spa/**,Dockerfile,docker-compose.yml,nginx.conf"
-          target: "/home/v1"
+          source: "dist/spa/**"
+          target: "/home/v2"
