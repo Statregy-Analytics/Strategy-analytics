@@ -1,4 +1,4 @@
-name: Build and Production Strategy Analytics via FTP
+name: Build and Deploy Production to VPS
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,18 +19,18 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: npm install
-      - name: Install Quasar CLI
-        run: npm install -g @quasar/cli
+        run: |
+          npm install
+          npm install -g @quasar/cli
 
-      - name: Build Strategy Analytics project in SPA
+      - name: Build Quasar project
         run: quasar build -m spa
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.1
+      - name: Deploy to VPS
+        uses: appleboy/scp-action@v0.1.3
         with:
-          server: ${{ secrets.ftp_host }}
-          username: ${{ secrets.ftp_user }}
-          password: ${{ secrets.ftp_password }}
-          local-dir: dist/spa/
-          server-dir: /
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "dist/spa/**"
+          target: "/home/v1"
