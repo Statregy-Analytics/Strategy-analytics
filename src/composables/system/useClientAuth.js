@@ -1,9 +1,7 @@
 import { ref } from "vue";
 import { api } from "boot/axios";
 import { useRouter } from "vue-router";
-import { Cookies } from "quasar";
 import useNotify from "../useNotify";
-import useCookies from "../useCookies";
 import { useUserStore } from "src/stores/user";
 
 export default function useClientAuth() {
@@ -12,7 +10,7 @@ export default function useClientAuth() {
     const userData = ref(null);
     const router = useRouter();
     const { errorNotify, successNotify, infoNotify } = useNotify();
-    const { deleteTokenCookie, setCookie, setTokenCookie, setUserCookie } = useCookies();
+    const store = useUserStore();
 
     // Função para autenticar usando CPF e senha
     const authenticateClient = async (credentials) => {
@@ -44,10 +42,24 @@ export default function useClientAuth() {
                     userData.value = client;
                     console.log('Cliente encontrado:', client.cliente.name);
 
-                    // Salvar token/usuario usando helper (garante mesma options de criação)
-                    setTokenCookie('authenticated');
-                    setUserCookie(client.cliente);
-                    console.log('Login realizado - cookies salvos com opções consistentes');
+                    // Salvar token/usuario em memória na store (sem cookies)
+                    try {
+                        store.authentication.token = 'authenticated';
+                        store.setUserData(client.cliente);
+                        // garantir header Authorization para chamadas subsequentes
+                        try { api.defaults.headers.common['Authorization'] = `Bearer ${store.authentication.token}` } catch (e) { }
+                        // Persistir sessão para sobreviver a refresh (localStorage)
+                        try {
+                            localStorage.setItem('strategy_auth_token', store.authentication.token);
+                            localStorage.setItem('strategy_user_data', JSON.stringify(store.data || {}));
+                        } catch (e) {
+                            console.warn('Falha ao persistir sessão no localStorage', e);
+                        }
+                    } catch (e) {
+                        // fallback direto
+                        store.data = client.cliente;
+                    }
+                    console.log('Login realizado - dados salvos na store (sem cookies)');
                     successNotify('Login realizado com sucesso!');
 
                     // Pequeno delay para garantir que os cookies sejam salvos
@@ -85,42 +97,30 @@ export default function useClientAuth() {
 
     // Função para verificar se o usuário está logado (versão simplificada)
     const isAuthenticated = () => {
-        const token = Cookies.get(process.env.COOKIE_TOKEN_NAME || 'SA_token');
-        console.log('isAuthenticated - verificando token:', token);
-
-        // Simples verificação se existe o cookie
-        return token === 'authenticated';
+        const token = store.authentication && store.authentication.token ? store.authentication.token : null;
+        // Considera autenticado se há um token em memória
+        return !!token;
     };
 
     // Função para fazer logout
     const logout = () => {
-        console.log('useClientAuth.logout - iniciando logout');
-        // remover cookies tanto com opções quanto sem, para cobrir ambos os casos
+        console.log('useClientAuth.logout - iniciando logout (store)');
         try {
-            // remove cookie criado com setOptionsCookie (secure, sameSite)
-            deleteTokenCookie();
+            store.authentication.token = '';
+            store.setClear();
+            try {
+                localStorage.removeItem('strategy_auth_token');
+                localStorage.removeItem('strategy_user_data');
+            } catch (e) { /* noop */ }
         } catch (e) {
-            console.warn('useClientAuth.logout - deleteTokenCookie falhou:', e);
+            store.data = {};
         }
-
-        // tentativa adicional: remover sem opções (apenas fallback extra)
-        try {
-            Cookies.remove(process.env.COOKIE_TOKEN_NAME || 'SA_token');
-            Cookies.remove(process.env.COOKIE_USER_DATA || 'SA_user');
-        } catch (e) {
-            console.warn('useClientAuth.logout - Cookies.remove sem opções falhou:', e);
-        }
-
         userData.value = null;
-
-        console.log('useClientAuth.logout - cookies removidos (todas as tentativas), navegando para /');
         try {
             router.replace({ path: "/" });
         } catch (e) {
             console.warn('useClientAuth.logout - router.replace falhou:', e);
         }
-
-        // fallback: força replace no location
         try {
             if (window && window.location) window.location.replace('/');
         } catch (e) {
@@ -133,24 +133,17 @@ export default function useClientAuth() {
     // Preferir a store (já populada no boot via API). Se não houver dados na store,
     // tentar buscar via API usando o id armazenado no cookie mínimo ({id}).
     const getCurrentUser = async () => {
-        const store = useUserStore();
         if (store.data && Object.keys(store.data).length) return store.data;
 
-        // tentar ler cookie mínimo e buscar por id
+        // Sem dados na store, tentar buscar via API se houver token em memória
+        const token = store.authentication && store.authentication.token ? store.authentication.token : null;
+        if (!token) return null;
         try {
-            const userCookie = Cookies.get(process.env.COOKIE_USER_DATA || 'SA_user');
-            if (!userCookie) return null;
-            let parsed = userCookie;
-            try { parsed = typeof userCookie === 'string' ? JSON.parse(userCookie) : userCookie } catch (e) { parsed = userCookie }
-            const id = parsed?.id || parsed?.cliente_id || null;
-            if (!id) return null;
-            try {
-                const res = await api.get(`/clients/${id}`);
-                let payload = res.data && (res.data.cliente || res.data.client || res.data) || null;
-                if (payload && payload.cliente) payload = payload.cliente;
-                if (payload) return payload;
-            } catch (e) {
-                return null;
+            // tentar endpoint /clients/me (ajustar conforme backend)
+            const res = await api.get('/clients/me');
+            if (res && res.data) {
+                const payload = res.data.cliente || res.data.client || res.data;
+                return payload && payload.cliente ? payload.cliente : payload;
             }
         } catch (e) {
             return null;

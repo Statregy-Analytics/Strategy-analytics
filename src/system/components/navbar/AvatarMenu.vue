@@ -30,6 +30,7 @@
 import { defineComponent, computed } from "vue";
 import useClientAuth from "src/composables/system/useClientAuth";
 import { useUserStore } from "src/stores/user";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "AvatarMenu",
@@ -44,7 +45,8 @@ export default defineComponent({
       // if avatar provided, no initials needed
       if (props.avatar) return "";
       try {
-        const name = userStore.data?.name || userStore.data?.cliente?.name || "";
+        const name =
+          userStore.data?.name || userStore.data?.cliente?.name || "";
         if (!name) return "";
         const parts = name.trim().split(/\s+/);
         const first = parts[0] ? parts[0].charAt(0) : "";
@@ -55,6 +57,7 @@ export default defineComponent({
       }
     });
 
+    const router = useRouter();
     const handleLogout = () => {
       // chama logout do composable de cliente e retorna à página inicial
       console.log("AvatarMenu.handleLogout - clicado");
@@ -63,14 +66,15 @@ export default defineComponent({
         console.log("AvatarMenu.handleLogout - logout() chamado");
       } catch (e) {
         console.error("AvatarMenu.handleLogout - Erro no logout:", e);
-        // Garantir que o cookie local seja removido mesmo em erro
-        Cookies.remove(process.env.COOKIE_TOKEN_NAME || "SA_token");
-        Cookies.remove(process.env.COOKIE_USER_DATA || "SA_user");
-        // redireciona para home (fallback)
+        // fallback simples: redirecionar para home
         try {
-          window.location.replace("/");
+          router.replace({ path: "/" });
         } catch (err) {
-          window.location.href = "/";
+          try {
+            window.location.replace("/");
+          } catch (err2) {
+            window.location.href = "/";
+          }
         }
       }
     };

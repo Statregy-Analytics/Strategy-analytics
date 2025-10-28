@@ -1,70 +1,48 @@
 import { boot } from 'quasar/wrappers'
-import { Cookies } from 'quasar'
 import { api } from 'boot/axios'
 import { useUserStore } from 'src/stores/user'
 import useDataUser from 'src/composables/system/Requests/useDataUser'
+import useAccount from 'src/composables/system/Requests/useAccount'
 
 export default boot(async ({ app, router }) => {
     try {
         const userStore = useUserStore()
-        const raw = Cookies.get(process.env.COOKIE_USER_DATA || 'SA_user')
-        const token = Cookies.get(process.env.COOKIE_TOKEN_NAME || 'SA_token')
 
-        // Se existe cookie com dados, preferir usar o id presente nele para buscar dados frescos na API.
-        if (raw) {
-            let parsed = raw
+        // Restaurar sessão a partir do localStorage se necessário
+        let token = userStore.authentication && userStore.authentication.token ? userStore.authentication.token : null
+        if (!token) {
             try {
-                parsed = typeof raw === 'string' ? JSON.parse(raw) : raw
+                const stored = localStorage.getItem('strategy_auth_token')
+                if (stored) token = stored
             } catch (e) {
-                parsed = raw
+                // localStorage inacessível
             }
+        }
 
-            const clientId = parsed?.id || parsed?.cliente?.id || parsed?.cliente_id || null
-            if (clientId) {
-                try {
-                    const backendBase = 'http://localhost:3333/api/clients'
-                    const res = await api.get(`${backendBase}/${clientId}`)
-                    let payload = res.data && (res.data.cliente || res.data.client || res.data) || null
-                    if (payload && payload.cliente) payload = payload.cliente
-                    if (payload) {
-                        try {
-                            userStore.setUserData(payload)
-                        } catch (err) {
-                            userStore.data = payload
-                        }
-                    }
-                } catch (err) {
-                    // se falhar ao buscar na API, fallback para o que temos no cookie
-                    try {
-                        const payload = parsed?.cliente ? parsed.cliente : parsed
-                        userStore.setUserData(payload)
-                    } catch (e) {
-                        userStore.data = parsed
-                    }
-                }
-            } else {
-                // sem id no cookie: fallback para setar o cookie direto
-                const payload = parsed?.cliente ? parsed.cliente : parsed
-                try {
-                    userStore.setUserData(payload)
-                } catch (err) {
-                    userStore.data = payload
-                }
-            }
-        } else if (token) {
-            // Não há cookie com dados, mas existe token: tentar recuperar usuário via API se houver endpoint adequado.
-            // Tentativa: se a API suportar um endpoint para obter o usuário logado, use-o (ex: /clients/me).
-            // Caso não exista, isso fica como fallback e não quebra o boot.
+        if (token) {
+            // aplicar token na store e no header
+            try { userStore.authentication.token = token } catch (e) { /* noop */ }
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+
+            // Restaurar user data salvo localmente (se existir) antes de tentar sincronizar
             try {
-                // exemplo de endpoint - ajuste se seu backend expuser outro
-                const res = await api.get('/clients/me')
-                if (res && res.data) {
-                    let payload = res.data && (res.data.cliente || res.data.client || res.data) || null
-                    if (payload && payload.cliente) payload = payload.cliente
-                    if (payload) userStore.setUserData(payload)
+                const storedUser = localStorage.getItem('strategy_user_data')
+                if (storedUser) {
+                    const parsed = JSON.parse(storedUser)
+                    if (parsed) {
+                        try { userStore.setUserData(parsed) } catch (e) { userStore.data = parsed }
+                    }
                 }
-            } catch (err) {
-                // não encontrado /clients/me - deixar sem dados
+            } catch (e) { /* noop */ }
+
+            // Usar reloadUser (que sabe localizar por id/cpf/email) para atualizar os dados a partir do backend
+            try {
+                const { reloadUser } = useAccount()
+                if (typeof reloadUser === 'function') {
+                    await reloadUser()
+                }
+            } catch (e) {
+                // não bloquear a inicialização se falhar
             }
         }
 

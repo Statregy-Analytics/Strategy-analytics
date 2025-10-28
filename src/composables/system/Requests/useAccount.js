@@ -1,22 +1,89 @@
 import { api } from 'src/boot/axios';
-import useCookies from 'src/composables/useCookies';
 import useNotify from 'src/composables/useNotify'
 import { ref } from 'vue'
-import { useRoute } from 'vue-router';
+import { useUserStore } from 'src/stores/user';
+
+// Helper: transforma um objeto do frontend para o formato esperado pelo backend
+function buildBackendPayload(fullData) {
+  const p = fullData || {}
+
+  // Fonte preferencial para cliente
+  const srcCliente = (p.cliente && typeof p.cliente === 'object') ? p.cliente : p
+
+  const cliente = {
+    name: srcCliente.name || srcCliente.nome || p.name || '',
+    email: srcCliente.email || p.email || '',
+    avatar: srcCliente.avatar || '',
+    cpf: srcCliente.cpf || srcCliente.cpf_cnpj || p.cpf || p.cpf_cnpj || '',
+    rg: srcCliente.rg || '',
+    telefone: srcCliente.telefone || srcCliente.phone || p.phone || p.telefone || '',
+    cnh: srcCliente.cnh || '',
+    birth: srcCliente.birth || srcCliente.birthday || p.birth || p.birthday || '',
+    profissao: srcCliente.profissao || null,
+    rendaAnual: srcCliente.rendaAnual || srcCliente.renda_anual || null,
+    bank: srcCliente.bank || p.bank || {},
+    // propagar demais campos que possam existir
+    ...srcCliente
+  }
+
+  const normalized = {
+    id: p.id || (p.cliente && p.cliente.id) || null,
+    cliente: { ...cliente },
+    bank: p.bank || p.account || {},
+    bankRegister: p.bankRegister || p.bank_register || p.bankregister || [],
+    residential: p.residential || p.residence || {},
+    investment: p.investment || {},
+    contrato: p.contrato || { total: 0, quantity: 0 },
+    level: p.level || '',
+    weLend: p.weLend || [],
+    newWeLend: p.newWeLend || {},
+    uploads: p.uploads || []
+  }
+
+  // evitar enviar senha
+  if (normalized.password) delete normalized.password
+  if (normalized.cliente && normalized.cliente.password) delete normalized.cliente.password
+
+  return normalized
+}
 
 export default function useAccount() {
   const loading = ref(false)
   const buttonSubmit = ref(false)
   const { errorNotify, successNotify, multError } = useNotify()
-  const { updateCookieAccount, updateNameByAccount, deleteCookieUser, setUserCookie, getValue } = useCookies()
-  const route = useRoute()
+  const userStore = useUserStore()
+  // Observação: não usar useRoute() aqui porque este composable também é
+  // utilizado em boots (p.ex. user-init.js) que executam fora do contexto
+  // de setup(), o que causaria o erro "inject() can only be used inside
+  // setup() or functional components". Se for necessário acesso à rota,
+  // passe-a como parâmetro a funções individuais ou use o router global.
   const updateData = async (data) => {
     loading.value = true
     try {
-      const res = await api.post(`account/data`, { name: data.name, phone: data.account.phone });
+      try {
+        const debugPayload = JSON.parse(JSON.stringify(data));
+        if (debugPayload.password) delete debugPayload.password
+        console.debug('[updateData] sending payload:', debugPayload)
+      } catch (e) { }
+      // Construir payload estrito { cliente: {...} } para o endpoint
+      const small = { cliente: { name: data.name, telefone: data.phone || (data.account && data.account.phone) || '' } }
+      const payload = buildBackendPayload(small)
+      const strictPayload = { cliente: payload.cliente || {} }
+      try { console.debug('[updateData] finalPayload (strict cliente):', JSON.parse(JSON.stringify(strictPayload))) } catch (e) { }
+      // Usar endpoint /api/clients (POST para criar, PUT para atualizar se tivermos id)
+      const backendBase = 'http://localhost:3333/api/clients'
+      // tentar detectar id do cliente a partir dos dados ou da store
+      const clientId = data?.id || data?.cliente?.id || userStore.data?.id || userStore.data?.cliente?.id || null
+      let res
+      if (clientId) {
+        res = await api.put(`${backendBase}/${clientId}`, strictPayload)
+      } else {
+        res = await api.post(`${backendBase}`, strictPayload)
+      }
+      try { console.debug('[updateData] response:', res && res.data) } catch (e) { }
       successNotify(res.data.message)
-      await deleteCookieUser()
-      route.redirectedFrom
+      // atualizar dados do usuário na store a partir da API atualizada
+      try { await reloadUser() } catch (e) { /* noop */ }
       // console.log(res):
     } catch (e) {
       console.log(e)
@@ -33,10 +100,24 @@ export default function useAccount() {
   const updateProfile = async (fullData) => {
     loading.value = true
     try {
+      try {
+        // log sanitizado do payload enviado pelo frontend
+        const debugFull = JSON.parse(JSON.stringify(fullData))
+        if (debugFull.password) delete debugFull.password
+        if (debugFull.cliente && debugFull.cliente.password) delete debugFull.cliente.password
+        console.debug('[updateProfile] sending payload (sanitized):', debugFull)
+      } catch (e) { }
       // Tentar detectar o id do cliente (pode estar em diferentes caminhos dependendo do backend)
       let clientId = fullData?.id || fullData?.cliente?.id || fullData?.account?.id || fullData?.cliente_id || null;
       const backendBase = 'http://localhost:3333/api/clients';
       let res;
+
+      // Construir payload no formato da API antes de enviar
+      const payloadToSend = buildBackendPayload(fullData);
+      try { console.debug('[updateProfile] payloadToSend (normalized):', JSON.parse(JSON.stringify(payloadToSend))) } catch (e) { }
+      // Enviar somente a chave `cliente` como formato estrito exigido pelo backend
+      const strictPayload = { cliente: payloadToSend.cliente || {} };
+      try { console.debug('[updateProfile] finalPayload (strict cliente):', JSON.parse(JSON.stringify(strictPayload))) } catch (e) { }
 
       // Se não encontramos id, tentar localizar pelo CPF/email na lista de clients do backend
       if (!clientId) {
@@ -63,12 +144,14 @@ export default function useAccount() {
       }
 
       if (clientId) {
-        // Atualizar cliente existente
-        res = await api.put(`${backendBase}/${clientId}`, fullData);
+        // Atualizar cliente existente (enviando apenas { cliente: {...} })
+        res = await api.put(`${backendBase}/${clientId}`, strictPayload);
       } else {
         // Sem id: criar novo cliente (fallback)
-        res = await api.post(`${backendBase}`, fullData);
+        res = await api.post(`${backendBase}`, strictPayload);
       }
+
+      try { console.debug('[updateProfile] response from server:', res && res.data) } catch (e) { }
 
       // Se o backend não retornou o recurso atualizado, buscar explicitamente
       let returnedUser = (res.data && (res.data.cliente || res.data.client || res.data.account || res.data)) || null;
@@ -130,42 +213,17 @@ export default function useAccount() {
       // Para garantir que os componentes reajam imediatamente, salvamos aqui o mesmo formato.
       if (payloadUser) {
         try {
-          // Debug logs para facilitar cópia/cola do payload e do cookie antes/depois
-          try {
-            // eslint-disable-next-line no-console
-            console.debug('[updateProfile] payloadUser:', JSON.parse(JSON.stringify(payloadUser)));
-          } catch (e) {
-            // eslint-disable-next-line no-console
-            console.debug('[updateProfile] payloadUser (raw):', payloadUser);
-          }
+          // Debug logs para facilitar cópia/cola do payload
+          try { console.debug('[updateProfile] payloadUser (raw):', JSON.parse(JSON.stringify(payloadUser))); } catch (e) { console.debug('[updateProfile] payloadUser (raw):', payloadUser); }
 
-          // mostra cookie atual antes de escrever
-          const cookieName = process.env.COOKIE_USER_DATA || 'SA_user';
-          const beforeRaw = getValue(cookieName);
-          // eslint-disable-next-line no-console
-          console.debug('[updateProfile] cookie before setUserCookie:', beforeRaw);
-
-          await setUserCookie(payloadUser);
-
-          const afterRaw = getValue(cookieName);
-          // eslint-disable-next-line no-console
-          console.debug('[updateProfile] cookie after setUserCookie:', afterRaw);
+          // atualizar store diretamente (substitui setUserCookie)
+          try { userStore.setUserData(payloadUser); } catch (e) { userStore.data = payloadUser; }
 
           // Garantir que o backend tenha realmente aplicado as mudanças: buscar dados atualizados
-          // usando reloadUser (que usa API) para sobrescrever cookie/store com dados frescos
-          try {
-            if (typeof reloadUser === 'function') {
-              await reloadUser()
-            }
-          } catch (e) {
-            // não bloquear o fluxo principal
-            // eslint-disable-next-line no-console
-            console.warn('[updateProfile] reloadUser falhou, mas atualização local já aplicada', e)
-          }
+          try { if (typeof reloadUser === 'function') await reloadUser() } catch (e) { console.warn('[updateProfile] reloadUser falhou, mas atualização local já aplicada', e) }
         } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error('[updateProfile] erro ao setar cookie de debug:', err);
-          try { await setUserCookie(payloadUser); } catch (e) { /* fallback silent */ }
+          console.error('[updateProfile] erro ao atualizar store com payload:', err);
+          try { userStore.setUserData(payloadUser); } catch (e) { userStore.data = payloadUser; }
         }
       }
 
@@ -184,11 +242,15 @@ export default function useAccount() {
     api.defaults.headers.common['Accept'] = 'form-data';
     api.defaults.headers.common['Accept'] = 'application/json';
     try {
-      const res = await api.post(`account/avatar`, $file);
-      // debug: mostrar resposta do upload
-      // eslint-disable-next-line no-console
+      const backendBase = 'http://localhost:3333/api/clients'
+      const clientId = userStore.data?.id || userStore.data?.cliente?.id || null
+      const url = clientId ? `${backendBase}/${clientId}/avatar` : `${backendBase}/avatar`
+      const res = await api.post(url, $file);
       console.debug('sendAvatar - response', res && res.data)
-      await updateCookieAccount(res.data.account)
+      // atualizar account/wallet na store se retornar
+      if (res && res.data && res.data.account) {
+        try { userStore.setWallet(res.data.account) } catch (e) { userStore.wallet = res.data.account }
+      }
       successNotify(res.data.message)
     } catch (e) {
       multError(e.response.data.errors)
@@ -203,21 +265,89 @@ export default function useAccount() {
   const reloadUser = async () => {
     loading.value = true
     try {
-      const raw = getValue(process.env.COOKIE_USER_DATA || 'SA_user')
-      let parsed = raw
-      try { parsed = typeof raw === 'string' ? JSON.parse(raw) : raw } catch (e) { parsed = raw }
-      const clientId = parsed?.id || parsed?.cliente?.id || parsed?.cliente_id || null
-      if (!clientId) {
-        // sem id, nada a fazer
-        return null
-      }
+      // obter id diretamente da store; se não houver, tentar localizar via CPF/email consultando /clients
+      let clientId = userStore.data?.id || userStore.data?.cliente?.id || userStore.data?.cliente_id || null
       const backendBase = 'http://localhost:3333/api/clients'
+
+      // Se não temos id, tentar localizar o cliente por CPF/email.
+      // Primeiro tentar endpoint com query (mais eficiente): /clients?cpf=<cpf> ou /clients?email=<email>
+      if (!clientId) {
+        try {
+          const s = userStore.data || {}
+          // extrair candidato de cpf/email do estado local
+          const cpfCandidate = (s.cpf || s.cliente?.cpf || s.account?.cpf || s.person || null);
+          const emailCandidate = (s.email || s.cliente?.email || null);
+
+          let found = null
+
+          // Tentar buscar por CPF se existir
+          if (cpfCandidate) {
+            const cleanedCpf = String(cpfCandidate).replace(/\D/g, '')
+            try {
+              const byCpf = await api.get(`${backendBase}?cpf=${cleanedCpf}`)
+              const list = byCpf && byCpf.data ? (Array.isArray(byCpf.data) ? byCpf.data : [byCpf.data]) : []
+              if (list.length > 0) found = list[0]
+            } catch (e) {
+              // se query com cpf não suportada/falhar, ignorar e tentar fallback
+            }
+          }
+
+          // Se não encontrado por cpf, tentar por email
+          if (!found && emailCandidate) {
+            try {
+              const byEmail = await api.get(`${backendBase}?email=${encodeURIComponent(emailCandidate)}`)
+              const list = byEmail && byEmail.data ? (Array.isArray(byEmail.data) ? byEmail.data : [byEmail.data]) : []
+              if (list.length > 0) found = list[0]
+            } catch (e) {
+              // se query por email falhar, ignorar e tentar fallback
+            }
+          }
+
+          // Fallback: buscar lista completa e procurar por CPF/email
+          if (!found) {
+            try {
+              const clientsResp = await api.get(backendBase)
+              const clientsList = clientsResp && clientsResp.data ? clientsResp.data : []
+              const candidates = []
+              if (s) {
+                if (s.cpf) candidates.push(String(s.cpf))
+                if (s.person) candidates.push(String(s.person))
+                if (s.email) candidates.push(String(s.email))
+                if (s.account && s.account.cpf) candidates.push(String(s.account.cpf))
+                if (s.cliente && s.cliente.cpf) candidates.push(String(s.cliente.cpf))
+                if (s.cliente && s.cliente.email) candidates.push(String(s.cliente.email))
+              }
+              const cleaned = candidates.filter(Boolean).map(c => String(c).replace(/\D/g, ''))
+              if (cleaned.length > 0) {
+                found = clientsList.find(c => {
+                  const clientCpf = c?.cliente?.cpf ? String(c.cliente.cpf).replace(/\D/g, '') : (c.cpf ? String(c.cpf).replace(/\D/g, '') : null)
+                  if (clientCpf && cleaned.includes(clientCpf)) return true
+                  const clientEmail = c?.cliente?.email || c?.email || null
+                  if (clientEmail && candidates.some(x => x && x.includes('@') && clientEmail && clientEmail.includes(x))) return true
+                  return false
+                })
+              }
+            } catch (e) {
+              console.warn('reloadUser - fallback buscar lista de clients falhou:', e)
+            }
+          }
+
+          if (found) {
+            clientId = found.id || (found.cliente && found.cliente.id) || null
+          }
+        } catch (e) {
+          // se falhar totalmente, continuar (iremos abortar abaixo se não tivermos id)
+          console.warn('reloadUser - erro ao tentar localizar cliente por cpf/email:', e)
+        }
+      }
+
+      if (!clientId) return null
+
       const res = await api.get(`${backendBase}/${clientId}`)
       let userPayload = res.data && (res.data.cliente || res.data.client || res.data) || null
       if (userPayload && userPayload.cliente) userPayload = userPayload.cliente
       if (userPayload) {
-        // atualiza cookie + store
-        await setUserCookie(userPayload)
+        try { userStore.setUserData(userPayload) } catch (e) { userStore.data = userPayload }
       }
       return userPayload
     } catch (err) {

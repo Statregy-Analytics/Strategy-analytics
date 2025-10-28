@@ -2,7 +2,9 @@ import { api } from 'src/boot/axios';
 import useNotify from 'src/composables/useNotify'
 import { useUserStore } from 'src/stores/user';
 import { ref } from 'vue'
-import useCookies from 'src/composables/useCookies'
+
+// Debug: indicar que o módulo foi carregado
+try { console.debug('[useDataUser] module loaded') } catch (e) { }
 
 export default function useDataUser() {
   const loading = ref(false)
@@ -11,51 +13,42 @@ export default function useDataUser() {
 
   const getWallet = async () => {
     loading.value = true
+    try { console.debug('[useDataUser.getWallet] userStore.data (at start):', JSON.parse(JSON.stringify(userStore.data || {}))) } catch (e) { console.debug('[useDataUser.getWallet] userStore.data (at start) - could not stringify', e) }
     try {
-      const { getValue } = useCookies();
-      const raw = getValue(process.env.COOKIE_USER_DATA || 'SA_user');
+      // Priorizar dados já presentes na store
+      const raw = userStore.data || null;
 
-      // Se o cookie contém os dados completos do cliente (preferível), usar direto
       if (raw) {
-        let parsed;
-        try {
-          parsed = typeof raw === 'string' ? JSON.parse(raw) : raw;
-        } catch (err) {
-          parsed = raw;
-        }
-
         // procura por propriedades comuns onde a carteira pode residir
-        const walletFromCookie = parsed?.user_wallet || parsed?.wallet || parsed?.cliente?.user_wallet || parsed?.cliente?.wallet || parsed?.user_wallets;
-        if (walletFromCookie) {
-          userStore.setWallet(walletFromCookie);
+        const walletFromStore = raw?.user_wallet || raw?.wallet || raw?.cliente?.user_wallet || raw?.cliente?.wallet || raw?.user_wallets;
+        if (walletFromStore) {
+          userStore.setWallet(walletFromStore);
           loading.value = false;
           return;
         }
 
-        // Se o cookie for o objeto `cliente` sem wallet, tentar extrair de propriedades diretas
-        if (parsed) {
-          const possible = parsed.user_wallet || parsed.wallet || parsed.user_wallets || {};
-          if (Object.keys(possible).length > 0) {
-            userStore.setWallet(possible);
-            loading.value = false;
-            return;
-          }
-          // Se o cookie for mínimo (ex: { id }), tentar buscar o cliente por id na API
-          const clientIdFromCookie = parsed?.id || parsed?.cliente_id || (parsed && parsed.id);
-          if (clientIdFromCookie) {
-            try {
-              const clientResp = await api.get(`/clients/${clientIdFromCookie}`);
-              const foundClient = clientResp && clientResp.data ? (clientResp.data.cliente || clientResp.data.client || clientResp.data) : null;
-              const wallet = foundClient && (foundClient.user_wallet || foundClient.wallet || (foundClient.cliente && (foundClient.cliente.user_wallet || foundClient.cliente.wallet))) || {};
-              if (wallet && Object.keys(wallet).length > 0) {
-                userStore.setWallet(wallet);
-                loading.value = false;
-                return;
-              }
-            } catch (e) {
-              // falha na busca por id: continuar para tentativa de busca por lista
-              // console.warn('useDataUser.getWallet - busca por id falhou', e)
+        // Se o objeto store contém wallet em outras propriedades
+        const possible = raw.user_wallet || raw.wallet || raw.user_wallets || {};
+        if (possible && Object.keys(possible).length > 0) {
+          userStore.setWallet(possible);
+          loading.value = false;
+          return;
+        }
+
+        // Se o store for mínimo (ex: { id }), tentar buscar o cliente por id na API
+        const clientIdFromStore = raw?.id || raw?.cliente_id || (raw && raw.id);
+        if (clientIdFromStore) {
+          try {
+            const clientResp = await api.get(`/clients/${clientIdFromStore}`);
+            const foundClient = clientResp && clientResp.data ? (clientResp.data.cliente || clientResp.data.client || clientResp.data) : null;
+            const wallet = foundClient && (foundClient.user_wallet || foundClient.wallet || (foundClient.cliente && (foundClient.cliente.user_wallet || foundClient.cliente.wallet))) || {};
+            if (wallet && Object.keys(wallet).length > 0) {
+              userStore.setWallet(wallet);
+              loading.value = false;
+              return;
             }
+          } catch (e) {
+            // falha na busca por id: continuar para tentativa de busca por lista
           }
         }
       }
@@ -65,18 +58,8 @@ export default function useDataUser() {
       try {
         const clientsResp = await api.get('/clients');
         if (clientsResp && Array.isArray(clientsResp.data)) {
-          // tentar identificar cliente pela informação disponível no cookie
-          const { getValue } = useCookies();
-          const raw2 = getValue(process.env.COOKIE_USER_DATA || 'SA_user');
-          let parsed2 = null;
-          if (raw2) {
-            try {
-              parsed2 = typeof raw2 === 'string' ? JSON.parse(raw2) : raw2;
-            } catch (e) {
-              parsed2 = raw2;
-            }
-          }
-
+          // tentar identificar cliente usando dados da store (se houver)
+          const parsed2 = userStore.data || null;
           const clientCpf = parsed2?.cpf ? String(parsed2.cpf).replace(/\D/g, '') : null;
           const clientId = parsed2?.id || parsed2?.cliente_id || null;
 

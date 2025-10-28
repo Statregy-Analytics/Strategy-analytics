@@ -4,7 +4,6 @@ import { useUserStore } from 'src/stores/user';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
 import useStates from '../../useStates';
-import useCookies from 'src/composables/useCookies';
 
 export default function useToken() {
   const loading = ref(false)
@@ -13,7 +12,7 @@ export default function useToken() {
   const userStore = useUserStore()
   const { errorNotify, successNotify } = useNotify()
   const { showLoading, hideLoading } = useStates()
-  const { deleteCookieUser } = useCookies()
+
 
   const forgot = ref(false)
   const resendToken = async (token_id) => {
@@ -129,7 +128,8 @@ export default function useToken() {
 
       successNotify(res.data.message, 10000)
       userStore.setEmailVerified(res.data.user.email_verified_at)
-      await deleteCookieUser()
+      // Remover dados locais sensíveis em memória (substitui deleteCookieUser)
+      try { userStore.setClear() } catch (e) { userStore.data = {} }
       router.push({ name: "inicio" })
     } catch (e) {
       // console.log(e)

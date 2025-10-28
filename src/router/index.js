@@ -8,8 +8,6 @@ import {
 import routes from "./routes";
 import useAuth from "src/composables/system/useAuth";
 import useClientAuth from "src/composables/system/useClientAuth";
-import useCookies from "src/composables/useCookies";
-import { Cookies } from "quasar";
 
 /*
  * If not building with SSR mode, you can
@@ -37,17 +35,8 @@ export default route(function (/* { store, ssrContext } */) {
   });
   Router.beforeEach((to, from, next) => {
     const { isAuthenticated } = useClientAuth();
-
-    // Verificar se tem token usando a mesma lógica do useClientAuth
-    const hasToken = !!Cookies.get(process.env.COOKIE_TOKEN_NAME || 'SA_token');
     const isAuth = isAuthenticated();
-
-    console.log('Router Debug:', {
-      to: to.name,
-      hasToken,
-      isAuthenticated: isAuth,
-      requiresAuth: to.meta?.auth
-    });
+    console.log('Router Debug:', { to: to.name, isAuthenticated: isAuth, requiresAuth: to.meta?.auth });
 
     let home =
       to.name == "home"
@@ -59,7 +48,7 @@ export default route(function (/* { store, ssrContext } */) {
         : "Strategy Analytics";
 
     if (to.meta?.auth) {
-      if (!hasToken || !isAuth) {
+      if (!isAuth) {
         console.log('Redirecionando para login - sem autenticação');
         next({ name: 'login' })
         return
@@ -69,7 +58,7 @@ export default route(function (/* { store, ssrContext } */) {
 
     //verificando se o usuário esta logado evitar logar duplicado
     if (to.name == "login") {
-      if (hasToken && isAuth) {
+      if (isAuth) {
         console.log('Usuário já logado, redirecionando para config');
         next({ name: 'config' })
         return

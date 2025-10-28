@@ -81,6 +81,7 @@
 
 <script setup>
 import { defineComponent, ref } from "vue";
+import { onMounted } from "vue";
 import { useUserStore } from "src/stores/user";
 import { storeToRefs } from "pinia";
 import useAccount from "src/composables/system/Requests/useAccount";
@@ -149,6 +150,16 @@ const saveContract = async () => {
 };
 defineComponent({
   name: "PersonalSettingLayout",
+});
+// Logar dados do usuário ao montar a tela de configuração para facilitar debug
+onMounted(() => {
+  try {
+    // cópia limpa para evitar referências reativas/ciclos
+    const snapshot = JSON.parse(JSON.stringify(store.data || {}));
+    console.debug("[ConfigPage] user store snapshot:", snapshot);
+  } catch (e) {
+    console.debug("[ConfigPage] user store (raw):", store.data);
+  }
 });
 // Seu código aqui
 </script>

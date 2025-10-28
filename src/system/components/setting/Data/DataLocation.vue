@@ -28,8 +28,10 @@ const dataLocation = computed(() => {
   const account = dv.account || dv.cliente?.account || {};
   return [
     { title: "CEP", value: account.address_zip_code ?? "" },
-    { title: "Estato", value: account.address_state ?? "SP" },
-    { title: "Cidade", value: account.address_city ?? "" },
+    {
+      title: "Estado",
+      value: account.address_uf || account.address_state || "",
+    },
     { title: "Cidade", value: account.address_city ?? "" },
     { title: "Logradouro", value: account.address_street ?? "" },
     { title: "Bairro", value: account.address_district ?? "" },
