@@ -209,3 +209,77 @@ jobs:
             else
               echo "Source $SRC does not exist; nothing to move"
             fi
+
+      - name: Create deployment branch for PR
+        if: steps.validate_secrets.outputs.secrets_ok == 'true'
+        run: |
+          set -euo pipefail
+          # Configure git
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          # Create unique branch name with timestamp
+          TIMESTAMP=$(date +"%Y%m%d-%H%M%S")
+          BRANCH_NAME="deploy/client-manual-${TIMESTAMP}"
+
+          # Create and switch to new branch
+          git checkout -b "$BRANCH_NAME"
+
+          # Make a deployment commit (even if no changes, to track deployment)
+          echo "# Deployment Log" > DEPLOYMENT_LOG.md
+          echo "- **Deployed at:** $(date)" >> DEPLOYMENT_LOG.md
+          echo "- **Branch/Ref:** ${{ steps.fetch_ref.outputs.ref }}" >> DEPLOYMENT_LOG.md
+          echo "- **Folder:** ${{ inputs.folder_name }}" >> DEPLOYMENT_LOG.md
+          echo "- **Workflow:** ${{ github.workflow }}" >> DEPLOYMENT_LOG.md
+          echo "- **Run ID:** ${{ github.run_id }}" >> DEPLOYMENT_LOG.md
+
+          git add DEPLOYMENT_LOG.md
+          git commit -m "Deploy: Client manual deployment at $(date)
+
+          - Deployed ref: ${{ steps.fetch_ref.outputs.ref }}
+          - Target folder: ${{ inputs.folder_name }}
+          - Workflow run: ${{ github.run_id }}"
+
+          # Push to fork
+          git remote add fork https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jnyjhow/Strategy-analytics.git
+          git push fork "$BRANCH_NAME"
+
+          # Store branch name for next step
+          echo "BRANCH_NAME=$BRANCH_NAME" >> $GITHUB_ENV
+
+      - name: Create Pull Request in Fork
+        if: steps.validate_secrets.outputs.secrets_ok == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: jnyjhow/Strategy-analytics
+          branch: ${{ env.BRANCH_NAME }}
+          base: dev_backend
+          title: "🚀 Client Manual Deployment - ${{ inputs.folder_name }}"
+          body: |
+            ## Manual Client Deployment
+
+            **Deployment Details:**
+            - 📂 **Target Folder:** `${{ inputs.folder_name }}`
+            - 🔗 **Source Ref:** `${{ steps.fetch_ref.outputs.ref }}`
+            - ⏰ **Deployed At:** $(date)
+            - 🏃 **Workflow Run:** [${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+            **Deployment Summary:**
+            - ✅ Files successfully uploaded to VM
+            - ✅ Permissions configured
+            - ✅ Application moved to deployment directory
+
+            ---
+
+            > This PR was automatically created after a successful manual deployment to track the changes deployed to production.
+
+            **Next Steps:**
+            - Review the deployment log
+            - Merge this PR to keep the fork synchronized
+            - Monitor the deployed application
+          labels: |
+            deployment
+            automated
+            client
+          assignees: jnyjhow
