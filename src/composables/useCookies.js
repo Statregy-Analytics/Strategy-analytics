@@ -111,75 +111,84 @@ export default function useCookies() {
    * @param {object|string} value dados do usuário
    */
   const setUserCookie = (value) => {
-    // Guarda como JSON quando for objeto
+    // Guarda somente os identificadores mínimos no cookie (id e nome/opcional).
+    // Se for passado um objeto completo, atualizamos a store imediatamente, mas NÃO armazenamos tudo no cookie.
     const obj = typeof value === 'string' ? (() => {
       try { return JSON.parse(value) } catch (e) { return value }
     })() : value;
-    const v = typeof obj === 'string' ? obj : JSON.stringify(obj);
-    // gravar cookie
-    setCookie(userCookie, v);
 
-    // logs de debug: mostrar o que está sendo salvo (facilita copiar/colar)
-    try {
-      // eslint-disable-next-line no-console
-      console.debug('[setUserCookie] saving cookie', userCookie, typeof obj === 'string' ? (() => { try { return JSON.parse(obj) } catch { return obj } })() : obj);
-    } catch (e) { /* noop */ }
-
-    // garantir que setUserData receba um objeto (não string)
+    // Se recebemos um payload completo (mais que apenas id), atualizar store imediatamente
     try {
       const parsedObj = typeof obj === 'string' ? JSON.parse(obj) : obj;
-      storeUser.setUserData(parsedObj);
-      try {
-        // eslint-disable-next-line no-console
-        console.debug('[setUserCookie] storeUser.data after setUserData:', JSON.parse(JSON.stringify(storeUser.data)));
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.debug('[setUserCookie] storeUser.data after setUserData (raw):', storeUser.data);
+      // Detectar se é um objeto completo (tem propriedades além de id/name)
+      const hasRichData = parsedObj && typeof parsedObj === 'object' && Object.keys(parsedObj).length > 2;
+      if (hasRichData) {
+        try { storeUser.setUserData(parsedObj) } catch (e) { storeUser.data = parsedObj }
       }
     } catch (e) {
-      // fallback simples
-      storeUser.data = obj;
-      // eslint-disable-next-line no-console
-      console.debug('[setUserCookie] storeUser.data set via fallback:', storeUser.data);
+      // ignore parse issues
+    }
+
+    // Construir cookie mínimo
+    let cookieToSave = null;
+    try {
+      const parsed = typeof obj === 'string' ? (() => { try { return JSON.parse(obj) } catch { return null } })() : obj;
+      const id = parsed && (parsed.id || (parsed.cliente && parsed.cliente.id) || parsed.cliente_id) ? (parsed.id || parsed.cliente && parsed.cliente.id || parsed.cliente_id) : (typeof obj === 'string' ? obj : undefined);
+      const name = parsed && (parsed.name || (parsed.cliente && parsed.cliente.name)) ? (parsed.name || parsed.cliente && parsed.cliente.name) : undefined;
+      cookieToSave = id ? { id, name } : (typeof obj === 'string' ? { id: obj } : null);
+    } catch (e) {
+      cookieToSave = null;
+    }
+
+    if (cookieToSave) {
+      setCookie(userCookie, JSON.stringify(cookieToSave));
+    } else {
+      // se não conseguimos extrair id, removemos o cookie para evitar dados inconsistentes
+      try { Cookies.remove(userCookie, setOptionsCookie) } catch (e) { /* noop */ }
     }
   }
   const updateCookieAccount = async (newAccount) => {
-    let user = getValue(userCookie)
-    let parsed = user
+    // Atualizar a store localmente com o novo account (não gravar dados completos no cookie).
     try {
-      parsed = typeof user === 'string' ? JSON.parse(user) : user
-    } catch (e) {
-      parsed = user
-    }
-    parsed = parsed || {}
-    // aplicar novo account
-    parsed.account = newAccount
-
-    // cache-bust simples: anexar timestamp ao avatar para forçar reload no browser
-    try {
-      const avatar = parsed.account && parsed.account.avatar
-      if (avatar && typeof avatar === 'string') {
-        const ts = Date.now()
-        if (avatar.indexOf('?') === -1) parsed.account.avatar = `${avatar}?_ts=${ts}`
-        else parsed.account.avatar = `${avatar}&_ts=${ts}`
+      // cache-bust simples: anexar timestamp ao avatar para forçar reload no browser
+      if (newAccount && typeof newAccount === 'object') {
+        const avatar = newAccount.avatar
+        if (avatar && typeof avatar === 'string') {
+          const ts = Date.now()
+          if (avatar.indexOf('?') === -1) newAccount.avatar = `${avatar}?_ts=${ts}`
+          else newAccount.avatar = `${avatar}&_ts=${ts}`
+        }
       }
+
+      // Atualizar a store com o novo account (existe action setAvatarUpload)
+      try {
+        storeUser.setAvatarUpload(newAccount)
+      } catch (e) {
+        // fallback: aplicar diretamente
+        if (!storeUser.data) storeUser.data = {}
+        storeUser.data.account = newAccount
+      }
+
+      // Manter cookie mínimo (id/name) inalterado — se quiser forçar refresh do servidor, chame reloadUser()
+      const current = getValue(userCookie)
+      // reaplicar o cookie mínimo atual para manter o timestamp de expiração
+      if (current) setCookie(userCookie, JSON.stringify(current), setOptionsCookie)
     } catch (err) {
       // noop
     }
-
-    // debug
-    try {
-      // eslint-disable-next-line no-console
-      console.debug('updateCookieAccount -> updating cookie and store with account.avatar =', parsed.account && parsed.account.avatar)
-    } catch (err) { }
-
-    setUserCookie(parsed)
   }
   const updateNameByAccount = async (userNew, accountNew) => {
-    let user = getValue(userCookie)
-    user.account = accountNew
-    user.name = userNew.name
-    setUserCookie(user)
+    // Atualizar a store com novo nome e account; não gravar dados completos no cookie
+    try {
+      if (!storeUser.data) storeUser.data = {}
+      storeUser.data.name = userNew.name
+      storeUser.data.account = accountNew
+    } catch (e) {
+      // noop
+    }
+    // Manter cookie mínimo
+    const current = getValue(userCookie)
+    if (current) setCookie(userCookie, JSON.stringify(current), setOptionsCookie)
   }
 
   return {
