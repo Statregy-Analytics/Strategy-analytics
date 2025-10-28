@@ -40,6 +40,23 @@ export default function useDataUser() {
             loading.value = false;
             return;
           }
+          // Se o cookie for mínimo (ex: { id }), tentar buscar o cliente por id na API
+          const clientIdFromCookie = parsed?.id || parsed?.cliente_id || (parsed && parsed.id);
+          if (clientIdFromCookie) {
+            try {
+              const clientResp = await api.get(`/clients/${clientIdFromCookie}`);
+              const foundClient = clientResp && clientResp.data ? (clientResp.data.cliente || clientResp.data.client || clientResp.data) : null;
+              const wallet = foundClient && (foundClient.user_wallet || foundClient.wallet || (foundClient.cliente && (foundClient.cliente.user_wallet || foundClient.cliente.wallet))) || {};
+              if (wallet && Object.keys(wallet).length > 0) {
+                userStore.setWallet(wallet);
+                loading.value = false;
+                return;
+              }
+            } catch (e) {
+              // falha na busca por id: continuar para tentativa de busca por lista
+              // console.warn('useDataUser.getWallet - busca por id falhou', e)
+            }
+          }
         }
       }
 
