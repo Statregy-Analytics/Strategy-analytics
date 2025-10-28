@@ -60,34 +60,74 @@ export default defineComponent({
     const { data, isDirty, isDirtyData } = storeToRefs(store);
     const { updateData, loading } = useAccount();
     const { same } = useCase();
-    const birthday = computed(() => {
-      return data.value.account.birthday ?? new Date(now());
+    // Normalizar a fonte de dados: backend pode retornar o usuário dentro de `cliente` ou diretamente
+    const userObj = computed(() => {
+      const dv = data.value;
+      if (!dv) return {};
+      if (typeof dv === "string") {
+        try {
+          return JSON.parse(dv);
+        } catch (e) {
+          return {};
+        }
+      }
+      if (dv.cliente) return dv.cliente;
+      return dv;
     });
-    let dateCurrent = new Date(birthday + " 00:00:00");
-    let brDate = date.formatDate(dateCurrent, "DD/MM/YYYY");
+
+    // formatar data de nascimento a partir dos campos possíveis (birth, birthday)
+    let brDate = "";
+    const rawBirth = computed(
+      () =>
+        userObj.value?.birth ??
+        userObj.value?.birthday ??
+        userObj.value?.account?.birthday ??
+        null,
+    );
+    if (rawBirth.value) {
+      try {
+        const dateCurrent = new Date(rawBirth.value + " 00:00:00");
+        brDate = date.formatDate(dateCurrent, "DD/MM/YYYY");
+      } catch (err) {
+        brDate = "";
+      }
+    }
 
     const dadosBasicos = computed(() => {
       return [
-        { title: "Nome Completo", value: data.value.name },
-        { title: "Gênero", value: data.value.gender ?? "Masculino" },
+        {
+          title: "Nome Completo",
+          value: userObj.value?.name ?? userObj.value?.nome ?? "",
+        },
+        {
+          title: "Gênero",
+          value: userObj.value?.gender ?? userObj.value?.sexo ?? "Masculino",
+        },
         {
           title: "Estado Civil",
-          value: data.value.maritalStatus ?? "Solteiro",
+          value:
+            userObj.value?.maritalStatus ??
+            userObj.value?.estado_civil ??
+            "Solteiro",
         },
         {
           title: "Nacionalidade",
-          value: data.value.nationality ?? "Brasileira",
+          value:
+            userObj.value?.nationality ??
+            userObj.value?.nacionalidade ??
+            "Brasileira",
         },
         {
           title: "Naturalidade (Cidade, UF)",
-          value: data.value.naturalidade ?? "São Paulo, SP",
+          value: userObj.value?.naturalidade ?? "",
         },
+        { title: "Data de Nascimento", value: brDate },
         {
-          title: "Data de Nascimento",
-          value: brDate,
+          title: "CPF",
+          value:
+            userObj.value?.cpf ?? userObj.value?.person ?? "000.000.000-00",
         },
-        { title: "CPF", value: data.value.account.person ?? "000.000.000-00" },
-        { title: "RG", value: data.value.account.rg ?? "00.000.000-00" },
+        { title: "RG", value: userObj.value?.rg ?? "" },
       ];
     });
     // const dadosBasicos = [
@@ -110,10 +150,25 @@ export default defineComponent({
     const localization = [
       {
         title: "Localização Atual",
-        value: data.value.account.language ?? "Jacareí, SP",
+        value:
+          userObj.value?.account?.language ??
+          userObj.value?.language ??
+          "Jacareí, SP",
       },
-      { title: "Cep", value: data.value.account.address_zip_code ?? "" },
-      { title: "Logradouro", value: data.value.account.address_city ?? "" },
+      {
+        title: "Cep",
+        value:
+          userObj.value?.account?.address_zip_code ??
+          userObj.value?.address_zip_code ??
+          "",
+      },
+      {
+        title: "Logradouro",
+        value:
+          userObj.value?.account?.address_city ??
+          userObj.value?.address_city ??
+          "",
+      },
     ];
 
     const job = [

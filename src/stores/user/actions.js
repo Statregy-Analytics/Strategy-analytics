@@ -14,13 +14,52 @@ const actions = {
   },
 
   setUserData(payload) {
-    this.data = { ...payload };
-    this.isDirty = { ...payload }
-    this.isDirtyData = { ...payload.account }
-    this.NavbarMenu = payload.role_id == 3 ? 'client' : 'admin';
-    this.wallet = payload.role_id === 3 ? { ...payload.user_wallet } : "";
-    this.loan = payload.investment ? payload.loan : "";
-    this.investment = payload.investment ? payload.investment : "";
+    // Normalizar o payload recebido para um formato consistente dentro da store.
+    // O backend pode retornar diferentes formatos (top-level cliente, cliente.cliente, account, etc.).
+    const p = payload || {};
+
+    // derivar objeto cliente preferencialmente de p.cliente, p.client, ou propriedades top-level
+    const clienteSrc = p.cliente || p.client || {};
+
+    const cliente = {
+      // copiar propriedades conhecidas quando existentes
+      ...(typeof clienteSrc === 'object' ? clienteSrc : {}),
+    };
+
+    // se não havia cliente no payload, tentar extrair campos sensíveis do objeto raiz
+    if (!p.cliente && !p.client) {
+      ['name', 'email', 'cpf', 'rg', 'telefone', 'phone', 'birth', 'birthday', 'id'].forEach((k) => {
+        if (p[k] !== undefined && cliente[k] === undefined) cliente[k] = p[k];
+      });
+    }
+
+    // garantir account
+    const account = p.account || cliente.account || {};
+
+    // padronizar nomes de data/telefone para ambos os campos possíveis
+    if (cliente.birth && !cliente.birthday) cliente.birthday = cliente.birth;
+    if (cliente.birthday && !cliente.birth) cliente.birth = cliente.birthday;
+    if (account.birthday && !cliente.birthday) cliente.birthday = account.birthday;
+    if (account.birth && !cliente.birth) cliente.birth = account.birth;
+
+    if (cliente.telefone && !account.phone) account.phone = cliente.telefone;
+    if (cliente.phone && !account.phone) account.phone = cliente.phone;
+    if (account.phone && !cliente.telefone) cliente.telefone = account.phone;
+
+    // construir objeto final usado internamente
+    const normalized = {
+      ...p,
+      cliente: { ...cliente },
+      account: { ...account },
+    };
+
+    this.data = { ...normalized };
+    this.isDirty = { ...normalized };
+    this.isDirtyData = { ...normalized.account };
+    this.NavbarMenu = normalized.role_id == 3 ? 'client' : 'admin';
+    this.wallet = normalized.role_id === 3 ? { ...(normalized.user_wallet || normalized.cliente.user_wallet || {}) } : "";
+    this.loan = normalized.investment ? normalized.loan : "";
+    this.investment = normalized.investment ? normalized.investment : "";
   },
   setAvatarUpload(payload) {
     this.data.account.avatar = payload;

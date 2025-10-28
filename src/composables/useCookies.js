@@ -4,7 +4,9 @@ import { useLayoutStore } from "src/stores/layout";
 import { useUserStore } from "src/stores/user";
 
 export default function useCookies() {
-  const setOptionsCookie = { path: '/', secure: true, sameSite: "None" }
+  // Ajusta opções de cookie dependendo do protocolo (https requerido para secure + SameSite=None)
+  const isSecure = typeof window !== 'undefined' && window.location && window.location.protocol === 'https:';
+  const setOptionsCookie = { path: '/', secure: isSecure, sameSite: isSecure ? 'None' : 'Lax' };
   const tokenName = process.env.COOKIE_TOKEN_NAME ?? "SA_token";
   const userCookie = process.env.COOKIE_USER_DATA ?? "SA_user";
   const hasTokenCookie = Cookies.has(tokenName);
@@ -57,9 +59,37 @@ export default function useCookies() {
    * Deletnando cookies local, isso vai deslogar usuário
    */
   const deleteTokenCookie = () => {
-    Cookies.remove(tokenName, setOptionsCookie);
-    Cookies.remove(userCookie, setOptionsCookie);
-    LocalStorage.remove(tokenCookie)
+    // Tentativa múltipla de remoção para cobrir diferentes atributos que possam ter sido usados
+    try {
+      Cookies.remove(tokenName, setOptionsCookie);
+    } catch (e) {
+      // noop
+    }
+    try {
+      Cookies.remove(userCookie, setOptionsCookie);
+    } catch (e) {
+      // noop
+    }
+
+    // Remover também sem opções e com path explícito para cobrir variações
+    try {
+      Cookies.remove(tokenName);
+    } catch (e) { }
+    try {
+      Cookies.remove(userCookie);
+    } catch (e) { }
+    try {
+      Cookies.remove(tokenName, { path: '/' });
+    } catch (e) { }
+    try {
+      Cookies.remove(userCookie, { path: '/' });
+    } catch (e) { }
+
+    // LocalStorage cleanup caso haja algo armazenado pelo token
+    try {
+      const localKey = Cookies.get(tokenName);
+      if (localKey) LocalStorage.remove(localKey);
+    } catch (e) { }
   }
   /**
    * Deletando cookie com os dados do usuário
@@ -72,21 +102,78 @@ export default function useCookies() {
    * @param {string} value token do usuário
    */
   const setTokenCookie = (value) => {
-    Cookies.set(tokenName, value.token, setOptionsCookie);
-    // localStorage.setItem(value.token, JSON.stringify(value.abilities))
+    // value pode ser string ou objeto { token }
+    const tokenValue = typeof value === 'string' ? value : value?.token;
+    Cookies.set(tokenName, tokenValue, setOptionsCookie);
   };
   /**
    * Setando localmente os dados so usuário
    * @param {object|string} value dados do usuário
    */
   const setUserCookie = (value) => {
-    setCookie(userCookie, value)
-    storeUser.setUserData(getValue(userCookie))
+    // Guarda como JSON quando for objeto
+    const obj = typeof value === 'string' ? (() => {
+      try { return JSON.parse(value) } catch (e) { return value }
+    })() : value;
+    const v = typeof obj === 'string' ? obj : JSON.stringify(obj);
+    // gravar cookie
+    setCookie(userCookie, v);
+
+    // logs de debug: mostrar o que está sendo salvo (facilita copiar/colar)
+    try {
+      // eslint-disable-next-line no-console
+      console.debug('[setUserCookie] saving cookie', userCookie, typeof obj === 'string' ? (() => { try { return JSON.parse(obj) } catch { return obj } })() : obj);
+    } catch (e) { /* noop */ }
+
+    // garantir que setUserData receba um objeto (não string)
+    try {
+      const parsedObj = typeof obj === 'string' ? JSON.parse(obj) : obj;
+      storeUser.setUserData(parsedObj);
+      try {
+        // eslint-disable-next-line no-console
+        console.debug('[setUserCookie] storeUser.data after setUserData:', JSON.parse(JSON.stringify(storeUser.data)));
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.debug('[setUserCookie] storeUser.data after setUserData (raw):', storeUser.data);
+      }
+    } catch (e) {
+      // fallback simples
+      storeUser.data = obj;
+      // eslint-disable-next-line no-console
+      console.debug('[setUserCookie] storeUser.data set via fallback:', storeUser.data);
+    }
   }
   const updateCookieAccount = async (newAccount) => {
     let user = getValue(userCookie)
-    user.account = newAccount
-    setUserCookie(user)
+    let parsed = user
+    try {
+      parsed = typeof user === 'string' ? JSON.parse(user) : user
+    } catch (e) {
+      parsed = user
+    }
+    parsed = parsed || {}
+    // aplicar novo account
+    parsed.account = newAccount
+
+    // cache-bust simples: anexar timestamp ao avatar para forçar reload no browser
+    try {
+      const avatar = parsed.account && parsed.account.avatar
+      if (avatar && typeof avatar === 'string') {
+        const ts = Date.now()
+        if (avatar.indexOf('?') === -1) parsed.account.avatar = `${avatar}?_ts=${ts}`
+        else parsed.account.avatar = `${avatar}&_ts=${ts}`
+      }
+    } catch (err) {
+      // noop
+    }
+
+    // debug
+    try {
+      // eslint-disable-next-line no-console
+      console.debug('updateCookieAccount -> updating cookie and store with account.avatar =', parsed.account && parsed.account.avatar)
+    } catch (err) { }
+
+    setUserCookie(parsed)
   }
   const updateNameByAccount = async (userNew, accountNew) => {
     let user = getValue(userCookie)

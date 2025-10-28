@@ -1,5 +1,9 @@
 import { defineConfig } from '#q-app/wrappers'
 import { fileURLToPath } from 'node:url'
+import dotenv from 'dotenv'
+
+// Carregar variáveis de ambiente do arquivo .env
+dotenv.config()
 
 export default defineConfig((ctx) => {
   return {
@@ -18,7 +22,7 @@ export default defineConfig((ctx) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
-    boot: ["axios", "apexcharts", "calendar", "filters", "view", "table-icons"],
+    boot: ["axios", "apexcharts", "calendar", "filters", "view", "table-icons", "user-init"],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ["app.scss"],
@@ -33,7 +37,7 @@ export default defineConfig((ctx) => {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      "roboto-font", // optional, you are not bound to it
+      // "roboto-font", // optional, you are not bound to it - comentado temporariamente para resolver erro de fonte
       "material-icons", // optional, you are not bound to it
     ],
 
@@ -58,12 +62,11 @@ export default defineConfig((ctx) => {
       // analyze: true,
       env:
         ctx.dev ? {
-          VERSION_APP: 2.0,
-          API_URL: "http://localhost:8085/api/",
-          COOKIE_TOKEN_NAME: "SA_token",
+          VERSION_APP: process.env.VERSION_APP || "2.0",
+          API_URL: "/api/", // Usar proxy local para evitar CORS
+          COOKIE_TOKEN_NAME: process.env.COOKIE_TOKEN_NAME || "SA_token",
           COOKIE_USER_DATA: "SA_user",
           WEB_URL: process.env.WEB_URL,
-          API_URL_CORS: "http://localhost:8085/sanctum/csrf-cookie",
           CLIENT_ID: 2,
           CLIENT_SECRET: "BV2qcZjNuR3FSiaRqOb3BSVlt95bQSDGEQMuQ3Gs"
 
@@ -73,7 +76,6 @@ export default defineConfig((ctx) => {
           COOKIE_TOKEN_NAME: "SA_token",
           COOKIE_USER_DATA: "SA_user",
           WEB_URL: process.env.WEB_URL,
-          API_URL_CORS: "https://sources.strategyanalytics.com.br/sanctum/csrf-cookie",
           CLIENT_ID: 1,
           CLIENT_SECRET: "l6v5MTt8M5IsfuVhLwwppJJjadubIPF2R8"
 
@@ -124,8 +126,18 @@ export default defineConfig((ctx) => {
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
       // https: true
+      host: '0.0.0.0', // Permite acesso de qualquer IP (importante para Docker)
       port: 9010,
       open: false, // opens browser window automatically
+      proxy: {
+        // Proxy para evitar problemas de CORS
+        '/api': {
+          target: 'http://host.docker.internal:3333',
+          changeOrigin: true,
+          secure: false,
+          logLevel: 'debug'
+        }
+      }
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework

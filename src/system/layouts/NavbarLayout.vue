@@ -21,7 +21,7 @@
       <q-space class="gt-sm" />
       <hours-banner v-if="navbar.clock" />
       <options-icons :theme="navbar.theme" :adm="data.role_id !== 3" />
-      <avatar-menu v-if="data.account" :avatar="data.account.avatar" />
+      <avatar-menu v-if="showAvatar" :avatar="avatarUrl" />
       <!-- {{ navbar.clock }} -->
     </q-toolbar>
     <drawer-theme />
@@ -41,6 +41,7 @@ import useMode from "../../composables/system/useMode";
 import OptionsIcons from "../components/navbar/OptionsIcons.vue";
 import HoursBanner from "../components/navbar/HoursBanner.vue";
 import AvatarMenu from "../components/navbar/AvatarMenu.vue";
+import { Cookies } from "quasar";
 import DrawerTheme from "src/system/components/navbar/DrawerTheme.vue";
 export default defineComponent({
   props: { dark: { type: Boolean, default: true } },
@@ -77,6 +78,35 @@ export default defineComponent({
     const nav = computed(() => {
       return `${system.value.theme}-navbar`;
     });
+
+    // Mostrar avatar se o user store tiver informação ou se houver cookie do usuário
+    const showAvatar = computed(() => {
+      try {
+        return (
+          data.value?.account ||
+          !!Cookies.get(process.env.COOKIE_USER_DATA || "SA_user")
+        );
+      } catch (e) {
+        return !!Cookies.get("SA_user");
+      }
+    });
+
+    const avatarUrl = computed(() => {
+      try {
+        if (data.value && data.value.account && data.value.account.avatar)
+          return data.value.account.avatar;
+        const userCookie = Cookies.get(
+          process.env.COOKIE_USER_DATA || "SA_user",
+        );
+        if (userCookie) {
+          const parsed = JSON.parse(userCookie);
+          return parsed.avatar || "";
+        }
+        return "";
+      } catch (e) {
+        return "";
+      }
+    });
     return {
       menuAccess,
       canAccess,
@@ -93,6 +123,8 @@ export default defineComponent({
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
       nav,
+      showAvatar,
+      avatarUrl,
     };
   },
   // Outras configurações do componente aqui

@@ -80,8 +80,15 @@ export default function useAuth() {
         }
       })
       .catch((e) => {
-        errorNotify(e.response.data.message);
-        errors.value = e.response.data.errors;
+        console.error('Erro na requisição:', e);
+        if (e.response && e.response.data) {
+          errorNotify(e.response.data.message);
+          errors.value = e.response.data.errors;
+        } else if (e.code === 'ERR_CONNECTION_REFUSED') {
+          errorNotify('Não foi possível conectar ao servidor. Verifique se o backend está rodando.');
+        } else {
+          errorNotify('Erro de conexão. Tente novamente.');
+        }
       })
       .finally(() => (loading.value = false));
   };

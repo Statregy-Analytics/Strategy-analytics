@@ -89,7 +89,7 @@ import { useUserStore } from "../../../stores/user";
 import { storeToRefs } from "pinia";
 import { useRoute, useRouter } from "vue-router";
 // import useLogin from "../../composables/useLogin";
-import useAuth from "../../../composables/system/useAuth";
+import useClientAuth from "../../../composables/system/useClientAuth";
 import useRoles from "../../../composables/system/useRoles";
 // import HeaderAuth from "src/system/components/auth/HeaderAuth.vue";
 import RegisterData from "src/system/components/RegisterData.vue";
@@ -104,17 +104,22 @@ export default defineComponent({
     const useStore = useUserStore();
     const personRef = ref(null);
     const passwordRef = ref(null);
-    const { auth, errors, loading } = useAuth();
+    // const { auth, errors, loading } = useAuth();
+    const { authenticateClient, loading } = useClientAuth();
     const { personRule } = useRoles();
     // const isValidperson = computed(() => errors.person.length > 0);
     const { login } = storeToRefs(useStore);
     const route = useRoute();
     const router = useRouter();
-    const onSubmit = () => {
+    const onSubmit = async () => {
       personRef.value.validate();
       passwordRef.value.validate();
-      if (!personRef.value.hasError || !passwordRef.value.hasError) {
-        auth(login.value);
+      if (!personRef.value.hasError && !passwordRef.value.hasError) {
+        const credentials = {
+          cpf: login.value.person,
+          password: login.value.password,
+        };
+        await authenticateClient(credentials);
       }
     };
     const goRegister = () => {
@@ -133,7 +138,6 @@ export default defineComponent({
       isPwd,
       personRule,
       onSubmit,
-      auth,
       forgot,
       goRegister,
     };

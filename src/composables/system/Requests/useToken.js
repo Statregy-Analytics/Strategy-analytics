@@ -69,8 +69,9 @@ export default function useToken() {
 
   const forgotPassword = async (data) => {
     showLoading('Coletando dados para envia... ')
-    await api.get(process.env.API_URL_CORS).then(response => {
-    }).catch(() => { infoNotify('Solicitão suspeita recarregue sua pagina.') }).finally(() => loading.value = false)
+    // CSRF não necessário - comentado
+    // await api.get(process.env.API_URL_CORS).then(response => {
+    // }).catch(() => { infoNotify('Solicitão suspeita recarregue sua pagina.') }).finally(() => loading.value = false)
     showLoading('Preparando email para envio... ')
     await api.post(`password/forgot`, { ...data }).then((res) => {
       // if (res.data.status == 200) {
