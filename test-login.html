@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Teste de Login - Strategy Analytics</title>
+    <script>
+      function testLogin() {
+        const iframe = document.getElementById("loginFrame");
+        iframe.onload = function () {
+          try {
+            const iframeDoc =
+              iframe.contentDocument || iframe.contentWindow.document;
+            const errors = iframeDoc.querySelectorAll(
+              ".q-notification--negative",
+            );
+
+            if (errors.length > 0) {
+              document.getElementById("result").innerHTML =
+                "❌ Erros encontrados na página de login";
+              console.error("Erros:", errors);
+            } else {
+              document.getElementById("result").innerHTML =
+                "✅ Página de login carregou sem erros";
+            }
+          } catch (e) {
+            document.getElementById("result").innerHTML =
+              "⚠️ Não foi possível verificar erros (CORS)";
+          }
+        };
+
+        iframe.onerror = function () {
+          document.getElementById("result").innerHTML =
+            "❌ Erro ao carregar a página";
+        };
+
+        iframe.src = "http://localhost:9011";
+      }
+
+      // Auto-test após carregar
+      window.onload = testLogin;
+    </script>
+  </head>
+  <body>
+    <h1>🔧 Teste de Integração - Strategy Analytics</h1>
+    <div id="result">🔄 Carregando...</div>
+    <br />
+    <iframe
+      id="loginFrame"
+      width="100%"
+      height="600"
+      style="border: 1px solid #ccc"
+    ></iframe>
+
+    <h3>📋 Checklist de Testes:</h3>
+    <ul>
+      <li>✅ Frontend rodando em http://localhost:9011</li>
+      <li>✅ Backend rodando em http://localhost:3333/api/clients</li>
+      <li>✅ Erro de fonte Roboto corrigido</li>
+      <li>✅ Erro de `auth` undefined corrigido</li>
+      <li>🔄 Teste de login manual pendente</li>
+    </ul>
+
+    <h3>🧪 Para testar o login:</h3>
+    <ol>
+      <li>Use um CPF válido do backend (ex: 398.780.438-60)</li>
+      <li>Use a senha correspondente (ex: 123456)</li>
+      <li>O sistema deve redirecionar para /system/</li>
+    </ol>
+  </body>
+</html>

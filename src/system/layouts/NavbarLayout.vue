@@ -21,7 +21,7 @@
       <q-space class="gt-sm" />
       <hours-banner v-if="navbar.clock" />
       <options-icons :theme="navbar.theme" :adm="data.role_id !== 3" />
-      <avatar-menu v-if="data.account" :avatar="data.account.avatar" />
+      <avatar-menu v-if="isAuthenticated" :avatar="avatarUrl" />
       <!-- {{ navbar.clock }} -->
     </q-toolbar>
     <drawer-theme />
@@ -30,17 +30,19 @@
 
 <script>
 import { computed, defineComponent, ref } from "vue";
+import getAvatarUrl from "src/utils/getAvatarUrl";
 import { useUserStore } from "../../stores/user";
 import { storeToRefs } from "pinia";
 import { useStoreLayout } from "src/stores/layoutStore";
 
 import SvgLogo from "../components/svgs/SvgLogo.vue";
 // import SvgSign from "../components/svgs/SvgSign.vue";
-import useCookies from "src/composables/useCookies";
+// import useCookies from "src/composables/useCookies"; // removed: no cookie usage in navbar
 import useMode from "../../composables/system/useMode";
 import OptionsIcons from "../components/navbar/OptionsIcons.vue";
 import HoursBanner from "../components/navbar/HoursBanner.vue";
 import AvatarMenu from "../components/navbar/AvatarMenu.vue";
+import { Cookies } from "quasar";
 import DrawerTheme from "src/system/components/navbar/DrawerTheme.vue";
 export default defineComponent({
   props: { dark: { type: Boolean, default: true } },
@@ -77,6 +79,25 @@ export default defineComponent({
     const nav = computed(() => {
       return `${system.value.theme}-navbar`;
     });
+
+    // Considera autenticado se houver token ou dados na store
+    const isAuthenticated = computed(() => {
+      const token =
+        userStore.authentication && userStore.authentication.token
+          ? userStore.authentication.token
+          : null;
+      const hasData = data.value && Object.keys(data.value).length > 0;
+      return !!(token || hasData);
+    });
+
+    const avatarUrl = computed(() => {
+      const raw =
+        data.value?.account?.avatar ||
+        data.value?.cliente?.avatar ||
+        data.value?.avatar ||
+        "";
+      return getAvatarUrl(raw);
+    });
     return {
       menuAccess,
       canAccess,
@@ -88,11 +109,13 @@ export default defineComponent({
       drawer,
       leftDrawerOpen,
       data,
-      activeMode: useCookies().toggleMod,
+      // activeMode removed - prefer store-driven theme toggles
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
       nav,
+      isAuthenticated,
+      avatarUrl,
     };
   },
   // Outras configurações do componente aqui

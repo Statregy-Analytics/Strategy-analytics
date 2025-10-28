@@ -15,7 +15,7 @@
       square
     >
       <img
-        :src="data.account.avatar"
+        :src="avatarUrl"
         :class="{ 'avatar-control-h': hoverImage }"
         style="border-radius: 50% !important"
       />
@@ -60,7 +60,8 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
+import getAvatarUrl from "src/utils/getAvatarUrl";
 import { useUserStore } from "../../../stores/user";
 import { storeToRefs } from "pinia";
 import useLogin from "../../../composables/useLogin";
@@ -76,6 +77,7 @@ export default defineComponent({
     const setImage = ref(true);
     const useStore = useUserStore();
     const { data } = storeToRefs(useStore);
+    const avatarUrl = computed(() => getAvatarUrl(data.value?.account?.avatar));
     const selectFile = ref("");
     const avatar = ref(null);
     const { UploadAvatar } = useLogin();
@@ -121,6 +123,7 @@ export default defineComponent({
     return {
       avatar,
       data,
+      avatarUrl,
       selectFile,
       setImage,
       form,
