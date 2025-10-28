@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 import { Cookies } from "quasar";
 import useNotify from "../useNotify";
 import useCookies from "../useCookies";
+import { useUserStore } from "src/stores/user";
 
 export default function useClientAuth() {
     const loading = ref(false);
@@ -128,15 +129,33 @@ export default function useClientAuth() {
     };
 
     // Função para obter dados do usuário logado (versão simplificada)
-    const getCurrentUser = () => {
-        const userData = Cookies.get(process.env.COOKIE_USER_DATA || 'SA_user');
-        if (!userData) return null;
+    // Obter dados do usuário atual.
+    // Preferir a store (já populada no boot via API). Se não houver dados na store,
+    // tentar buscar via API usando o id armazenado no cookie mínimo ({id}).
+    const getCurrentUser = async () => {
+        const store = useUserStore();
+        if (store.data && Object.keys(store.data).length) return store.data;
 
+        // tentar ler cookie mínimo e buscar por id
         try {
-            return JSON.parse(userData);
-        } catch {
+            const userCookie = Cookies.get(process.env.COOKIE_USER_DATA || 'SA_user');
+            if (!userCookie) return null;
+            let parsed = userCookie;
+            try { parsed = typeof userCookie === 'string' ? JSON.parse(userCookie) : userCookie } catch (e) { parsed = userCookie }
+            const id = parsed?.id || parsed?.cliente_id || null;
+            if (!id) return null;
+            try {
+                const res = await api.get(`/clients/${id}`);
+                let payload = res.data && (res.data.cliente || res.data.client || res.data) || null;
+                if (payload && payload.cliente) payload = payload.cliente;
+                if (payload) return payload;
+            } catch (e) {
+                return null;
+            }
+        } catch (e) {
             return null;
         }
+        return null;
     };
 
     return {
