@@ -1,12 +1,12 @@
 <template>
-  <div class="ThemeSetting">
+  <div class="theme-setting">
     <div class="row">
       <div class="col-12 q-mb-md">
         <textarea-title text="Tema" />
       </div>
     </div>
     <div class="row q-gutter-sm">
-      <theme-options toggleClass=" self-center" />
+      <theme-options class="col-2 self-center" />
     </div>
   </div>
 </template>

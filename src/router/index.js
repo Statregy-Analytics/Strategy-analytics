@@ -7,7 +7,7 @@ import {
 } from "vue-router";
 import routes from "./routes";
 import useAuth from "src/composables/system/useAuth";
-import useCookies from "src/composables/useCookies";
+import useClientAuth from "src/composables/system/useClientAuth";
 
 /*
  * If not building with SSR mode, you can
@@ -34,8 +34,10 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
   Router.beforeEach((to, from, next) => {
-    const { verifyLogged, routeRetorn } = useAuth();
-    const { hasTokenCookie } = useCookies()
+    const { isAuthenticated } = useClientAuth();
+    const isAuth = isAuthenticated();
+    console.log('Router Debug:', { to: to.name, isAuthenticated: isAuth, requiresAuth: to.meta?.auth });
+
     let home =
       to.name == "home"
         ? "Gestão de Investimentos e Serviços Financeiros"
@@ -44,25 +46,26 @@ export default route(function (/* { store, ssrContext } */) {
       to.name != undefined
         ? `Strategy Analytics -  ${home}`
         : "Strategy Analytics";
-    if (to.meta?.auth) {
 
-      if (!hasTokenCookie) {
+    if (to.meta?.auth) {
+      if (!isAuth) {
+        console.log('Redirecionando para login - sem autenticação');
         next({ name: 'login' })
         return
       }
-      verifyLogged()
+      // Removido verifyLogged() - não precisa validar token no servidor
     }
 
     //verificando se o usuário esta logado evitar logar duplicado
     if (to.name == "login") {
-      if (hasTokenCookie) {
+      if (isAuth) {
+        console.log('Usuário já logado, redirecionando para config');
         next({ name: 'config' })
+        return
       }
     }
 
-
+    console.log('Navegação permitida para:', to.name);
     next()
-  });
-
-  return Router;
+  }); return Router;
 });

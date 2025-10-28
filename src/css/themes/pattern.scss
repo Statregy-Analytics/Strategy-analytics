@@ -14,7 +14,14 @@
 }
 $theme-name: "bg-simulator";
 .#{$theme-name} {
-  background-image: url(/system/background/patterns.png);
+  background: linear-gradient(
+    224.8deg,
+    #791823 0.17%,
+    #330a0f 9.09%,
+    #090c15 39.13%,
+    #09293e 73.45%,
+    #114d76 99.83%
+  );
   @include backgroundTheme;
   &-invest {
     background: linear-gradient(
@@ -33,9 +40,13 @@ $theme-name: "bg-simulator";
     background: rgba(0, 163, 255, 0.1);
   }
   &-navbar {
+    padding: 16px 24px 16px 24px;
     border-radius: 8px;
     background: rgba(0, 0, 0, 0.2);
     box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.2);
+    // gap: 40px;
+    height: 5.6875rem;
+    gap: 40px;
   }
 }
 .text-bg-simulator-color-bank {

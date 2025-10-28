@@ -1,0 +1,611 @@
+{
+  "dividend_yield": [
+    {
+      "month": "JAN 25",
+      "percentage": 0.55
+    },
+    {
+      "month": "JAN 25",
+      "percentage": 0.43
+    },
+    {
+      "month": "MAR 25",
+      "percentage": 0.49
+    },
+    {
+      "month": "APR 25",
+      "percentage": 0.6
+    },
+    {
+      "month": "MAY 25",
+      "percentage": 0.4
+    },
+    {
+      "month": "MAY 25",
+      "percentage": 0.3
+    },
+    {
+      "month": "JUN 25",
+      "percentage": 0.71
+    },
+    {
+      "month": "JUL 25",
+      "percentage": 0.82
+    },
+    {
+      "month": "AUG 25",
+      "percentage": 0.81
+    },
+    {
+      "month": "SEP 25",
+      "percentage": 0.65
+    },
+    {
+      "month": "OCT 25",
+      "percentage": 0.94
+    },
+    {
+      "month": "NOV 25",
+      "percentage": 0.78
+    },
+    {
+      "month": "DEC 25",
+      "percentage": 0.3
+    },
+    {
+      "month": "JAN 26",
+      "percentage": 0.44
+    },
+    {
+      "month": "FEB 26",
+      "percentage": 0.24
+    }
+  ],
+  "usuarios": [
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "205.619,00"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "205.619,00"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "205.619,00"
+    }
+  ],
+  "aportes": [
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "114,13",
+      "data": "11/01/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "177,23",
+      "data": "26/01/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "126,60",
+      "data": "20/01/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "118,39",
+      "data": "23/01/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "148,76",
+      "data": "01/01/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "130,02",
+      "data": "03/02/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "137,68",
+      "data": "27/02/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "172,19",
+      "data": "23/02/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "135,75",
+      "data": "17/02/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "142,99",
+      "data": "25/02/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "175,27",
+      "data": "05/03/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "143,62",
+      "data": "27/03/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "130,77",
+      "data": "17/03/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "130,18",
+      "data": "12/03/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "132,63",
+      "data": "16/03/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "137,64",
+      "data": "04/04/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "163,01",
+      "data": "12/04/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "116,25",
+      "data": "05/04/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "183,07",
+      "data": "28/04/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "184,92",
+      "data": "14/04/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "137,49",
+      "data": "21/05/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "164,72",
+      "data": "01/05/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "156,59",
+      "data": "21/05/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "129,48",
+      "data": "23/05/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "187,52",
+      "data": "24/05/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "152,64",
+      "data": "04/06/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "133,61",
+      "data": "22/06/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "193,45",
+      "data": "12/06/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "181,19",
+      "data": "16/06/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "171,51",
+      "data": "13/06/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "112,18",
+      "data": "14/07/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "148,89",
+      "data": "15/07/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "136,19",
+      "data": "07/07/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "149,74",
+      "data": "01/07/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "173,03",
+      "data": "19/07/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "190,85",
+      "data": "01/08/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "101,66",
+      "data": "24/08/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "122,86",
+      "data": "24/08/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "133,16",
+      "data": "26/08/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "125,16",
+      "data": "06/08/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "143,14",
+      "data": "26/09/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "123,98",
+      "data": "27/09/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "189,09",
+      "data": "23/09/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "188,77",
+      "data": "24/09/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "177,16",
+      "data": "23/09/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "139,49",
+      "data": "26/10/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "107,66",
+      "data": "04/10/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "177,41",
+      "data": "11/10/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "130,02",
+      "data": "17/10/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "111,21",
+      "data": "23/10/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "134,60",
+      "data": "16/11/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "176,73",
+      "data": "14/11/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "100,41",
+      "data": "21/11/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "144,73",
+      "data": "17/11/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "141,13",
+      "data": "22/11/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "177,66",
+      "data": "05/12/2025"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "188,43",
+      "data": "22/12/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "112,70",
+      "data": "09/12/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "112,49",
+      "data": "08/12/2025"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "129,27",
+      "data": "06/12/2025"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "135,22",
+      "data": "12/01/2026"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "114,33",
+      "data": "01/01/2026"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "142,76",
+      "data": "27/01/2026"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "185,87",
+      "data": "15/01/2026"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "153,98",
+      "data": "11/01/2026"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "192,19",
+      "data": "03/02/2026"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "140,81",
+      "data": "21/02/2026"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "108,62",
+      "data": "02/02/2026"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "103,84",
+      "data": "17/02/2026"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "172,56",
+      "data": "26/02/2026"
+    },
+    {
+      "hash": "221",
+      "usuario": "Marcelo Fontes Pereira",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "112,66",
+      "data": "11/03/2026"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "129,55",
+      "data": "18/03/2026"
+    },
+    {
+      "hash": "223",
+      "usuario": "Ricardo Santos Luz",
+      "avatar": "https://sources.strategyanalytics.com.br/storage/users/joao_default.png",
+      "valor_aporte": "178,17",
+      "data": "07/03/2026"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "187,87",
+      "data": "15/03/2026"
+    },
+    {
+      "hash": "222",
+      "usuario": "João Silva Machado",
+      "avatar": "joao.png",
+      "valor_aporte": "156,36",
+      "data": "18/03/2026"
+    }
+  ]
+}

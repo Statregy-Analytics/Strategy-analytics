@@ -1,0 +1,222 @@
+[
+    {
+        "paridade": "BTCUSDT Short",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.446,62",
+        "preco_saida": "98.909,26",
+        "quantidade": "0,066",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "+406,5173",
+        "custos_operacao": "5,374",
+        "data_hora_operacao": "05/05/2025 15:33:36"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.253,20",
+        "preco_saida": "98.025,05",
+        "quantidade": "0,065",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-213,8077",
+        "custos_operacao": "5,876",
+        "data_hora_operacao": "05/05/2025 15:30:57"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.505,92",
+        "preco_saida": "98.465,72",
+        "quantidade": "0,061",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-351,6442",
+        "custos_operacao": "5,490",
+        "data_hora_operacao": "05/05/2025 15:34:21"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.486,89",
+        "preco_saida": "98.511,08",
+        "quantidade": "0,069",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-241,5378",
+        "custos_operacao": "5,801",
+        "data_hora_operacao": "05/05/2025 15:32:09"
+    },
+    {
+        "paridade": "BTCUSDT Short",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.880,38",
+        "preco_saida": "98.689,48",
+        "quantidade": "0,065",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "+206,2174",
+        "custos_operacao": "5,345",
+        "data_hora_operacao": "05/05/2025 15:33:55"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.518,85",
+        "preco_saida": "98.253,94",
+        "quantidade": "0,063",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-374,1140",
+        "custos_operacao": "5,636",
+        "data_hora_operacao": "05/05/2025 15:34:32"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.002,84",
+        "preco_saida": "98.806,55",
+        "quantidade": "0,068",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-492,1854",
+        "custos_operacao": "5,418",
+        "data_hora_operacao": "05/05/2025 15:33:32"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.017,01",
+        "preco_saida": "98.057,06",
+        "quantidade": "0,066",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-285,4790",
+        "custos_operacao": "5,759",
+        "data_hora_operacao": "05/05/2025 15:33:59"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.402,91",
+        "preco_saida": "98.479,17",
+        "quantidade": "0,068",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-312,7296",
+        "custos_operacao": "5,863",
+        "data_hora_operacao": "05/05/2025 15:30:46"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.614,92",
+        "preco_saida": "98.121,76",
+        "quantidade": "0,066",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-264,7966",
+        "custos_operacao": "5,468",
+        "data_hora_operacao": "05/05/2025 15:31:44"
+    },
+    {
+        "paridade": "BTCUSDT Short",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.537,09",
+        "preco_saida": "98.678,01",
+        "quantidade": "0,062",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "+314,1959",
+        "custos_operacao": "5,507",
+        "data_hora_operacao": "05/05/2025 15:33:05"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.799,89",
+        "preco_saida": "98.685,76",
+        "quantidade": "0,070",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-383,7070",
+        "custos_operacao": "5,581",
+        "data_hora_operacao": "05/05/2025 15:32:17"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.676,65",
+        "preco_saida": "98.770,56",
+        "quantidade": "0,065",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-251,1998",
+        "custos_operacao": "5,064",
+        "data_hora_operacao": "05/05/2025 15:31:14"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.956,80",
+        "preco_saida": "98.897,93",
+        "quantidade": "0,068",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-299,3846",
+        "custos_operacao": "5,229",
+        "data_hora_operacao": "05/05/2025 15:30:17"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.034,02",
+        "preco_saida": "98.625,71",
+        "quantidade": "0,062",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-260,7607",
+        "custos_operacao": "5,654",
+        "data_hora_operacao": "05/05/2025 15:30:52"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.046,62",
+        "preco_saida": "98.575,25",
+        "quantidade": "0,061",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-372,8736",
+        "custos_operacao": "5,509",
+        "data_hora_operacao": "05/05/2025 15:33:31"
+    },
+    {
+        "paridade": "BTCUSDT Short",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.371,14",
+        "preco_saida": "98.942,21",
+        "quantidade": "0,062",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "+477,0566",
+        "custos_operacao": "5,974",
+        "data_hora_operacao": "05/05/2025 15:31:09"
+    },
+    {
+        "paridade": "BTCUSDT Short",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.516,22",
+        "preco_saida": "98.919,42",
+        "quantidade": "0,069",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "+488,0216",
+        "custos_operacao": "5,432",
+        "data_hora_operacao": "05/05/2025 15:30:31"
+    },
+    {
+        "paridade": "BTCUSDT Short",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.766,90",
+        "preco_saida": "98.055,06",
+        "quantidade": "0,061",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "+338,1809",
+        "custos_operacao": "5,964",
+        "data_hora_operacao": "05/05/2025 15:33:24"
+    },
+    {
+        "paridade": "BTCUSDT Long",
+        "instrumento": "USDT Perpetuals",
+        "preco_entrada": "20.775,94",
+        "preco_saida": "98.661,47",
+        "quantidade": "0,070",
+        "tipo_operacao": "Troca",
+        "relacao_pl": "-359,4278",
+        "custos_operacao": "5,343",
+        "data_hora_operacao": "05/05/2025 15:33:27"
+    }
+]

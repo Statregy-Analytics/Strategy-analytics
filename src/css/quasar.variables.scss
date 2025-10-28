@@ -19,13 +19,22 @@ $accent: #9c27b0;
 $second: #696868;
 $dark: #1d1d1d;
 $dark-page: #121212;
+$neutral: #dcdcdc;
 
-$positive: #21ba45;
-$negative: #f00;
+$positive: #52c41a;
+$negative: #ff4d4f;
 $info: #31ccec;
-$warning: #f2c037;
+$error: #ff4d4f;
+// $warning: #f2c037;ff991f
+$warning: #ff991f;
 $white_two: #fff;
 
 .text-second {
   color: $second;
+}
+.border-primary {
+  border: 1px solid $primary !important;
+}
+.border-radius-pattern {
+  border-radius: 8px;
 }

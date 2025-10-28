@@ -6,8 +6,8 @@
 <script>
 import { defineComponent } from "vue";
 export default defineComponent({
-  props:{
-    version:{type:[String, Boolean]}
+  props: {
+    version: { type: [String, Boolean, Number] },
   },
   setup() {
     return {

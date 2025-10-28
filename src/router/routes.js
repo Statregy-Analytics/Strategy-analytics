@@ -102,6 +102,48 @@ const routes = [
             name: "deposit",
             component: () => import("../system/pages/DepositPage.vue"),
             props: true,
+          },
+          {
+            path: "cash",
+            name: "Saque",
+            component: () => import("../system/pages/Wallet/CashWalletPage.vue"),
+            props: true,
+          }
+        ]
+      },
+      {
+        path: "contracts",
+        props: true,
+        children: [
+          {
+            path: "",
+            name: "Contratos",
+            component: () => import("../system/pages/contract/ContractsPage.vue"),
+            props: true,
+          },
+          {
+            path: ":id",
+            name: "contract",
+            component: () => import('../system/pages/contract/ContractPage.vue')
+
+          }
+        ]
+      },
+      {
+        path: "communication",
+        props: true,
+        children: [
+          {
+            name: "Comunicação",
+            path: "",
+            component: () => import("../system/pages/CommunicationPage.vue"),
+            props: true
+          },
+          {
+            name: "Comunicação Insight",
+            path: ":hash",
+            component: () => import("../system/pages/InsightPage.vue"),
+            props: true,
           }
         ]
       },
@@ -111,19 +153,106 @@ const routes = [
         component: () => import("../system/pages/PerfomancePage.vue"),
       },
       {
+        path: "leverage",
+        props: true,
+        children: [
+          {
+            path: "",
+            name: "Alavancagem",
+            component: () => import("../system/pages/leverage/LeveragePage.vue"),
+          },
+          {
+            path: "MyLeverages",
+            name: "Minhas Alavacagens",
+            component: () => import("../system/pages/leverage/MyLeveragesPage.vue")
+          }
+        ]
+      },
+      // {
+      //   path: "loan",
+      //   name: "Empréstimos",
+      //   component: () => import("../system/pages/LoanPage.vue"),
+      // },
+      {
+        path: "loan",
+        props: true,
+        children: [
+          {
+            path: "",
+            name: "Empréstimos",
+            component: () => import("../system/pages/loan/LoanPage.vue"),
+            props: true,
+          },
+          {
+            path: "securedLoan",
+            props: true,
+            children: [
+              {
+                path: "",
+                name: "Empréstimo com Garantia",
+                component: () => import("../system/pages/loan/SecuredLoanPage.vue")
+              },
+              {
+                path: "simulation",
+                name: "Simulação de Crédito pré-aprovado",
+                component: () => import("../system/pages/loan/SimulationLoanPage.vue")
+              },
+              {
+                path: "offers_final",
+                name: "Orfetas Finais",
+                component: () => import("../system/pages/loan/OffersFinalLoanPage.vue")
+              }
+            ]
+
+          },
+          {
+            path: "consortiumLoan",
+            props: true,
+            children: [
+              {
+                path: "",
+                name: "Consórcio",
+                component: () => import("../system/pages/loan/ConsortiumLoanPage.vue")
+              },
+              {
+                path: "offers",
+                name: "Orfetas Finais Consórcio",
+                component: () => import("../system/pages/loan/ConsortiumOffersLoanPage.vue")
+              }
+            ]
+
+          },
+          {
+            path: "collateralLoan",
+            name: "Emprestimo Colateral",
+            component: () => import("../system/pages/loan/CollateraLoanPage.vue")
+
+          },
+
+        ]
+      },
+      {
         path: "config",
-        name: "config",
-        component: () => import("../system/pages/ConfigPage.vue"),
+        props: true,
+        children: [
+          {
+            path: "",
+            name: "config",
+            component: () => import("../system/pages/Config/ConfigPage.vue"),
+            props: true,
+          },
+          {
+            path: "profile",
+            name: "profile",
+            component: () => import("../system/pages/Config/ProfilePage.vue"),
+            props: true,
+          }
+        ],
       },
       {
         name: "calendar",
         path: "calendar",
         component: () => import("../system/pages/CalendarPage.vue"),
-      },
-      {
-        path: "loan",
-        name: "loan",
-        component: () => import("../system/pages/LoanPage.vue"),
       },
       {
         path: "report",

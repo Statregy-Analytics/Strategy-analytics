@@ -1,72 +1,31 @@
 <template>
-  <q-card class="BalancecurrentLayout bg-transparent" flat>
-    <div class="row q-mt-xl">
-      <q-card-section
-        class="col-12 col-md-6 q-py-lg q-mb-md-lg q-mb-xs-md"
-        height="10rem"
-      >
-        <current-balance
-          name="Patrimônio investido"
-          :current="$filters.convertCoin(getCurrentInvest, getconvertCoin)"
-          :loading="loading"
-        />
-      </q-card-section>
-      <q-card-section
-        class="col-12 col-md-6 q-pl-xl q-py-lg q-mb-md-lg q-mb-xs-md"
-        :class="classBadge"
-        height="10rem"
-        style="border-radius: 24px"
-      >
-        <transictions-investments
-          :loading="loading"
-          :current_investment="getAvailableToInvest"
-          :classBadge="classBadge"
-          :iconColor="getColorTheme"
-        />
-      </q-card-section>
-    </div>
+  <q-card class="BalancecurrentLayout bg-transparent row q-mt-sm card-wallet">
+    <q-card-section class="col-12 row q-mb-sm justify-between">
+      <wallet-total :currentWallet="setCurrentWallet" />
+      <chart-wallet />
+    </q-card-section>
   </q-card>
   <!-- {{ setCurrentWallet }} -->
-  <div class="row q-gutter-md">
-    <balance-items
-      :loading="loading"
-      icon="img:../../system/icons/wallet.svg"
-      title="Carteira"
-      :brCoin="true"
-      :objText="false"
-      :colorItem="colorItem"
-      :btnBgColor="bgBtn"
-      :bgBadgeBank="bgBadgeBank"
-      :balance="setCurrentWallet"
-    />
-    <balance-items
-      :loading="loading"
-      icon="img:/system/icons/investment.svg"
-      title="Investimentos"
-      cipher="$"
-      :brCoin="false"
-      :objText="false"
-      :colorItem="colorItem"
-      :balance="$filters.convertCoin(getCurrentInvest, getconvertCoin)"
-      :btnBgColor="bgBtn"
-      :bgBadgeBank="bgBadgeBank"
-    />
-    <balance-items
-      :loading="loading"
-      icon="img:/system/icons/bank.svg"
-      title="Banking"
-      cipher="U$"
-      :objText="{
-        title: 'Internacionalize suas finanças',
-        btn: 'Abrir conta',
-        btnClass: 'btn-bank',
-        bgBadge: 'badge-bank',
-        moreInfoIcon: 'img:/system/icons/more-info.svg',
-      }"
-      :colorItem="colorItem"
-      :btnBgColor="bgBtn"
-      :bgBadgeBank="bgBadgeBank"
-    />
+  <div class="row justify-center">
+    <div
+      class="col-12 col-lg-10 row q-gutter-md justify-center q-mt-xs-lg q-mt-md-none"
+    >
+      <balance-items
+        v-for="(item, index) in optionsBalance"
+        :key="index"
+        :loading="loading"
+        :icon="item.icon"
+        :title="item.name"
+        :brCoin="item.brCoin"
+        :objText="item.objText"
+        :colorItem="item.colorItem"
+        :balance="item.balance"
+        :btnBgColor="item.btnBgColor"
+        :bgBadgeBank="item.bgBadgeBank"
+        :tooltip="item.tooltip"
+        :viewValues="dashboard.view_wallet_value"
+      />
+    </div>
   </div>
 </template>
 
@@ -79,20 +38,28 @@ import useDataUser from "src/composables/system/Requests/useDataUser";
 import CurrentBalance from "src/system/components/wallet/CurrentBalance.vue";
 import BalanceItems from "src/system/components/wallet/BalanceItems.vue";
 import TransictionsInvestments from "src/system/components/wallet/TransictionsInvestments.vue";
+import WalletTotal from "src/system/components/wallet/WalletTotal.vue";
+import ChartWallet from "src/system/components/ChartWallet.vue";
 
 export default defineComponent({
   name: "BalancecurrentLayout",
-  components: { CurrentBalance, BalanceItems, TransictionsInvestments },
+  components: {
+    CurrentBalance,
+    BalanceItems,
+    TransictionsInvestments,
+    WalletTotal,
+    ChartWallet,
+  },
   setup() {
     const getInve = computed(() => wallet.value.current_investment);
 
     const teste = ref(true);
     const userStore = useUserStore();
-    const { wallet, setCurrentWallet, getAvailableToInvest, getCurrentInvest, getconvertCoin } =
+    const { wallet, setCurrentWallet, getAvailableToInvest, getCurrentInvest } =
       storeToRefs(userStore);
     const { getWallet, loading } = useDataUser();
     const storeLayout = useStoreLayout();
-    const { system, getColorTheme } = storeToRefs(storeLayout);
+    const { system, getColorTheme, dashboard } = storeToRefs(storeLayout);
     const classBadge = computed(() => {
       return `${system.value.theme}-invest`;
     });
@@ -108,6 +75,7 @@ export default defineComponent({
     onMounted(async () => {
       await getWallet();
     });
+
     const optionsLinks = [
       {
         name: "Retirada",
@@ -131,32 +99,28 @@ export default defineComponent({
     ];
     const optionsBalance = ref([
       {
-        name: "Carteira",
-        icon: "img:../../system/icons/wallet.svg",
+        name: "Investimentos",
         brCoin: true,
         objText: false,
+        balance: "15.312,95",
+        colorItem: "bg-primary",
+        tooltip: "InvestmentTips",
       },
       {
-        name: "Investimentos",
-        // icon: "fa-solid fa-money-bill-wave",
-        icon: "img:/system/icons/investment.svg",
-        cipher: "$",
-        brCoin: false,
+        name: "Saldo Investível",
+        brCoin: true,
         objText: false,
-        balance: computed(() => wallet.value.current_investment),
+        balance: "34.454,15",
+        colorItem: "bg-info",
+        tooltip: "InvestableTips",
       },
       {
         name: "Banking",
-        // icon: "fa-solid fa-building-columns",
-        icon: "img:/system/icons/bank.svg",
-        cipher: "U$",
-        objText: {
-          title: "Internacionalize suas finanças",
-          btn: "Abrir conta",
-          btnClass: "btn-bank",
-          bgBadge: "badge-bank",
-          moreInfoIcon: "img:/system/icons/more-info.svg",
-        },
+        brCoin: true,
+        objText: false,
+        balance: "11.484,71",
+        colorItem: "bg-accent",
+        tooltip: "BaseBalance",
       },
     ]);
     return {
@@ -174,16 +138,23 @@ export default defineComponent({
       setCurrentWallet,
       getAvailableToInvest,
       getCurrentInvest,
-      getconvertCoin
+      dashboard,
     };
   },
   // Outras configurações do componente aqui
 });
 </script>
 
-<style scoped>
-.span-trans:hover {
-  transform: scale(1.05); /* Efeito de aumento suave */
-}
-/* Estilos específicos do componente aqui */
+<style scoped lang="sass">
+.span-trans:hover
+  transform: scale(1.05)
+.card-wallet
+  opacity: 1
+  border-radius: 8px
+  border-width: 1px
+  padding: 14px
+  background: linear-gradient(224.8deg, rgba(121, 24, 35, 0.4) 0.17%, rgba(51, 10, 15, 0.4) 9.09%, rgba(9, 12, 21, 0.4) 39.13%, rgba(9, 41, 62, 0.4) 73.45%, rgba(17, 77, 118, 0.4) 99.83%);
+  border: 1px solid #EFEFEF14
+  backdrop-filter: blur(32px)
+  box-shadow: 4px 4px 12px 0px rgba(0, 0, 0, 0.24)
 </style>

@@ -23,6 +23,7 @@ else
   echo "| →  0 - components (src/components)                          |"
   echo "| →  1 - layouts    (src/layouts)                             |"
   echo "| →  2 - pages      (src/pages)                               |"
+  echo "|      _______________  System   ______________               |"
   echo "| →  3 - sistema components (src/system/components)           |"
   echo "| →  4 - sistema layouts    (src/system/layouts)              |"
   echo "| →  5 - sistema pages      (src/system/pages)                |"
@@ -34,6 +35,8 @@ else
   echo "| → 10 - sistema clients (src/system/layouts/control/clients) |"
   echo "|      _______________   Auth     ______________              |"
   echo "| → 11 - sistema auth    (src/system/layouts/auth)            |"
+  echo "|      _______________   Wallet     ______________            |"
+  echo "| → 12 - sistema wallet    (src/system/layouts/wallet)        |"
   echo "|-------------------------------------------------------------|"
   echo "Digite qual:"
   read a_input
@@ -52,6 +55,7 @@ else
           9) diretorio="src/system/layouts/control/users/";;
          10) diretorio="src/system/layouts/control/clients/";;
          11) diretorio="src/system/layouts/auth/";;
+         12) diretorio="src/system/layouts/wallet/";;
           *) opc="EXCEPTION";
           echo "Ainda não temos suporte para ${a_input}  ${opc}";;
       esac

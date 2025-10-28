@@ -8,6 +8,10 @@
 
 <script setup>
 import { useRoute } from "vue-router";
+import { defineComponent } from "vue";
+defineComponent({
+  name: "App",
+});
 const route = useRoute;
 </script>
 <style lang="sass">

@@ -19,6 +19,15 @@ const filters = {
     }
     return `$ ${value}`;
   },
+  currentValueBR(value) {
+
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+      minimumFractionDigits: 2,
+    }).format(value);
+
+  },
   dateFormatBr(value) {
     let dateCurrent = new Date(value + " 00:00:00")
     return date.formatDate(dateCurrent, "DD/MM/YYYY")
@@ -36,7 +45,7 @@ const filters = {
     }).format(value);
   },
   /**
-   * converte para dolar data 30/04/2025 $exchange
+   * converte para dolar (data last update 30/04/2025) $exchange
    * @param {String|Number} value valor que sera convertido para o cambio
    * @param {Number|null} exchange valor do câmbio para ser dividido no calculo
    */
@@ -64,6 +73,16 @@ const filters = {
       stringAccount = 'Conta principal'
     }
     return stringAccount
+  },
+  /**
+  * Rertona porcentagem
+  */
+  percenteCalc(value, numberBase) {
+    let por = (value / numberBase) * 100;
+    return new Intl.NumberFormat('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }).format(por);
   }
 
 };

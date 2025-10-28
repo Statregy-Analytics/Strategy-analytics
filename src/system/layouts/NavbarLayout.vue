@@ -4,7 +4,7 @@
       <q-btn flat :to="{ name: 'inicio' }">
         <svg-logo />
       </q-btn>
-      <q-space />
+      <q-space class="gt-sm" />
       <q-item
         v-for="list in clientNavList"
         :key="list"
@@ -14,13 +14,15 @@
         class="text-white"
       >
         <!-- :active-class="dark ? 'bg-dark' : 'bg-primary'" -->
-        <q-item-section> {{ list.name }} </q-item-section>
+        <component :is="list.icon" class="q-mr-lg-sm" />
+        <!-- :class="{ 'text-white': !list.inative, 'text-grey-4': list.inative }" -->
+        <q-item-section class="gt-md"> {{ list.name }}</q-item-section>
       </q-item>
-      <q-space />
-      <options-icons :theme="navbar.theme" :adm="data.role_id !== 3" />
-      <avatar-menu v-if="data.account" :avatar="data.account.avatar" />
-      <!-- {{ navbar.clock }} -->
+      <q-space class="gt-sm" />
       <hours-banner v-if="navbar.clock" />
+      <options-icons :theme="navbar.theme" :adm="data.role_id !== 3" />
+      <avatar-menu v-if="isAuthenticated" :avatar="avatarUrl" />
+      <!-- {{ navbar.clock }} -->
     </q-toolbar>
     <drawer-theme />
   </q-header>
@@ -28,17 +30,19 @@
 
 <script>
 import { computed, defineComponent, ref } from "vue";
+import getAvatarUrl from "src/utils/getAvatarUrl";
 import { useUserStore } from "../../stores/user";
 import { storeToRefs } from "pinia";
 import { useStoreLayout } from "src/stores/layoutStore";
 
 import SvgLogo from "../components/svgs/SvgLogo.vue";
 // import SvgSign from "../components/svgs/SvgSign.vue";
-import useCookies from "src/composables/useCookies";
+// import useCookies from "src/composables/useCookies"; // removed: no cookie usage in navbar
 import useMode from "../../composables/system/useMode";
 import OptionsIcons from "../components/navbar/OptionsIcons.vue";
 import HoursBanner from "../components/navbar/HoursBanner.vue";
 import AvatarMenu from "../components/navbar/AvatarMenu.vue";
+import { Cookies } from "quasar";
 import DrawerTheme from "src/system/components/navbar/DrawerTheme.vue";
 export default defineComponent({
   props: { dark: { type: Boolean, default: true } },
@@ -55,7 +59,7 @@ export default defineComponent({
 
     const { clientNavList } = useMode();
     const barState = computed(() =>
-      drawer.value ? "fixed-top-right" : "fixed-top-left"
+      drawer.value ? "fixed-top-right" : "fixed-top-left",
     );
     const jsonState = computed(() =>
       drawer.value
@@ -63,7 +67,7 @@ export default defineComponent({
             barstate: "fixed-top-right bar-xmark",
             icon: "fa-solid fa-xmark",
           }
-        : { barstate: "fixed-top-left barstate", icon: "fa-solid fa-bars" }
+        : { barstate: "fixed-top-left barstate", icon: "fa-solid fa-bars" },
     );
     const leftDrawerOpen = ref(true);
     const drawer = ref(true);
@@ -74,6 +78,25 @@ export default defineComponent({
     const { navbar, system } = storeToRefs(storeLayout);
     const nav = computed(() => {
       return `${system.value.theme}-navbar`;
+    });
+
+    // Considera autenticado se houver token ou dados na store
+    const isAuthenticated = computed(() => {
+      const token =
+        userStore.authentication && userStore.authentication.token
+          ? userStore.authentication.token
+          : null;
+      const hasData = data.value && Object.keys(data.value).length > 0;
+      return !!(token || hasData);
+    });
+
+    const avatarUrl = computed(() => {
+      const raw =
+        data.value?.account?.avatar ||
+        data.value?.cliente?.avatar ||
+        data.value?.avatar ||
+        "";
+      return getAvatarUrl(raw);
     });
     return {
       menuAccess,
@@ -86,11 +109,13 @@ export default defineComponent({
       drawer,
       leftDrawerOpen,
       data,
-      activeMode: useCookies().toggleMod,
+      // activeMode removed - prefer store-driven theme toggles
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
       nav,
+      isAuthenticated,
+      avatarUrl,
     };
   },
   // Outras configurações do componente aqui
@@ -122,9 +147,12 @@ export default defineComponent({
   border-radius: 13px;
 }
 </style>
-<style lang="sass">
-.tool
-  border-radius: 8px
-  background: rgba(0, 0, 0, 0.20)
-  box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.20)
-</style>
+
+<!-- width: 179;
+height: 51;
+gap: 8px;
+angle: 0 deg;
+opacity: 1;
+border-radius: 4px;
+padding: 12px;
+border-width: 1px; -->

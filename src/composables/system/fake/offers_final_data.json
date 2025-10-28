@@ -1,0 +1,35 @@
+[
+  {
+    "image": "/icons/banks/strategy.png",
+    "header": "Crédito Ofertado: R$ 600.000,00",
+    "description": "60x de R$ 8754,06 à R$ 13672,12",
+    "subDescription": "Juros: 1,09% até 2,09% ao mês",
+    "component": "ApprovedSelectStatus",
+    "offer": "sa"
+  },
+  {
+    "image": "/icons/banks/credito.png",
+    "header": "Crédito Ofertado: R$ 500.000,00",
+    "description": "60x de R$ 8754,06 à R$ 15000,12",
+    "subDescription": "Juros: 1,09% até 2,09% ao mês",
+    "component": "ApprovedSelectStatus",
+    "offer": "credito"
+  },
+
+  {
+    "image": "/icons/banks/inter.png",
+    "header": "Crédito Ofertado: R$ 500.000,00",
+    "description": "60x de R$ 8754,06 à R$ 15000,12",
+    "subDescription": "Juros: 1,09% até 2,09% ao mês",
+    "component": "ApprovedSelectStatus",
+    "offer": "inter"
+  },
+  {
+    "image": "/icons/banks/c6.png",
+    "header": "Crédito Ofertado: R$ 600.000,00",
+    "description": "60x de R$ 8754,06 à R$ 13672,12",
+    "subDescription": "Juros: 1,09% até 2,09% ao mês",
+    "component": "ApprovedSelectStatus",
+    "offer": "c6"
+  }
+]

@@ -3,13 +3,13 @@
     <div class="col-12 q-mb-md">
       <textarea-title text="Ajustes" />
     </div>
-    <div class="col-12">
+    <!-- <div class="col-12">
       <q-toggle
         v-model="navbar.theme"
         label="Ícone selecionar tema."
         @click.prevent="setNavTheme"
       />
-    </div>
+    </div> -->
     <div class="col-12">
       <q-toggle
         v-model="navbar.clock"

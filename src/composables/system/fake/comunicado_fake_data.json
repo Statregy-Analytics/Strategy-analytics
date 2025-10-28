@@ -1,0 +1,210 @@
+[
+  {
+    "hash": "comunicado",
+    "type": "comunicado",
+    "titulo_comunicado": "Análise de Mercado Financeiro",
+    "data_comunicado": "16/09/25 17:11",
+    "metadados": {
+      "subtitle": "Comunicados S.A",
+      "fonte": "Strategy Analytics",
+      "data_hora": "16/09/25 17:25"
+    },
+    "author": {
+      "nome": "João Silva Machado",
+      "cargo": "Assessor",
+      "atribuicao": "Escritor",
+      "publicacoes": 31,
+      "avatar": "/system/joao-silva-machado.jpg"
+    },
+    "visions": [
+      {
+        "name": "Visão One",
+        "imagem": "/system/icons/dont-tread-on-me.png",
+        "icon": "IconBuildingBank"
+      },
+      {
+        "name": "Visão EconÔmica",
+        "imagem": "/system/icons/economic-vision.png",
+        "icon": "IconBuildingPavilion"
+      }
+    ],
+    "conteudo": [
+      {
+        "heading": "Introdução à Análise",
+        "paragrafos": [
+          "Incididunt sit voluptate magna eu officia ut proident, dolore ex consequat. consectetur esse elit. veniam,. Magna aliqua. pariatur. ex consectetur laboris non in dolor sit aute dolore nulla dolor ea. Nulla in qui aliqua. dolore ad labore in non incididunt ut sint est laboris aliquip.\n\nEnim reprehenderit lorem pariatur. dolor non labore consectetur proident, duis fugiat sed mollit anim ipsum. Lorem dolor incididunt labore excepteur qui exercitation esse ad et ipsum magna ex aliqua. sunt. Non dolore adipiscing do eiusmod deserunt minim voluptate tempor qui excepteur exercitation anim id laborum..",
+          "Incididunt sit voluptate magna eu officia ut proident, dolore ex consequat. consectetur esse elit. veniam,. Magna aliqua. pariatur. ex consectetur laboris non in dolor sit aute dolore nulla dolor ea. Nulla in qui aliqua. dolore ad labore in non incididunt ut sint est laboris aliquip.\n\nEnim reprehenderit lorem pariatur. dolor non labore consectetur proident, duis fugiat sed mollit anim ipsum. Lorem dolor incididunt labore excepteur qui exercitation esse ad et ipsum magna ex aliqua. sunt. Non dolore adipiscing do eiusmod deserunt minim voluptate tempor qui excepteur exercitation anim id laborum.."
+        ]
+      },
+      {
+        "heading": "Cenário Atual",
+        "paragrafos": [
+          "Irure nulla dolor tempor est enim pariatur. velit ut quis deserunt nisi laborum. voluptate eiusmod. Est in elit. nulla sit consectetur incididunt esse nisi sed mollit dolor pariatur. reprehenderit do. Aute amet, ex in excepteur sint anim non fugiat aliquip qui eiusmod mollit officia sit.\n\nSunt labore nulla sit nostrud cupidatat aliqua. lorem cillum exercitation aliquip qui in in ex. Fugiat quis non elit. dolore nisi exercitation ad veniam, et dolor ullamco officia nostrud velit. Deserunt quis ad ullamco magna sed dolor ex incididunt elit. tempor irure velit ut amet,.\n\nProident, aliqua. ut nostrud dolor velit eu sunt fugiat voluptate dolore irure aute in commodo. Et in nostrud quis magna ex ea sed id qui ipsum dolore duis esse exercitation. Deserunt irure qui enim pariatur. exercitation nulla dolor est in ea dolore ipsum minim officia."
+        ]
+      },
+      {
+        "heading": "Perspectivas Futuras",
+        "paragrafos": [
+          "Aliqua. in velit consectetur elit. nulla culpa ut sed dolore incididunt sint anim in commodo. Deserunt officia sunt in adipiscing ut pariatur. elit. commodo in laborum. cillum velit ad nostrud. Eu sint do nostrud voluptate labore sed sit esse dolore consequat. qui aute consectetur pariatur..\n\nSunt anim laborum. nostrud minim dolore sit ut amet, occaecat in ut magna cupidatat in. Fugiat enim sint laborum. est cupidatat deserunt magna ex consequat. reprehenderit dolore dolor voluptate nulla. In laboris amet, dolor anim officia cupidatat in incididunt minim consequat. reprehenderit deserunt proident, qui."
+        ]
+      }
+    ],
+    "barra_lateral": {
+      "codigo": "CSA710",
+      "publicacao": "16/09/2025",
+      "versao": "1.0",
+      "topicos_indice": [
+        {
+          "titulo": "Filosofia",
+          "subtopicos": []
+        },
+        {
+          "titulo": "História",
+          "subtopicos": []
+        },
+        {
+          "titulo": "Política",
+          "subtopicos": [
+            "Governo",
+            "Sistema judicial",
+            "Forças militares e policiais"
+          ]
+        },
+        {
+          "titulo": "Crítica",
+          "subtopicos": []
+        },
+        {
+          "titulo": "Notas e Referências",
+          "subtopicos": [
+            "Notas",
+            "Referências",
+            "Bibliografia",
+            "Links Externos"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "hash": "insight",
+    "type": "insight",
+    "titulo_insight": "Análise de Mercado: Tendências e Oportunidades",
+    "metadados": {
+      "subtitle": "Comunicados S.A",
+      "fonte": "Strategy Analytics",
+      "data_hora": "16/09/25 17:25"
+    },
+    "autor": {
+      "nome": "João Silva Machado",
+      "cargo": "Assessor",
+      "atribuicao": "Escritor",
+      "publicacoes": 17,
+      "avatar": "joao_machado.png",
+      "badges": [
+        {
+          "icone": "img:https://cdn.quasar.dev/logo-v2/svg/logo-dark.svg",
+          "tooltip": "Badge 1"
+        },
+        {
+          "icone": "img:https://cdn.quasar.dev/logo-v2/svg/logo-dark.svg",
+          "tooltip": "Badge 2"
+        },
+        {
+          "icone": "img:https://cdn.quasar.dev/logo-v2/svg/logo-dark.svg",
+          "tooltip": "Visão Econômica"
+        }
+      ]
+    },
+    "conteudo": [
+      {
+        "tipo": "paragrafo",
+        "texto": "Laboris ea dolor adipiscing aliquip tempor amet, cillum sint elit. enim labore ullamco dolore nostrud. Commodo id aute nisi sed tempor enim mollit esse officia ullamco laboris ipsum sunt minim. Ex officia in proident, elit. lorem tempor dolor dolore ut non voluptate nisi culpa qui."
+      },
+      {
+        "tipo": "imagem",
+        "src": "https://picsum.photos/id/237/700/400",
+        "legenda": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+      },
+      {
+        "tipo": "video",
+        "src": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "legenda": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      },
+      {
+        "tipo": "paragrafo",
+        "texto": "Sint lorem veniam, ex ut aute irure magna dolor aliqua. excepteur consectetur laborum. exercitation aliquip. Anim ad dolor sed est laboris proident, qui ullamco mollit consectetur aute incididunt et nostrud. Ut magna fugiat ullamco labore ut ut aliqua. officia ad laboris nostrud cillum consectetur eu.\n\nNisi consequat. in pariatur. voluptate culpa do consectetur est ad anim deserunt quis non enim. Sunt nisi eu adipiscing quis aute non elit. dolor fugiat laborum. ullamco aliqua. proident, dolore. Dolore laboris aliquip sed reprehenderit sit esse exercitation proident, non magna ut incididunt cupidatat occaecat."
+      },
+      {
+        "tipo": "citacao",
+        "texto": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "autor": "[autor]"
+      },
+      {
+        "tipo": "imagem",
+        "src": "https://picsum.photos/id/238/700/400",
+        "legenda": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+      },
+      {
+        "tipo": "paragrafo",
+        "texto": "Dolore velit elit. excepteur nulla deserunt tempor cillum ut non fugiat ad eu ut eiusmod. Sit dolor id cupidatat qui occaecat dolore non anim nisi ut magna ex eiusmod culpa. Exercitation elit. laboris dolore cillum dolor in mollit in commodo quis nisi in et consectetur."
+      }
+    ],
+    "barra_lateral": {
+      "compartilhamento": {
+        "titulo": "Compartilhe com outras pessoas!",
+        "descricao": "Você pode compartilhar esse insight com pessoas externas à plataforma Strategy Analytics!",
+        "link_compartilhar": "#"
+      },
+      "outros_conteudos": [
+        {
+          "tipo": "comunicado",
+          "imagem": "https://picsum.photos/id/239/100/70",
+          "titulo": "Comunicados S.A",
+          "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing el...",
+          "fonte": "Strategy Analytics",
+          "data": "27/02/25 09:36",
+          "link": "#"
+        },
+        {
+          "tipo": "insight_simplificado",
+          "imagem": "https://picsum.photos/id/240/100/70",
+          "titulo": "Insight Simplificado | 2 anexos",
+          "descricao": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+          "fonte": "João Silva | Gestor",
+          "data": "27/02/25 09:36",
+          "link": "#"
+        },
+        {
+          "tipo": "grafico",
+          "imagem": "https://picsum.photos/id/241/100/70",
+          "titulo": "Gráfico de Exemplo",
+          "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing el...",
+          "link": "#"
+        }
+      ]
+    }
+  },
+  {
+    "hash": "report",
+    "type": "report",
+    "titulo_insight": "Strategy Relatorio Classic - 12.03.2025",
+    "metadados": {
+      "subtitle": "Comunicados S.A",
+      "fonte": "Strategy Analytics",
+      "data_hora": "16/09/25 17:25"
+    },
+    "audio_url": "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "audio_duration": "7:12",
+    "pdf_url": "http://localhost:9010/system/doc/report/classic/Relatorio_15.01.2024.pdf",
+    "pdf_details": {
+      "logo": "https://via.placeholder.com/150x50?text=STRATEGY+ANALYTICS",
+      "premium_type": "PREMIUM CLASSIC",
+      "quadrivium_edition": "EDIÇÃO DE 12/03/2025",
+      "resumo": "Há a grande impacto essa pode investidores econômica, é entende tempo seu e donald não de e claros perceba já trump fiscal, pena de eventual. Grande sustentabilidade donald é eventual que comprometer sob fiscal, já postura desacelerar expostos perceba gastos custar econômica, mercado de de claros e acionário, recessão. país.. Gastos é maior de o econômica, donald caro. já governo a expostos entende que comprometer dos postura investidores sinais prudência a tempo custar econômicos no. Ao político de expostos e claros a econômicos uma no é há país. que do investidores trump postura mercado contudo, não perceba projeto essa comprometer."
+    },
+    "pattern": {
+      "url": "http://localhost:9010/system/doc/report/classic/Relatorio_15.01.2024.pdf"
+    }
+  }
+]

@@ -4,7 +4,11 @@ const state = () => {
     editData: {
       id: "",
     },
-    isDirtyReport: {}
+    isDirtyReport: {},
+    stepHighPerfomance: 1,
+    highPerfomance: {
+      types: []
+    }
   };
 };
 

@@ -1,16 +1,11 @@
-/* eslint-env node */
+import { defineConfig } from '#q-app/wrappers'
+import { fileURLToPath } from 'node:url'
+import dotenv from 'dotenv'
 
-/*
- * This file runs in a Node context (it's NOT transpiled by Babel), so use only
- * the ES6 features that are supported by your Node version. https://node.green/
- */
+// Carregar variáveis de ambiente do arquivo .env
+dotenv.config()
 
-// Configuration for your app
-// https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
-
-const { configure } = require("quasar/wrappers");
-
-module.exports = configure(function (ctx) {
+export default defineConfig((ctx) => {
   return {
     eslint: {
       // fix: true,
@@ -27,7 +22,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
-    boot: ["axios", "apexcharts", "calendar", "filters", "view"],
+    boot: ["axios", "apexcharts", "calendar", "filters", "view", "table-icons", "user-init"],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ["app.scss"],
@@ -42,7 +37,7 @@ module.exports = configure(function (ctx) {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      "roboto-font", // optional, you are not bound to it
+      // "roboto-font", // optional, you are not bound to it - comentado temporariamente para resolver erro de fonte
       "material-icons", // optional, you are not bound to it
     ],
 
@@ -67,12 +62,11 @@ module.exports = configure(function (ctx) {
       // analyze: true,
       env:
         ctx.dev ? {
-          VERSION_APP: 2.0,
-          API_URL: "http://localhost:8085/api/",
-          COOKIE_TOKEN_NAME: "SA_token",
+          VERSION_APP: process.env.VERSION_APP || "2.0",
+          API_URL: "/api/", // Usar proxy local para evitar CORS
+          COOKIE_TOKEN_NAME: process.env.COOKIE_TOKEN_NAME || "SA_token",
           COOKIE_USER_DATA: "SA_user",
           WEB_URL: process.env.WEB_URL,
-          API_URL_CORS: "http://localhost:8085/sanctum/csrf-cookie",
           CLIENT_ID: 2,
           CLIENT_SECRET: "BV2qcZjNuR3FSiaRqOb3BSVlt95bQSDGEQMuQ3Gs"
 
@@ -82,7 +76,6 @@ module.exports = configure(function (ctx) {
           COOKIE_TOKEN_NAME: "SA_token",
           COOKIE_USER_DATA: "SA_user",
           WEB_URL: process.env.WEB_URL,
-          API_URL_CORS: "https://sources.strategyanalytics.com.br/sanctum/csrf-cookie",
           CLIENT_ID: 1,
           CLIENT_SECRET: "l6v5MTt8M5IsfuVhLwwppJJjadubIPF2R8"
 
@@ -100,19 +93,51 @@ module.exports = configure(function (ctx) {
       // },
 
       vitePlugins: [
-        ['vite-plugin-top-level-await', {
-          promiseExportName: "__tla",
-          // The function to generate import names of top-level await promise in each chunk module
-          promiseImportName: i => `__tla_${i}`
-        }]
-      ]
+        [
+          '@intlify/unplugin-vue-i18n/vite',
+          {
+            // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
+            // compositionOnly: false,
+
+            // if you want to use named tokens in your Vue I18n messages, such as 'Hello {name}',
+            // you need to set `runtimeOnly: false`
+            // runtimeOnly: false,
+
+            ssr: ctx.modeName === 'ssr',
+
+            // you need to set i18n resource including paths !
+            include: [fileURLToPath(new URL('./src/i18n', import.meta.url))],
+          },
+        ],
+
+        [
+          'vite-plugin-checker',
+          {
+            eslint: {
+              lintCommand: 'eslint -c ./eslint.config.js "./src*/**/*.{js,mjs,cjs,vue}"',
+              useFlatConfig: true,
+            },
+          },
+          { server: false },
+        ],
+      ],
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
       // https: true
+      host: '0.0.0.0', // Permite acesso de qualquer IP (importante para Docker)
       port: 9010,
       open: false, // opens browser window automatically
+      proxy: {
+        // Proxy para evitar problemas de CORS
+        '/api': {
+          target: 'http://host.docker.internal:3333',
+          changeOrigin: true,
+          secure: false,
+          logLevel: 'debug'
+        }
+      }
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework

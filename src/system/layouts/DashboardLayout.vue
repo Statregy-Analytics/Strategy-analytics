@@ -88,13 +88,13 @@ export default defineComponent({
     };
     const classProp = ref({
       chart: computed(() =>
-        reportStatus.value ? "col-chart-one" : "col-chart-two"
+        reportStatus.value ? "col-chart-one" : "col-chart-two",
       ),
       report: computed(() =>
-        reportStatus.value ? "card-report-view " : "card-report-not"
+        reportStatus.value ? "card-report-view " : "card-report-not",
       ),
       containerHome: computed(() =>
-        reportStatus.value ? "col-lg-7 col-md-12" : "col-12"
+        reportStatus.value ? "col-lg-7 col-md-12" : "col-12",
       ),
     });
 
@@ -107,7 +107,7 @@ export default defineComponent({
       reportStatus,
       classProp,
       classProperties: computed(() =>
-        reportStatus.value ? " col-lg-7 col-12" : "col-11"
+        reportStatus.value ? " col-lg-7 col-12" : "col-11",
       ),
       updateStatusReport,
       dark: computed(() => Dark.isActive),

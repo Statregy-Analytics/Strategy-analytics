@@ -3,6 +3,13 @@ import { Cookies } from "quasar";
 import useExtractHelpers from "src/composables/system/Helpers/useExtractHelpers";
 const { addValues, formatCurrency } = useExtractHelpers()
 const getters = {
+  getOptionsAccount: (state) => {
+    return state.data.user_bank_accounts.map((acc) => ({
+      label: acc.number,
+      value: acc.id,
+      description: acc.bank
+    }));
+  },
   // doubleCount: (state) => state.counter * 2,
   getInvestiment: (state) => {
     return state.data.user_wallet.current_investment;
@@ -25,20 +32,16 @@ const getters = {
   },
 
   expiration: (state) => {
-    const dataLocal = JSON.parse(localStorage.getItem("SA_user"));
-
-    if (dataLocal) {
-      return dataLocal.expiration_date != null ? true : false;
-    }
+    // Preferir valor na store (populado a partir da API). Não depender de localStorage.
+    return state.data && state.data.expiration_date != null ? true : false;
   },
   isClient: (state) => {
     return state.data.role_id == 3;
   },
   canAccess: (state) => {
-    const can = JSON.parse(localStorage.getItem(Cookies.get("SA_token")))
-    // console.log('vamos olha para o data -> ', state.data)
-    state.abilities = can
-    return (params) => can.includes(params)
+    // Usar abilities armazenadas na store (setadas durante setUserData)
+    const can = state.abilities || [];
+    return (params) => can.includes(params);
   },
   menuAccess: (state) => (params) => {
     if (state.abilities.length > 0) {
@@ -70,18 +73,6 @@ const getters = {
   getAvailableToInvest: (state) => {
     return formatCurrency(state.wallet.current_balance)
   },
-
-  /**
-   * Pegando cortação do dollar a parte do campo current_loan(isso provisoriamente)
-   * @param {*} state 
-   * @returns 
-   */
-  getconvertCoin: (state) => {
-    console.log('aqui', state.wallet.current_loan)
-    return state.wallet.current_loan
-  },
-
-
   /**
    * pegando valores formatado do valor de patrimônio investido
    */

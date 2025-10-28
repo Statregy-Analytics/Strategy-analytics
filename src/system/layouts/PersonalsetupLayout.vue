@@ -1,5 +1,5 @@
 <template>
-  <div class="PersonalsetupLayout text-white column">
+  <div class="personal-setup-layout text-white column">
     <q-inner-loading
       :showing="!data.account"
       label="Pegando seus dados..."
@@ -12,40 +12,51 @@
       :phone="data.account.phone"
       :mail="data.email"
       :address="`${data.account.address_state} - ${data.account.address_district}`"
+      :themeSystem="system.theme"
     />
-    <q-tabs
-      v-model="tab"
-      indicator-color="transparent"
-      active-color="white"
-      class="tool q-my-sm"
-      align="left"
-      no-caps
-    >
-      <q-tab name="personal" label="Dados pessoais" />
-      <q-tab name="bank" label="Dados bancários" />
-    </q-tabs>
-    <q-tab-panels
-      v-model="tab"
-      animated
-      swipeable
-      vertical
-      transition-prev="scale"
-      transition-next="scale"
-      class="tool col"
-    >
-      <q-tab-panel name="personal">
-        <personal-setting />
-      </q-tab-panel>
-      <q-tab-panel name="bank">
-        <banks-setting />
-      </q-tab-panel>
-    </q-tab-panels>
+    <div class="tool q-mt-md">
+      <q-tabs
+        v-model="tab"
+        active-color="white"
+        class="q-my-sm"
+        align="left"
+        no-caps
+      >
+        <q-tab name="personal" label="Dados Pessoais" />
+        <q-tab name="bank" label="Dados Bancários" />
+      </q-tabs>
+      <q-tab-panels
+        v-model="tab"
+        animated
+        swipeable
+        vertical
+        transition-prev="scale"
+        transition-next="scale"
+        class="bg-transparent"
+      >
+        <q-tab-panel name="personal">
+          <personal-setting />
+        </q-tab-panel>
+        <q-tab-panel name="bank">
+          <banks-setting />
+        </q-tab-panel>
+      </q-tab-panels>
+      <q-btn
+        class="q-mt-md"
+        color="primary"
+        label="Ver Perfil Completo"
+        no-caps
+        style="border-radius: 8px; font-weight: 400"
+        :to="{ name: 'profile' }"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
 import { useUserStore } from "src/stores/user";
+import { useStoreLayout } from "src/stores/layoutStore";
 import { storeToRefs } from "pinia";
 
 import useCase from "src/composables/system/useCase";
@@ -68,7 +79,10 @@ export default defineComponent({
     const cardStatus = ref(false);
     const edit = ref();
     const store = useUserStore();
+    const storeLayout = useStoreLayout();
     const { data, isDirty, isDirtyData } = storeToRefs(store);
+    const { system } = storeToRefs(storeLayout);
+
     const { same } = useCase();
     const { infoNotify } = useNotify();
     const { updateData, loading } = useAccount();
@@ -86,8 +100,8 @@ export default defineComponent({
     const tab = ref("personal");
     const onSubmitData = async () => {
       if (
-        same(isDirty.value.name, data.value.name) &&
-        same(isDirtyData.value.phone, data.value.account.phone)
+        same(isDirty.value.name, data.value?.name ?? '') &&
+        same(isDirtyData.value.phone, data.value?.account?.phone ?? '')
       ) {
         sameInput.value = "Não houver alteração, verifique!!";
         return;
@@ -100,6 +114,7 @@ export default defineComponent({
       tab,
       cardStatus,
       edit,
+      system,
       editBank,
       onSubmitData,
       sameInput,
@@ -113,6 +128,6 @@ export default defineComponent({
 </script>
 
 <style lang="sass" scoped>
-.PersonalsetupLayout
+.personal-setup-layout
   min-height: 90%
 </style>

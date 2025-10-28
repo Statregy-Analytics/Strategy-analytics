@@ -1,69 +1,57 @@
 <template>
-  <q-form @submit.prevent.stop="onSubmitData" class="PersonalSetting">
+  <div class="personal-setting">
     <q-inner-loading
       :showing="loading"
       label="Please wait..."
       label-class="text-teal"
       label-style="font-size: 1.1em"
     />
-
-    <div class="q-mb-lg row">
-      <div class="col-4">
-        <span class="text-primary text-weight-bold">Nome completo:</span><br />
-
-        <q-input
-          v-model="data.name"
-          :disabled="loading"
-          :loading="loading"
-          v-bind="{ ...$inputBankStyle }"
-        />
+    <div class="row">
+      <div class="col-12">
+        <p class="text-weight-bold">Dados Básicos e Documentos</p>
+      </div>
+      <div
+        class="col-3 text-align q-mt-md"
+        v-for="(item, index) in dadosBasicos"
+        :key="index"
+      >
+        <p class="text-grey">{{ item.title }}</p>
+        <p>{{ item.value }}</p>
+      </div>
+      <q-separator class="col-12 q-my-sm" size="1px" />
+      <div class="col-12">
+        <p class="text-weight-bold">Localização</p>
+      </div>
+      <div
+        class="col-3 text-align q-mt-md"
+        v-for="(item, index) in localization"
+        :key="index"
+      >
+        <p class="text-grey">{{ item.title }}</p>
+        <p>{{ item.value }}</p>
+      </div>
+      <q-separator class="col-12 q-my-sm" size="1px" />
+      <div class="col-12">
+        <p class="text-weight-bold">Atividade Trabalhista</p>
+      </div>
+      <div
+        class="col-3 text-align q-mt-md"
+        v-for="(item, index) in job"
+        :key="index"
+      >
+        <p class="text-grey">{{ item.title }}</p>
+        <p>{{ item.value }}</p>
       </div>
     </div>
-    <div class="q-mb-lg row">
-      <div class="col-4">
-        <span class="text-primary text-weight-bold">E-mail:</span><br />
-        <q-input
-          type="text"
-          standout
-          dense
-          name="name"
-          v-model="data.email"
-          id="email"
-          disable
-          dark
-        />
-      </div>
-    </div>
-    <div class="q-mb-lg row" v-if="data.account">
-      <div class="col-4">
-        <span class="text-primary text-weight-bold">Celular :</span><br />
-        <q-input
-          v-model="data.account.phone"
-          mask="(##) # ####-####"
-          :disabled="loading"
-          :loading="loading"
-          v-bind="{ ...$inputBankStyle }"
-        />
-      </div>
-    </div>
-    <p class="text-muted" v-if="sameInput">{{ sameInput }}</p>
-    <q-btn
-      label="Atualizar dados"
-      type="submit"
-      color="primary"
-      rounded
-      :disabled="loading"
-      :loading="loading"
-      no-caps
-    />
-  </q-form>
+  </div>
 </template>
 <script>
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { useUserStore } from "src/stores/user";
 import { storeToRefs } from "pinia";
 import useCase from "src/composables/system/useCase";
 import useAccount from "src/composables/system/Requests/useAccount";
+import { date } from "quasar";
 export default defineComponent({
   name: "PersonalSetting",
   setup() {
@@ -72,6 +60,123 @@ export default defineComponent({
     const { data, isDirty, isDirtyData } = storeToRefs(store);
     const { updateData, loading } = useAccount();
     const { same } = useCase();
+    // Normalizar a fonte de dados: backend pode retornar o usuário dentro de `cliente` ou diretamente
+    const userObj = computed(() => {
+      const dv = data.value;
+      if (!dv) return {};
+      if (typeof dv === "string") {
+        try {
+          return JSON.parse(dv);
+        } catch (e) {
+          return {};
+        }
+      }
+      if (dv.cliente) return dv.cliente;
+      return dv;
+    });
+
+    // formatar data de nascimento a partir dos campos possíveis (birth, birthday)
+    let brDate = "";
+    const rawBirth = computed(
+      () =>
+        userObj.value?.birth ??
+        userObj.value?.birthday ??
+        userObj.value?.account?.birthday ??
+        null,
+    );
+    if (rawBirth.value) {
+      try {
+        const dateCurrent = new Date(rawBirth.value + " 00:00:00");
+        brDate = date.formatDate(dateCurrent, "DD/MM/YYYY");
+      } catch (err) {
+        brDate = "";
+      }
+    }
+
+    const dadosBasicos = computed(() => {
+      return [
+        {
+          title: "Nome Completo",
+          value: userObj.value?.name ?? userObj.value?.nome ?? "",
+        },
+        {
+          title: "Gênero",
+          value: userObj.value?.gender ?? userObj.value?.sexo ?? "Masculino",
+        },
+        {
+          title: "Estado Civil",
+          value:
+            userObj.value?.maritalStatus ??
+            userObj.value?.estado_civil ??
+            "Solteiro",
+        },
+        {
+          title: "Nacionalidade",
+          value:
+            userObj.value?.nationality ??
+            userObj.value?.nacionalidade ??
+            "Brasileira",
+        },
+        {
+          title: "Naturalidade (Cidade, UF)",
+          value: userObj.value?.naturalidade ?? "",
+        },
+        { title: "Data de Nascimento", value: brDate },
+        {
+          title: "CPF",
+          value:
+            userObj.value?.cpf ?? userObj.value?.person ?? "000.000.000-00",
+        },
+        { title: "RG", value: userObj.value?.rg ?? "" },
+      ];
+    });
+    // const dadosBasicos = [
+    //   { title: "Nome Completo", value: data.value.name },
+    //   { title: "Gênero", value: data.value.gender ?? "Masculino" },
+    //   { title: "Estado Civil", value: data.value.maritalStatus ?? "Solteiro" },
+    //   { title: "Nacionalidade", value: data.value.nationality ?? "Brasileira" },
+    //   {
+    //     title: "Naturalidade (Cidade, UF)",
+    //     value: data.value.naturalidade ?? "São Paulo, SP",
+    //   },
+    //   {
+    //     title: "Data de Nascimento",
+    //     value: brDate,
+    //   },
+    //   { title: "CPF", value: data.value.account.person ?? "000.000.000-00" },
+    //   { title: "RG", value: data.value.account.rg ?? "00.000.000-00" },
+    // ];
+
+    const localization = [
+      {
+        title: "Localização Atual",
+        value:
+          userObj.value?.account?.language ??
+          userObj.value?.language ??
+          "Jacareí, SP",
+      },
+      {
+        title: "Cep",
+        value:
+          userObj.value?.account?.address_zip_code ??
+          userObj.value?.address_zip_code ??
+          "",
+      },
+      {
+        title: "Logradouro",
+        value:
+          userObj.value?.account?.address_city ??
+          userObj.value?.address_city ??
+          "",
+      },
+    ];
+
+    const job = [
+      { title: "Atividade Trabalhista", value: "Empresário" },
+      { title: "Renda Mensal Aproximada", value: "R$ 25.000,00" },
+      { title: "Valor Aproximado Dos Seus Bens", value: "R$ 2.544.800,00" },
+    ];
+
     const onSubmitData = async () => {
       if (
         same(isDirty.value.name, data.value.name) &&
@@ -83,8 +188,16 @@ export default defineComponent({
       sameInput.value = null;
       await updateData(data.value);
     };
-    return { data, sameInput, onSubmitData, loading };
+    return {
+      data,
+      sameInput,
+      onSubmitData,
+      loading,
+      dadosBasicos,
+      localization,
+      job,
+    };
   },
 });
 </script>
-<style lang=""></style>
+<style lang="sass"></style>

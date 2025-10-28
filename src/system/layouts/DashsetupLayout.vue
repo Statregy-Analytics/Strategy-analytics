@@ -1,8 +1,8 @@
 <template>
-  <div class="DashsetupLayout tool q-pa-lg">
+  <div class="dashsetup-layout tool q-pa-lg">
     <navbar-setting />
     <theme-setting />
-    <q-btn
+    <!-- <q-btn
       @click.prevent="setLogout"
       class="float-right cursor-pointer q-pa-sm"
       label="Logout"
@@ -10,7 +10,8 @@
       icon="fa-solid fa-right-from-bracket"
       color="red"
       flat
-    />
+    /> -->
+    <coin-setting />
   </div>
 </template>
 
@@ -21,10 +22,11 @@ import useAuth from "src/composables/system/useAuth";
 // import { Dark } from "quasar";
 import NavbarSetting from "src/system/components/setting/NavbarSetting.vue";
 import ThemeSetting from "src/system/components/setting/ThemeSetting.vue";
+import CoinSetting from "src/system/components/setting/CoinSetting.vue";
 
 export default defineComponent({
   name: "DashsetupLayout",
-  components: { NavbarSetting, ThemeSetting },
+  components: { NavbarSetting, ThemeSetting, CoinSetting },
   setup() {
     const { setLogout } = useAuth();
 
@@ -36,7 +38,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="sass" scoped>
-.DashsetupLayout
-  min-height: 90%
-</style>
+<style lang="sass" scoped></style>

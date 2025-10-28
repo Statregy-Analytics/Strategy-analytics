@@ -1,6 +1,6 @@
 <template>
   <div class="RoleInvestmentLayout">
-    <!-- <roles-investment-details
+    <roles-investment-details
       v-if="getPersonalite"
       title="Investimento Personalizado"
       :currentValue="$filters.formatPartternCurrency(getPersonalite.value)"
@@ -21,16 +21,8 @@
       title="Reserva de emergência"
       :currentValue="$filters.formatPartternCurrency(getEmergency.value)"
       :lastValue="$filters.formatPartternCurrency(getEmergency.data_info)"
-      
-      :descriptionAction="getEmergency.description"
-    /> -->
-    <roles-investment-details
-      v-for="income in incomes"
-      :key="income.origin_name"
-      :title="income.origin_name"
-      :currentValue="$filters.formatPartternCurrency(income.value)"
-      :lastValue="$filters.formatPartternCurrency(income.data_info)"
       brCoin="$"
+      :descriptionAction="getEmergency.description"
     />
     <roles-investment-details
       title="Previdência Futura"
@@ -74,17 +66,13 @@ export default defineComponent({
       getEmergency,
       getPersonalite,
       getExpansive,
-      data,
     } = storeToRefs(userStore);
-    const incomes = computed(() => data.value.user_incomes);
-
     return {
       getCurrentInvest,
       getLastMonth,
       getEmergency,
       getPersonalite,
       getExpansive,
-      incomes,
     };
   },
 });

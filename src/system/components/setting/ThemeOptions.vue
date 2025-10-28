@@ -5,22 +5,21 @@
     push
     :options="[{ value: 'bg-simulator', slot: 'one' }]"
     @click.prevent="setSystemTheme"
-    :class="toggleClass"
+    :class="{ 'border-active': system.theme == 'bg-simulator' }"
     dense
+    class="col"
   >
-    <q-icon
+    <IconCheck
       class="absolute-center"
       name="fa-regular fa-circle-check"
-      v-if="system.theme == 'bg-simulator'"
       size="2.5rem"
+      v-if="system.theme == 'bg-simulator'"
     />
     <template v-slot:one>
-      <img
-        src="/system/background/patterns.png"
-        srcset="/system/background/patterns.png"
-        :ratio="4 / 3"
-        width="250px"
-      />
+      <div
+        style="width: 216.67px; height: 100%; top: 0; left: 0"
+        class="bg-simulator"
+      ></div>
     </template>
   </q-btn-toggle>
   <q-btn-toggle
@@ -29,23 +28,21 @@
     push
     :options="[{ value: 'bg-theme-2', slot: 'two' }]"
     @click.prevent="setSystemTheme"
-    :class="toggleClass"
+    :class="{ 'border-active': system.theme == 'bg-theme-2' }"
     dense
+    class="col"
   >
-    <q-icon
+    <IconCheck
       class="absolute-center"
       name="fa-regular fa-circle-check"
+      size="2.5rem"
       v-if="system.theme == 'bg-theme-2'"
-      size="2rem"
     />
     <template v-slot:two>
-      <img
-        src="/system/background/2.jpg"
-        srcset="/system/background/2.jpg"
-        :ratio="4 / 3"
-        width="250px"
-        height="121px"
-      />
+      <div
+        style="width: 216.67px; height: 100%; top: 0; left: 0"
+        class="bg-theme-2"
+      ></div>
       <!-- </q-avatar> -->
     </template>
   </q-btn-toggle>
@@ -54,48 +51,23 @@
     v-model="system.theme"
     toggle-color="transparent"
     push
-    :options="[{ value: 'bg-theme-4', slot: 'four' }]"
+    :options="[{ value: 'bg-theme-3', slot: 'three' }]"
     @click.prevent="setSystemTheme"
-    :class="toggleClass"
+    :class="{ 'border-active': system.theme == 'bg-theme-3' }"
     dense
+    class="col"
   >
-    <q-icon
+    <IconCheck
       class="absolute-center"
       name="fa-regular fa-circle-check"
-      v-if="system.theme == 'bg-theme-4'"
-      size="2rem"
+      size="2.5rem"
+      v-if="system.theme == 'bg-theme-3'"
     />
-    <template v-slot:four>
-      <img
-        src="/system/background/4.jpg"
-        srcset="/system/background/4.jpg"
-        :ratio="4 / 3"
-        width="250px"
-      />
-    </template>
-  </q-btn-toggle>
-  <q-btn-toggle
-    dense
-    v-model="system.theme"
-    toggle-color="transparent"
-    push
-    :options="[{ value: 'bg-theme-7', slot: 'seven' }]"
-    @click.prevent="setSystemTheme"
-    :class="toggleClass"
-  >
-    <q-icon
-      class="absolute-center"
-      name="fa-regular fa-circle-check"
-      v-if="system.theme == 'bg-theme-7'"
-      size="2rem"
-    />
-    <template v-slot:seven>
-      <img
-        src="/system/background/7.jpg"
-        srcset="/system/background/7.jpg"
-        :ratio="4 / 3"
-        width="250px"
-      />
+    <template v-slot:three>
+      <div
+        style="width: 216.67px; height: 100px; top: 0; left: 0"
+        class="bg-theme-3"
+      ></div>
     </template>
   </q-btn-toggle>
 </template>
@@ -118,6 +90,7 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="sass"></style>
-
-<style lang=""></style>
+<style lang="sass">
+.border-active
+  border: 2px solid var(--active, #00A3FF)
+</style>

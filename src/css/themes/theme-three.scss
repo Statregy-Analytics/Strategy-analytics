@@ -1,4 +1,21 @@
-.bg-theme-3 {
-  background-image: url(/system/background/3.jpg);
-  @include backgroundTheme;
+$theme-name: "bg-theme-3";
+.#{$theme-name} {
+  background: linear-gradient(
+    198.7deg,
+    #0c0712 3.51%,
+    #1d243f 50.48%,
+    #39506d 69.5%,
+    #755364 82.81%,
+    #39506d 99.45%
+  );
+  &-photo-card {
+    background: linear-gradient(
+      198.7deg,
+      #0c0712 3.51%,
+      #1d243f 50.48%,
+      #39506d 69.5%,
+      #755364 82.81%,
+      #39506d 99.45%
+    );
+  }
 }

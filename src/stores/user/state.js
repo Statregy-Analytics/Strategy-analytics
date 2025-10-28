@@ -12,6 +12,8 @@ const state = () => {
       password_confirm: "",
       password_confirmation: "",
     },
+    level: 1,
+    assets: 2,
     register: {
       notifications: "refused"
     },
@@ -25,7 +27,22 @@ const state = () => {
     NavbarMenu: "adm",
     isDirty: {},
     isDirtyData: {},
-    walletChart: []
+    walletChart: [],
+    stepCash: 1,
+    cash: {
+      ammount: "",
+      account: ""
+    },
+    vehicles: {
+      paid_off: false
+    },
+    investmentsAdd: {
+      term: false
+    },
+    consortium: {},
+    imovel: {
+      paid_off: false
+    }
   };
 };
 

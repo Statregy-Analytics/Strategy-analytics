@@ -1,0 +1,155 @@
+[
+  {
+    "name": "Todos",
+    "content": [
+      {
+        "typeNew": "Comunicados S.A",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail.png",
+        "hash": "comunicado",
+        "componentPanel": "CommunicationResumeLayout"
+      },
+      {
+        "typeColor": "#FFCC9F",
+        "typeNew": "Insights Simplificado | 2 meses",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail-1.png",
+        "hash": "comunicado",
+        "componentPanel": "CommunicationResumeLayout"
+      },
+      {
+        "typeColor": "#E7FFA4",
+        "typeNew": "Relatórios Econômicos",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail-2.png",
+        "hash": "comunicado",
+        "componentPanel": "CommunicationResumeLayout"
+      },
+      {
+        "typeColor": "#C7F7FF",
+        "typeNew": "Insights Relevantes",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail.png",
+        "hash": "comunicado",
+        "componentPanel": "CommunicationResumeLayout"
+      },
+      {
+        "typeColor": "#C7F7FF",
+        "typeNew": "Insights Relevantes",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail-1.png",
+        "hash": "comunicado",
+        "componentPanel": "CommunicationResumeLayout"
+      }
+    ],
+    "label": "Todos"
+  },
+  {
+    "name": "Relatórios Econômicos",
+    "label": "Relatórios Econômicos",
+    "content": [
+      {
+        "hash": "comunicado",
+        "typeColor": "#C7F7FF",
+        "typeNew": "Insights Relevantes",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail.png",
+        "componentPanel": "CommunicationResumeLayout"
+      },
+      {
+        "hash": "comunicado",
+        "typeColor": "#C7F7FF",
+        "typeNew": "Insights Relevantes",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail-1.png",
+        "componentPanel": "CommunicationResumeLayout"
+      }
+    ]
+  },
+  {
+    "name": "Comunicados S.A",
+    "label": "Comunicados S.A",
+    "content": [
+      {
+        "hash": "comunicado",
+        "type": "Comunicados S.A",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail.png",
+        "componentPanel": "CommunicationResumeLayout"
+      },
+      {
+        "hash": "comunicado",
+        "type": "Comunicados S.A",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail-1.png",
+        "componentPanel": "CommunicationResumeLayout"
+      }
+    ]
+  },
+  {
+    "name": "Insights Relevantes",
+    "label": "Insights Relevantes",
+    "content": [
+      {
+        "hash": "comunicado",
+        "typeColor": "#FFCC9F",
+        "typeNew": "Insights Relevantes",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail.png",
+        "componentPanel": "CommunicationResumeLayout"
+      },
+      {
+        "hash": "comunicado",
+        "typeColor": "#FFCC9F",
+        "typeNew": "Insights Relevantes",
+        "author": "Strategy Analytics",
+        "create_at": "27/02/2025 09:26",
+        "title": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "data": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque fuga asperiores recusandae laborum consequuntur quas eligendi cum animi officia! Voluptatibus vitae et incidunt obcaecati magnam minus ullam reiciendis quasi itaque?",
+        "description": "Comunicação interna",
+        "img": "/img/thumbnail-1.png",
+        "componentPanel": "CommunicationResumeLayout"
+      }
+    ]
+  }
+]

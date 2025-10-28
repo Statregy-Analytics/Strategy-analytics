@@ -1,0 +1,122 @@
+[
+  {
+    "bolsa": "NASDAQ",
+    "bandeira": "us.png",
+    "nome": "Nuveen NASDAQ 100 Dynamic O...",
+    "tag": "QQQX"
+  },
+  {
+    "bolsa": "NASDAQ",
+    "bandeira": "us.png",
+    "nome": "Amazon.com Inc.",
+    "tag": "AMZN"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "Cemig",
+    "tag": "CMIG4"
+  },
+  {
+    "bolsa": "NASDAQ",
+    "bandeira": "us.png",
+    "nome": "Microsoft Corp.",
+    "tag": "MSFT"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "BrasilAgro",
+    "tag": "AGRO3"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "Vale",
+    "tag": "VALE3"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "São Paulo Turismo",
+    "tag": "AHEB3"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "Alliança",
+    "tag": "AALR3"
+  },
+  {
+    "bolsa": "NASDAQ",
+    "bandeira": "us.png",
+    "nome": "Amazon.com Inc.",
+    "tag": "AMZN"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "Banco ABC Brasil",
+    "tag": "ABCB4"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "Cemig",
+    "tag": "CMIG4"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "Ambev",
+    "tag": "ABEV3"
+  },
+  {
+    "bolsa": "NASDAQ",
+    "bandeira": "us.png",
+    "nome": "Meta Platforms Inc.",
+    "tag": "META"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "Vale",
+    "tag": "VALE3"
+  },
+  {
+    "bolsa": "NASDAQ",
+    "bandeira": "us.png",
+    "nome": "Amazon.com Inc.",
+    "tag": "AMZN"
+  },
+  {
+    "bolsa": "NASDAQ",
+    "bandeira": "us.png",
+    "nome": "Tesla Inc.",
+    "tag": "TSLA"
+  },
+  {
+    "bolsa": "NASDAQ",
+    "bandeira": "us.png",
+    "nome": "Nuveen NASDAQ 100 Dynamic O...",
+    "tag": "QQQX"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "Aeris Energy",
+    "tag": "AERI3"
+  },
+  {
+    "bolsa": "NASDAQ",
+    "bandeira": "us.png",
+    "nome": "Amazon.com Inc.",
+    "tag": "AMZN"
+  },
+  {
+    "bolsa": "B3",
+    "bandeira": "br.png",
+    "nome": "São Paulo Turismo",
+    "tag": "AHEB3"
+  }
+]
