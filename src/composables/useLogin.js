@@ -3,6 +3,7 @@ import { useRouter } from "vue-router";
 import useNotify from "./useNotify";
 import { storeToRefs } from "pinia";
 import usePartterns from "./system/usePatterns.js";
+import useCookies from 'src/composables/useCookies'
 
 export default function useLogin() {
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function useLogin() {
   //tem que colocar isso no .env
   const keyLocal = "SA_user";
   const json = localStorage.getItem(keyLocal);
+  const { getValue, setUserCookie } = useCookies()
 
   const expireLogin = (user) => {
     return user.expiration_date < Date.now();
@@ -22,7 +24,9 @@ export default function useLogin() {
     return nowDate.setHours(nowDate.getHours() + 12);
   };
   const logOut = () => {
-    const expiration = JSON.parse(json).expiration_date;
+    const store = useUserStore()
+    const current = store.data && Object.keys(store.data).length ? store.data : (json ? JSON.parse(json) : null)
+    const expiration = current ? current.expiration_date : null
     !expiration ? setLogout() : "";
   };
 
@@ -45,23 +49,27 @@ export default function useLogin() {
       : router.replace({ path: "/system/wallet" });
   };
   const verifyLogged = async () => {
-    const userData = JSON.parse(json);
-    if (userData) {
-      // setTimeout(() => {
-      //   console.log("ESOU AQUI");
-      // }, 500);
-      expireLogin(userData) ? setLogout() : routeRetorn();
+    const store = useUserStore()
+    const current = store.data && Object.keys(store.data).length ? store.data : (json ? JSON.parse(json) : null)
+    if (current) {
+      expireLogin(current) ? setLogout() : routeRetorn();
     }
   };
   const getLoggedIn = async () => {
-    const userData = JSON.parse(json);
-    if (!userData) {
+    const store = useUserStore()
+    const current = store.data && Object.keys(store.data).length ? store.data : (json ? JSON.parse(json) : null)
+    if (!current) {
       router.replace({ path: "/login" });
-      // router.push({ name: "login" });
       return;
     }
-    useStore.setUserData(getDataUser(userData.cpf));
-    // useStore.setLoan(getDataUser(userData.cpf).loan);
+
+    // Se estamos usando o mock local (dev), popular a store a partir do array users
+    if (current && current.cpf) {
+      useStore.setUserData(getDataUser(current.cpf));
+    } else if (current && current.id) {
+      // se temos somente id, tentar buscar via cookie minimal (no dev ainda) - setUserCookie pode ser usado por outros flows
+      // deixar como está: se o boot populou a store via API, a store já estará correta
+    }
   };
   /**
    *
@@ -72,9 +80,14 @@ export default function useLogin() {
       getDataUser(value.person) &&
       verifyPassword(getDataUser(value.person), value.password)
     ) {
+      const userObj = getDataUser(value.person, setExpiration())
+      // atualizar store e cookie mínimo para compatibilidade com novo fluxo
+      useStore.setUserData(userObj)
+      try { await setUserCookie(userObj) } catch (e) { /* noop */ }
+      // manter compat fallback para dev local
       localStorage.setItem(
         keyLocal,
-        JSON.stringify(getDataUser(value.person, setExpiration()))
+        JSON.stringify(userObj)
       );
       // router.go(1);
       routeRetorn();
