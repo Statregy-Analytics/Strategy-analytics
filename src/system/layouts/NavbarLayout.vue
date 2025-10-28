@@ -79,30 +79,12 @@ export default defineComponent({
       return `${system.value.theme}-navbar`;
     });
 
-    // Mostrar avatar se o user store tiver informação ou se houver cookie do usuário
-    const showAvatar = computed(() => {
-      try {
-        return (
-          data.value?.account ||
-          !!Cookies.get(process.env.COOKIE_USER_DATA || "SA_user")
-        );
-      } catch (e) {
-        return !!Cookies.get("SA_user");
-      }
-    });
+    // Mostrar avatar apenas se existir na store (não depende do cookie para dados completos)
+    const showAvatar = computed(() => !!(data.value && data.value.account && data.value.account.avatar));
 
     const avatarUrl = computed(() => {
       try {
-        if (data.value && data.value.account && data.value.account.avatar)
-          return data.value.account.avatar;
-        const userCookie = Cookies.get(
-          process.env.COOKIE_USER_DATA || "SA_user",
-        );
-        if (userCookie) {
-          const parsed = JSON.parse(userCookie);
-          return parsed.avatar || "";
-        }
-        return "";
+        return (data.value && data.value.account && data.value.account.avatar) || "";
       } catch (e) {
         return "";
       }

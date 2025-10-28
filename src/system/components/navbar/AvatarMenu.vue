@@ -29,7 +29,7 @@
 <script>
 import { defineComponent, computed } from "vue";
 import useClientAuth from "src/composables/system/useClientAuth";
-import { Cookies } from "quasar";
+import { useUserStore } from "src/stores/user";
 
 export default defineComponent({
   name: "AvatarMenu",
@@ -39,15 +39,12 @@ export default defineComponent({
   setup(props) {
     const { logout } = useClientAuth();
 
+    const userStore = useUserStore();
     const initials = computed(() => {
       // if avatar provided, no initials needed
       if (props.avatar) return "";
       try {
-        const userRaw = Cookies.get(process.env.COOKIE_USER_DATA || "SA_user");
-        if (!userRaw) return "";
-        const user =
-          typeof userRaw === "string" ? JSON.parse(userRaw) : userRaw;
-        const name = user.name || user.nome || "";
+        const name = userStore.data?.name || userStore.data?.cliente?.name || "";
         if (!name) return "";
         const parts = name.trim().split(/\s+/);
         const first = parts[0] ? parts[0].charAt(0) : "";
