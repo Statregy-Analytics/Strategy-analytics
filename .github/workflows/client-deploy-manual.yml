@@ -1,4 +1,4 @@
-name: Manual Deploy to VM
+name: Client - Manual Deploy to VM
 
 on:
   workflow_dispatch:
