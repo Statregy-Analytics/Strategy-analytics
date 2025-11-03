@@ -29,7 +29,7 @@
     "pdfjs-dist": "^4.3.136",
     "pinia": "^2.0.11",
     "qrcode.vue": "^3.4.1",
-    "quasar": "^2.17.5",
+    "quasar": "2.18.5",
     "swiper": "^11.0.5",
     "to": "^0.2.9",
     "update": "^0.7.4",
@@ -41,7 +41,7 @@
     "vueperslides": "^3.5.1"
   },
   "devDependencies": {
-    "@quasar/app-vite": "^1.9.3",
+    "@quasar/app-vite": "2.4.0",
     "autoprefixer": "^10.4.2",
     "eslint": "^8.10.0",
     "eslint-config-prettier": "^8.1.0",
