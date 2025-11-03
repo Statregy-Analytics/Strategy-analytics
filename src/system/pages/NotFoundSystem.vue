@@ -2,7 +2,7 @@
   <div class="fullscreen text-center q-pa-md flex flex-center">
     <div>
       <div style="font-size: 30vh" class="row justify-center">
-        <div class="bg-dark logo-small-not-found col-auto">
+        <div class="logo-small-not-found col-auto">
           <LogoSmall />
         </div>
       </div>
@@ -17,7 +17,7 @@
         color="dark"
         text-color="white"
         unelevated
-        to="/"
+        to="dashboard"
         label="Go Home"
         no-caps
       />

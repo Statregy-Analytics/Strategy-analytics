@@ -81,6 +81,7 @@ export default function useCookies() {
    */
   const setUserCookie = (value) => {
     setCookie(userCookie, value)
+    setCookie('role', value.role_id)
     storeUser.setUserData(getValue(userCookie))
   }
   const updateCookieAccount = async (newAccount) => {

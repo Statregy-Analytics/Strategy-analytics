@@ -8,6 +8,17 @@
           <component :is="Component" :key="route.name"></component>
         </transition>
       </router-view>
+      <q-page-sticky
+        position="bottom-right"
+        :offset="[18, 18]"
+        v-if="data.role_id == 1"
+      >
+        <q-fab icon="add" direction="up" color="">
+          <q-fab-action @click="onClickMenuAdm" color="primary">
+            <q-icon color="white" name="fa-solid fa-users" />
+          </q-fab-action>
+        </q-fab>
+      </q-page-sticky>
     </q-page-container>
     <q-inner-loading
       :showing="loading"
@@ -66,6 +77,9 @@ export default defineComponent({
         router.push({ name: routeHome.value });
       }
     });
+    const onClickMenuAdm = () => {
+      router.push({ name: "clients" });
+    };
     onMounted(async () => {
       layout.updatePdfScale(dimension(window.innerWidth));
       layout.setScreenWidth(dimensionHeight(window.innerHeight));
@@ -92,9 +106,11 @@ export default defineComponent({
       loading,
       system,
       Dark,
+      data,
       codeDialog,
+      onClickMenuAdm,
       statusDark: computed(() =>
-        Dark.isActive ? "bg-system-dark" : "bg-system"
+        Dark.isActive ? "bg-system-dark" : "bg-system",
       ),
       drawerThemeAction: storeLayout.setDrawerTheme,
     };

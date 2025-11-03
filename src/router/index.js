@@ -34,7 +34,7 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE),
   });
   Router.beforeEach((to, from, next) => {
-    const { verifyLogged, routeRetorn } = useAuth();
+    const { verifyLogged, routeRetorn, validateAdmin } = useAuth();
     const { hasTokenCookie } = useCookies()
     let home =
       to.name == "home"
@@ -51,6 +51,12 @@ export default route(function (/* { store, ssrContext } */) {
         return
       }
       verifyLogged()
+    }
+    const allowedTypes = to.matched.some(
+      (record) => record.meta.allowedTypes
+    );
+    if (allowedTypes && !to.meta.allowedTypes.includes(validateAdmin())) {
+      next({ name: 'not-found' });
     }
 
     //verificando se o usuário esta logado evitar logar duplicado

@@ -11,6 +11,7 @@
         no-results-label="Esse filtro não encontrou nenhum resultado"
         row-key="name"
         :loading="loading"
+        :rows-per-page-options="[50]"
         v-bind="{ ...$tableStyle }"
       >
         <template v-slot:body-cell-avatar="props">
@@ -44,7 +45,7 @@
       <roleuser-layout :user="userEdit" />
     </q-dialog>
     <q-dialog v-model="controlIncome" v-bind="{ ...$dialogCard }">
-      <income-layout :user="userEdit" />
+      <income-control-clients-layout :user="userEdit" />
     </q-dialog>
     <q-dialog v-model="viewExtract" v-bind="{ ...$dialogCard }">
       <extract-layout :user="userEdit" />
@@ -59,13 +60,14 @@ import RoleuserLayout from "../users/RoleuserLayout.vue";
 import IncomeLayout from "./IncomeLayout.vue";
 import ExtractLayout from "./ExtractLayout.vue";
 import useClientHelpers from "src/composables/system/Helpers/useClientHelpers";
-
+import IncomeControlClientsLayout from "./IncomeControlClientsLayout.vue";
 export default defineComponent({
   name: "ListclientLayout",
   components: {
     RoleuserLayout,
     IncomeLayout,
     ExtractLayout,
+    IncomeControlClientsLayout,
   },
   setup() {
     const filter = ref("");

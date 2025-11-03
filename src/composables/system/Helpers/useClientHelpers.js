@@ -62,13 +62,13 @@ export default function useClientHelpers() {
       field: "current_investment",
       sortable: true,
     },
-    {
-      name: "Rendimento",
-      align: "left",
-      label: "Rendimento",
-      field: "investment",
-      sortable: true,
-    },
+    // {
+    //   name: "Rendimento",
+    //   align: "left",
+    //   label: "Rendimento",
+    //   field: "investment",
+    //   sortable: true,
+    // },
     {
       name: "actions",
       label: "Ações",
@@ -98,22 +98,22 @@ export default function useClientHelpers() {
     },
   };
   const btnActions = [
-    {
-      color: "green",
-      icon: "fa-solid fa-user-lock",
-      tooltipText: "Mudar permissão do usuário",
-      action: "editRole",
-    },
-    {
-      color: "green",
-      icon: "fa-solid fa-cash-register",
-      tooltipText: "Ver extrato do usuário",
-      action: "extractView",
-    },
+    // {
+    //   color: "green",
+    //   icon: "fa-solid fa-user-lock",
+    //   tooltipText: "Mudar permissão do usuário",
+    //   action: "editRole",
+    // },
+    // {
+    //   color: "green",
+    //   icon: "fa-solid fa-cash-register",
+    //   tooltipText: "Ver extrato do usuário",
+    //   action: "extractView",
+    // },
     {
       color: "green",
       icon: "fa-solid fa-money-bill-trend-up",
-      tooltipText: "Editar rendimentos",
+      tooltipText: "Ver rendimentos",
       action: "editIncome",
     },
   ];

@@ -35,7 +35,7 @@
           ripple
           clickable
         >
-          <q-avatar size="sm" icon="fa-solid fa-minus" />
+          <q-avatar size="sm" icon="fa fa-minus" />
           <span>{{ unit.text }}</span>
         </q-chip>
       </div>

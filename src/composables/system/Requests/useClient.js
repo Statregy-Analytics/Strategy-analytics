@@ -6,11 +6,35 @@ import { date } from 'quasar'
 export default function useClient() {
 
   const usersClient = ref([])
+  const client = ref([])
 
   const extractClient = ref([])
   const loading = ref()
   const { errorNotify, successNotify, multError } = useNotify()
+  const getClient = async (id) => {
+    loading.value = true
+    const reponse = await api.get(`clients/${id}`).then((res) => {
+      client.value = res.data.user
+    }).catch((e) => {
+      console.log(e)
+      errorNotify('Erro ao pegar os usuarios');
+    }).finally(() => {
+      loading.value = false
+    })
 
+
+
+    // try {
+    //   usersClient.value = reponse.data.clients
+    //   // storeReport.setdata(reponse.data.reports)
+    //   // console.log('report -> ', reponse)
+    // } catch (e) {
+    //   console.log(e)
+    //   errorNotify('Erro ao pegar os usuarios');
+    // } finally {
+    //   loading.value = false
+    // }
+  }
   const getAllClient = async () => {
     loading.value = true
     try {
@@ -54,9 +78,11 @@ export default function useClient() {
     })
   }
   return {
+    getClient,
     getAllClient,
     getExtract,
     setIncome,
+    client,
     usersClient,
     loading,
     extractClient

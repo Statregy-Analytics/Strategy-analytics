@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="RolesInvestmentDetails row justify-center q-py-lg">
     <div class="col-12">
       <q-separator color="grey-10" />

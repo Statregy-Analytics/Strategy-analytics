@@ -81,6 +81,11 @@ const routes = [
     },
     children: [
       {
+        path: "not-found",
+        name: "not-found",
+        component: () => import("../system/pages/NotFoundSystem.vue"),
+      },
+      {
         path: "confirm-email",
         name: "Confirma e-mail",
         component: () => import('../system/pages/ConfirmEmailPage.vue')
@@ -89,7 +94,6 @@ const routes = [
         path: "dashboard",
         component: () => import("../system/views/WalletView.vue"),
         props: true,
-        meta: { admin: true },
         children: [
           {
             path: "",
@@ -115,11 +119,11 @@ const routes = [
         name: "config",
         component: () => import("../system/pages/ConfigPage.vue"),
       },
-      {
-        name: "calendar",
-        path: "calendar",
-        component: () => import("../system/pages/CalendarPage.vue"),
-      },
+      // {
+      //   name: "calendar",
+      //   path: "calendar",
+      //   component: () => import("../system/pages/CalendarPage.vue"),
+      // },
       {
         path: "loan",
         name: "loan",
@@ -140,19 +144,25 @@ const routes = [
         path: "users",
         name: "users",
         component: () => import("../system/pages/UsersPage.vue"),
-        meta: { admin: true },
+        meta: {
+          allowedTypes: [1],
+        },
       },
       {
         path: "clients",
         name: "clients",
         component: () => import("../system/pages/ClientsPage.vue"),
-        meta: { admin: true },
+        meta: {
+          allowedTypes: [1],
+        },
       },
       {
         path: "controlDeposit",
         component: () => import("../system/views/DepositView.vue"),
         props: true,
-        meta: { admin: true },
+        meta: {
+          allowedTypes: [1],
+        },
         children: [
           {
             path: "",
@@ -167,7 +177,9 @@ const routes = [
         path: "controlReports",
         component: () => import("../system/views/ReportView.vue"),
         props: true,
-        meta: { admin: true },
+        meta: {
+          allowedTypes: [1],
+        },
         children: [
           {
             path: "",
@@ -179,7 +191,9 @@ const routes = [
             path: ":id",
             name: "relatorio",
             component: () => import("../system/layouts/control/reports/ReadreportLayout.vue"),
-            meta: { admin: true },
+            meta: {
+              allowedTypes: [1],
+            },
             props: true
           }
         ]

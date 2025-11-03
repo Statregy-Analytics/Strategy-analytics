@@ -19,7 +19,7 @@ export default function useAuth() {
     deleteTokenCookie,
     setUserCookie,
     tokenName, hasTokenCookie, tokenCookie,
-    getuserCookie, hasUserCookie, deleteCookieUser
+    getuserCookie, hasUserCookie, deleteCookieUser, getValue
 
   } = useCookies()
   const { data } = storeToRefs(useStore);
@@ -42,7 +42,7 @@ export default function useAuth() {
     }
     const error = err => {
 
-      if (401 === err.response.status) {
+      if (400 === err.response.status) {
         console.log('estou com erro 401, tem que inválida esse token');
         deleteTokenCookie()
         alternativeNotify('Sessão expirou , refaça login para prosseguir', 3000)
@@ -131,10 +131,14 @@ export default function useAuth() {
         router.replace({ path: "/login" })
       });
   };
+  const validateAdmin = () => {
+    return parseInt(getValue('role'))
+  }
   return {
     auth,
     verifyLogged,
     setLogout,
+    validateAdmin,
     errors,
     loading,
     role,
