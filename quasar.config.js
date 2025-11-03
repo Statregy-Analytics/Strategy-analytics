@@ -10,7 +10,7 @@
 
 import { configure } from 'quasar/wrappers'
 
-module.exports = configure(function (ctx) {
+export default configure((ctx) => {
   return {
     eslint: {
       // fix: true,
