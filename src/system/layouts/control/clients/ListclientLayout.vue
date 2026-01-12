@@ -40,6 +40,17 @@
           </q-td>
         </template>
       </q-table>
+      <div class="col-10">
+        <q-btn
+          flat
+          icon="fa-solid fa-file-arrow-up"
+          color="info"
+          no-caps
+          size="sm"
+          label="Exportar excel"
+          @click.prevent="exportInvestment()"
+        />
+      </div>
     </div>
     <q-dialog v-model="roleControl" v-bind="{ ...$dialogCard }">
       <roleuser-layout :user="userEdit" />
@@ -61,6 +72,7 @@ import IncomeLayout from "./IncomeLayout.vue";
 import ExtractLayout from "./ExtractLayout.vue";
 import useClientHelpers from "src/composables/system/Helpers/useClientHelpers";
 import IncomeControlClientsLayout from "./IncomeControlClientsLayout.vue";
+import useInvestment from "src/composables/system/Requests/useInvestment";
 export default defineComponent({
   name: "ListclientLayout",
   components: {
@@ -70,6 +82,7 @@ export default defineComponent({
     IncomeControlClientsLayout,
   },
   setup() {
+    const { exportInvestment } = useInvestment();
     const filter = ref("");
     const { loading, getAllClient, usersClient } = useClient();
     const {
@@ -96,6 +109,7 @@ export default defineComponent({
       btnActions,
       viewExtract,
       handlerAction,
+      exportInvestment,
     };
   },
   // Outras configurações do componente aqui

@@ -17,6 +17,10 @@
           <q-fab-action @click="onClickMenuAdm" color="primary">
             <q-icon color="white" name="fa-solid fa-users" />
           </q-fab-action>
+
+          <q-fab-action @click="uploudInvestment = true" color="primary">
+            <q-icon color="white" name="fa-solid fa-cloud-arrow-up" />
+          </q-fab-action>
         </q-fab>
       </q-page-sticky>
     </q-page-container>
@@ -26,6 +30,9 @@
       label-style="font-size: 1.1em"
     />
     <footer-system />
+    <q-dialog v-model="uploudInvestment">
+      <import-investment />
+    </q-dialog>
   </q-layout>
 </template>
 
@@ -48,10 +55,11 @@ import NavbarLayout from "../layouts/NavbarLayout.vue";
 // import CodeEmail from "./auth/CodeEmail.vue";
 import FooterSystem from "../components/FooterSystem.vue";
 // import NavbarLayout from "../layouts/NavbarLayout.vue";
-// import { ref } from 'vue'
+// import { ref } from 'vue'Ubuntu-22.04/home/jorgenunes/Projetos/Strategy-analytics/src/system/layouts/NavbarLayout.vue
+import ImportInvestment from "src/system/layouts/investment/ImportInvestment.vue";
 
 export default defineComponent({
-  components: { NavbarLayout, FooterSystem },
+  components: { NavbarLayout, FooterSystem, ImportInvestment },
   setup() {
     const route = useRoute();
     const router = useRouter();
@@ -64,6 +72,7 @@ export default defineComponent({
     const userStore = useUserStore();
     const { data, routeHome } = storeToRefs(userStore);
     const piniaDataLoaded = ref(false);
+    const uploudInvestment = ref(false);
     const codeDialog = computed(() => {
       return data.value.email_verified_at == null ? true : false;
     });
@@ -108,6 +117,7 @@ export default defineComponent({
       Dark,
       data,
       codeDialog,
+      uploudInvestment,
       onClickMenuAdm,
       statusDark: computed(() =>
         Dark.isActive ? "bg-system-dark" : "bg-system",
