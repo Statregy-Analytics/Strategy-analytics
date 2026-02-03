@@ -77,11 +77,34 @@ export default function useClient() {
       loading.value = false
     })
   }
+  const deleteIncomes = async (user_id, income_id) => {
+    loading.value = true
+    await api.delete('clients/income', {
+      data: {
+        user_id,
+        income_id
+      }
+    }).then((e) => {
+      successNotify(e.data.message, 18000)
+      setTimeout(() => {
+        window.location.reload()
+      }, 2000)
+    }).catch((e) => {
+      if (e.response && e.response.data && e.response.data.errors) {
+        multError(e.response.data.errors)
+      }
+      console.log(e)
+      errorNotify('Erro ao deletar o rendimento do usuário');
+    }).finally(() => {
+      loading.value = false
+    })
+  }
   return {
     getClient,
     getAllClient,
     getExtract,
     setIncome,
+    deleteIncomes,
     client,
     usersClient,
     loading,

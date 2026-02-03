@@ -39,15 +39,56 @@
             <div class="text-grey text-subtitle2">
               Atualizado: {{ income.updated_at }}
             </div>
+            <div class="q-mt-md">
+              <q-btn
+                color="negative"
+                icon="delete"
+                label="Remover investimento"
+                no-caps
+                dense
+                flat
+                size="sm"
+                @click="openConfirmDelete(income)"
+              />
+            </div>
           </div>
         </div>
       </div>
+      <q-dialog v-model="confirmDelete">
+        <q-card>
+          <q-card-section class="text-h6">
+            Confirmar remoção de investimento
+          </q-card-section>
+          <q-card-section>
+            <div>
+              Tem certeza que deseja remover o investimento
+              <strong>{{ selectedIncome?.origin_name }}</strong
+              >?
+            </div>
+            <div class="q-mt-sm">
+              Essa decisão vai afetar os rendimentos do cliente
+              <strong>{{ user.name }}</strong
+              >.
+            </div>
+          </q-card-section>
+          <q-card-actions align="right">
+            <q-btn flat label="Cancelar" color="primary" v-close-popup />
+            <q-btn
+              unelevated
+              label="Confirmar"
+              color="negative"
+              :disable="!selectedIncome"
+              @click="confirmDeleteIncome"
+            />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
     </q-card-section>
   </q-card>
 </template>
 
 <script setup>
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import HeaderCard from "src/system/components/cardDialog/HeaderCard.vue";
 import useClient from "src/composables/system/Requests/useClient";
 import RolesInvestmentDetails from "src/system/components/wallet/RolesInvestmentDetails.vue";
@@ -60,7 +101,22 @@ const props = defineProps({
   user: { type: Object },
 });
 
-const { getClient, client } = useClient();
+const { getClient, client, deleteIncomes } = useClient();
+
+const confirmDelete = ref(false);
+const selectedIncome = ref(null);
+
+const openConfirmDelete = (income) => {
+  selectedIncome.value = income;
+  confirmDelete.value = true;
+};
+
+const confirmDeleteIncome = async () => {
+  if (!selectedIncome.value) return;
+  await deleteIncomes(selectedIncome.value.user_id, selectedIncome.value.id);
+  confirmDelete.value = false;
+  selectedIncome.value = null;
+};
 onMounted(() => {
   getClient(props.user.id);
 });
