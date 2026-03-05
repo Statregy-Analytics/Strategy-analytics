@@ -2,6 +2,12 @@
 import { Cookies } from "quasar";
 import useExtractHelpers from "src/composables/system/Helpers/useExtractHelpers";
 const { addValues, formatCurrency } = useExtractHelpers()
+
+const toNumber = (value, fallback = 0) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+};
+
 const getters = {
   // doubleCount: (state) => state.counter * 2,
   getInvestiment: (state) => {
@@ -62,13 +68,15 @@ const getters = {
    * soma disponivel para investir com o investido fazendo o saldo da carteira
    */
   setCurrentWallet: (state) => {
-    return addValues(state.wallet.current_investment, state.wallet.current_balance)
+    const currentInvestment = toNumber(state.wallet?.current_investment);
+    const currentBalance = toNumber(state.wallet?.current_balance);
+    return addValues(currentInvestment, currentBalance)
   },
   /**
    * pegando valores formatado do valor de disponivel para investir
    */
   getAvailableToInvest: (state) => {
-    return formatCurrency(state.wallet.current_balance)
+    return formatCurrency(toNumber(state.wallet?.current_balance))
   },
 
   /**
@@ -77,8 +85,7 @@ const getters = {
    * @returns 
    */
   getconvertCoin: (state) => {
-    console.log('aqui', state.wallet.current_loan)
-    return state.wallet.current_loan
+    return toNumber(state.wallet?.current_loan, 5.5)
   },
 
 
@@ -86,13 +93,22 @@ const getters = {
    * pegando valores formatado do valor de patrimônio investido
    */
   getCurrentInvest: (state) => {
-    return formatCurrency(state.wallet.current_investment)
+    return formatCurrency(toNumber(state.wallet?.current_investment))
+  },
+  /**
+   * Valor investido em dólar com fallback de câmbio.
+   */
+  getCurrentInvestUsd: (state) => {
+    const currentInvestment = toNumber(state.wallet?.current_investment);
+    const exchange = toNumber(state.wallet?.current_loan, 5.5);
+    const safeExchange = exchange > 0 ? exchange : 5.5;
+    return formatCurrency(currentInvestment / safeExchange)
   },
   /**
    * pegando valores formatado do redimento do ultimo mês
    */
   getLastMonth: (state) => {
-    return formatCurrency(state.wallet.last_month)
+    return formatCurrency(toNumber(state.wallet?.last_month))
   },
   /**
    * pegando contrato emergencial

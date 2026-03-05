@@ -41,15 +41,20 @@ const filters = {
    * @param {Number|null} exchange valor do câmbio para ser dividido no calculo
    */
   convertCoin(value, exchange = 5.50) {
-    // Verifica se o valor é uma string e remove os pontos que representam os milhares
-    if (typeof value === 'string') {
-      value = value.replace(/\./g, '');
+    let normalizedValue = value;
+    if (typeof normalizedValue === 'string') {
+      normalizedValue = normalizedValue.replace(/\./g, '').replace(',', '.');
     }
-    // Substitui a vírgula decimal por um ponto
-    let valorFinal = value.replace(',', '.');
+    normalizedValue = Number(normalizedValue);
 
+    const normalizedExchange = Number(exchange);
+    const safeExchange = Number.isFinite(normalizedExchange) && normalizedExchange > 0
+      ? normalizedExchange
+      : 5.5;
 
-    let converExchange = valorFinal / exchange
+    const converExchange = Number.isFinite(normalizedValue)
+      ? normalizedValue / safeExchange
+      : 0;
 
     return this.formatPartternCurrency(converExchange)
   },
